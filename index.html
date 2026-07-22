@@ -34,6 +34,9 @@
   .legend{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:center;font-size:11.5px;color:var(--muted);margin:12px 0 4px}
   .legend .sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
   svg{display:block;max-width:100%}
+  #svgbox{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+  #svgbox svg{max-width:none}
+  .mobilenote{display:none}
   svg text{font-family:var(--sans)}
   .dot{cursor:pointer}
   .lbl{font-size:11px;fill:var(--ink);cursor:pointer;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
@@ -139,7 +142,12 @@
   #tooltip b{color:#f4d9a8}
   .caption{font-size:11.5px;color:var(--faint);line-height:1.5;margin-top:10px;max-width:760px}
   a.homelink{color:var(--branch-e);font-weight:600;text-decoration:none;font-size:12px}
-  @media(max-width:640px){ header{padding:12px 14px 4px} #viewport{padding:6px 12px 20px} }
+  @media(max-width:640px){
+    header{padding:12px 14px 4px} #viewport{padding:6px 12px 20px}
+    .mobilenote{display:block;margin:8px 0 2px;padding:8px 11px;background:#fbf3e6;border:1px solid #e7d4b3;
+      border-radius:8px;font-size:12px;line-height:1.45;color:#5c5140}
+    #svgbox{border:1px solid var(--rule);border-radius:8px;background:#fff}
+  }
 </style>
 </head>
 <body>
@@ -157,6 +165,7 @@
         <button class="tab" data-view="voices">Authors &amp; leaders</button>
         <button id="askBtn">Ask &amp; compare</button>
       </div>
+      <div class="mobilenote">Built for a larger screen. On a phone, turn it sideways, and swipe each chart left or right to see all of it.</div>
     </header>
     <div id="viewport"><div style="color:var(--muted);padding:30px 0">Loading the comparison data&hellip;</div></div>
   </div>
