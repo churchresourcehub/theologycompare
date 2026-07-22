@@ -429,7 +429,7 @@ const TREE = {name:"Early Church", sub:"Apostolic & Nicene", children:[
         {name:"Anglo-Catholic", family:"Anglican", tid:"anglo-catholic"},
         {name:"Episcopal (US)", family:"Anglican", tid:"episcopal"},
         {name:"Methodist / Wesleyan", year:"1738 — Wesley", family:"Wesleyan/Methodist", children:[
-          {name:"UMC", family:"Wesleyan/Methodist", tid:"methodist", children:[
+          {name:"UMC", family:"Wesleyan/Methodist", tid:"methodist", solid:true, children:[
             {name:"GMC (2022)", family:"Wesleyan/Methodist", tid:"methodist"} ]},
           {name:"AME / AME Zion / CME", family:"Wesleyan/Methodist"},
           {name:"Holiness movement", year:"19th c.", family:"Wesleyan/Methodist", children:[
@@ -487,13 +487,13 @@ function renderTree(){
   });
   // nodes
   nodes.forEach(n=>{
-    const w=nodeW(n), leaf=!n.children, col=FAM_COLOR[n.family]||"#8a7f6a";
+    const w=nodeW(n), solid=!n.children||n.solid, col=FAM_COLOR[n.family]||"#8a7f6a";
     const g=el("g",{});
     if(n.year) g.appendChild(el("text",{x:n._x,y:n.y-nodeH/2-4,class:"axttl"},n.year));
     g.appendChild(el("rect",{x:n._x,y:n.y-nodeH/2,width:w,height:nodeH,rx:8,
-      fill:leaf?col:"#fff",stroke:col,"stroke-width":leaf?1.5:1.8}));
-    const tx=el("text",{x:n._x+10,y:n.y+4,fill:leaf?"#fff":col}); tx.setAttribute("font-size","11.5");
-    tx.setAttribute("font-weight",leaf?"600":"700"); tx.textContent=n.name; g.appendChild(tx);
+      fill:solid?col:"#fff",stroke:col,"stroke-width":solid?1.5:1.8}));
+    const tx=el("text",{x:n._x+10,y:n.y+4,fill:solid?"#fff":col}); tx.setAttribute("font-size","11.5");
+    tx.setAttribute("font-weight",solid?"600":"700"); tx.textContent=n.name; g.appendChild(tx);
     if(n.tid){ g.style.cursor="pointer"; g.onclick=()=>openDetail({trad:n.tid}); }
     svg.appendChild(g);
   });
