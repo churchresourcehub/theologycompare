@@ -72,6 +72,7 @@
   .node rect{cursor:pointer}
   .node text{fill:#fff;font-size:11.5px;font-weight:600;pointer-events:none}
   .edge{stroke:var(--line);stroke-width:1.6;fill:none;opacity:.7}
+  .edge.cross{stroke-dasharray:4 5;opacity:.55;stroke:var(--faint)}
   /* authors & leaders */
   .vkey{background:#fbf9f4;border:1px solid var(--rule);border-radius:10px;padding:12px 15px;margin:10px 0 14px}
   .vklabel{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:6px}
@@ -428,8 +429,19 @@ const TREE = {name:"Early Church", sub:"Apostolic & Nicene", children:[
         {name:"Anglo-Catholic", family:"Anglican", tid:"anglo-catholic"},
         {name:"Episcopal (US)", family:"Anglican", tid:"episcopal"},
         {name:"Methodist / Wesleyan", year:"1738 — Wesley", family:"Wesleyan/Methodist", children:[
-          {name:"UMC / GMC", family:"Wesleyan/Methodist", tid:"methodist"},
-          {name:"Holiness → Pentecostal", year:"1906 — Azusa", family:"Pentecostal", tid:"pentecostal"} ]} ]},
+          {name:"UMC", family:"Wesleyan/Methodist", tid:"methodist", children:[
+            {name:"GMC (2022)", family:"Wesleyan/Methodist", tid:"methodist"} ]},
+          {name:"AME / AME Zion / CME", family:"Wesleyan/Methodist"},
+          {name:"Holiness movement", year:"19th c.", family:"Wesleyan/Methodist", children:[
+            {name:"Church of the Nazarene", family:"Wesleyan/Methodist"},
+            {name:"Free Methodist / Wesleyan Ch.", family:"Wesleyan/Methodist"},
+            {name:"Salvation Army", family:"Wesleyan/Methodist"},
+            {name:"Pentecostal", year:"1906 — Azusa", family:"Pentecostal", children:[
+              {name:"Assemblies of God (AoG)", family:"Pentecostal", tid:"pentecostal"},
+              {name:"Church of God in Christ", family:"Pentecostal"},
+              {name:"Church of God (Cleveland)", family:"Pentecostal"},
+              {name:"Foursquare", family:"Pentecostal"},
+              {name:"Vineyard (Third Wave)", family:"Pentecostal"} ]} ]} ]} ]},
       {name:"Anabaptist (Radical Ref.)", family:"Baptist", children:[
         {name:"Anabaptist / Mennonite", family:"Baptist", tid:"anabaptist"} ]},
       {name:"Baptist", year:"17th c.", family:"Baptist", children:[
@@ -447,7 +459,7 @@ function renderTree(){
   vp.innerHTML='<div class="vtitle">Genealogy</div>'+
     '<p class="vnote">The historical branching, left to right in time: the one Church, the Great Schism of 1054, the Reformation of 1517, and the Protestant fan-out. Colored leaves are the living traditions on the other views — tap one to open it.</p>'+
     '<div id="svgbox" style="overflow-x:auto"></div>'+
-    '<p class="caption">This is the standard historical outline; a few bodies (e.g. the UCC via Congregationalism, Pentecostalism via the Holiness movement) are placed by descent. Woods can adjust the branching.</p>';
+    '<p class="caption">This is the standard historical outline; a few bodies are placed by descent (the UCC via Congregationalism; Pentecostalism out of the Wesleyan holiness movement). The dotted lines mark the nondenominational megachurch as a Baptist, Reformed, and charismatic amalgam. Woods can adjust the branching.</p>';
   const box=$("#svgbox");
   const rowH=34, colW=178, nodeH=26, mL=14, mT=16;
   const ctx={leaf:0,rowH,maxDepth:0};
@@ -460,11 +472,19 @@ function renderTree(){
   const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
   const nodes=[];
   (function collect(n){ n._x=mL+n.depth*colW; nodes.push(n); (n.children||[]).forEach(collect); })(TREE);
-  // edges
+  const byName={}; nodes.forEach(n=>byName[n.name]=n);
+  // edges (skip nondenom's single parent line — it's drawn as three cross-stream dotted links)
   nodes.forEach(n=> (n.children||[]).forEach(c=>{
+    if(c.name==="Nondenom megachurch") return;
     const x1=n._x+nodeW(n), y1=n.y, x2=c._x, y2=c.y, mx=(x1+x2)/2;
     svg.appendChild(el("path",{d:"M"+x1+","+y1+" C"+mx+","+y1+" "+mx+","+y2+" "+x2+","+y2,class:"edge"}));
   }));
+  // cross-lineage: the nondenominational megachurch is a Baptist + Reformed + charismatic amalgam
+  [["Baptist","Nondenom megachurch"],["New Calvinist","Nondenom megachurch"],["Pentecostal","Nondenom megachurch"]].forEach(([a,b])=>{
+    const f=byName[a],t=byName[b]; if(!f||!t) return;
+    const x1=f._x+nodeW(f), y1=f.y, x2=t._x, y2=t.y, mx=(x1+x2)/2;
+    svg.appendChild(el("path",{d:"M"+x1+","+y1+" C"+mx+","+y1+" "+mx+","+y2+" "+x2+","+y2,class:"edge cross"}));
+  });
   // nodes
   nodes.forEach(n=>{
     const w=nodeW(n), leaf=!n.children, col=FAM_COLOR[n.family]||"#8a7f6a";
