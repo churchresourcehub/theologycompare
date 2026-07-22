@@ -82,6 +82,8 @@
   .strip .track{position:relative;flex:1;height:8px;background:#efe9dc;border-radius:6px}
   .strip .pip{position:absolute;top:-3px;width:14px;height:14px;border-radius:50%;background:var(--branch);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX(-7px)}
   .strip .poles{display:flex;justify-content:space-between;font-size:10px;color:var(--faint);margin:1px 0 0}
+  .strip .bar{height:100%;background:var(--branch);border-radius:6px}
+  .strip .pct{width:30px;text-align:right;font-size:11px;color:var(--muted);flex:0 0 auto}
   /* panel */
   #panel{width:0;flex:0 0 auto;background:var(--panel);border-left:1px solid var(--rule);overflow:hidden;transition:width .25s ease;display:flex;flex-direction:column}
   #panel.open{width:min(430px,92vw)}
@@ -443,11 +445,19 @@ function renderTriangle(){
   const pt=a=>{ const w=a.word/100,s=a.spirit/100,t=a.tradition/100;
     return {x:w*apex.x+s*bl.x+t*br.x, y:w*apex.y+s*bl.y+t*br.y}; };
   const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
-  // triangle + medians
-  svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"#fff",stroke:"var(--rule)","stroke-width":1.4}));
   const mid=(p,q)=>({x:(p.x+q.x)/2,y:(p.y+q.y)/2});
-  [[apex,mid(bl,br)],[bl,mid(apex,br)],[br,mid(apex,bl)]].forEach(([a,b])=>
-    svg.appendChild(el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:"gridmid"})));
+  const G={x:(apex.x+bl.x+br.x)/3,y:(apex.y+bl.y+br.y)/3};
+  const mAB=mid(apex,bl), mBR=mid(bl,br), mCA=mid(br,apex);
+  // white base
+  svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"#fff"}));
+  // three corner zones (one per source of authority), subtly tinted
+  const kite=(v,ma,mb,fill)=>svg.appendChild(el("polygon",{points:v.x+","+v.y+" "+ma.x+","+ma.y+" "+G.x+","+G.y+" "+mb.x+","+mb.y,fill:fill,opacity:.5}));
+  kite(apex,mAB,mCA,"#e9dbb6");   // Word
+  kite(bl,mAB,mBR,"#d6e5ee");     // Spirit
+  kite(br,mBR,mCA,"#ecd7d1");     // Tradition
+  // zone boundaries + crisp outline
+  [[G,mAB],[G,mBR],[G,mCA]].forEach(([a,b])=> svg.appendChild(el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:"gridmid"})));
+  svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"none",stroke:"var(--rule)","stroke-width":1.4}));
   // corner labels
   const corner=(x,y,dy,lab,sub,anchor)=>{
     const t1=el("text",{x,y:y+dy,"text-anchor":anchor,class:"tricorner"},lab); svg.appendChild(t1);
@@ -523,6 +533,7 @@ function openDetail(ref){
       '<span class="fam" style="background:'+FAM_COLOR[t.family]+'">'+esc(t.family)+'</span>'+
       '<div class="dbody" style="margin-top:8px">'+esc(t.blurb)+'</div>'+
       '<div class="dsec">Where it sits</div>'+axisStrip(t.pos)+
+      (DATA.authority&&DATA.authority.pos[t.id]?'<div class="dsec">Source of authority</div>'+authStrip(DATA.authority.pos[t.id]):"")+
       '<div class="dsec">Its positions, doctrine by doctrine</div><ul class="celllist">'+
       DATA.doctrines.map(d=>'<li><b>'+esc(d.label)+'</b>'+esc(d.cells[t.family])+'</li>').join("")+'</ul>'+
       voicesDetail(t)+
@@ -541,6 +552,14 @@ function openDetail(ref){
       sourceNote(f);
     body.innerHTML=h;
   }
+}
+function authStrip(a){
+  if(!a) return "";
+  const rows=[["Word",a.word],["Spirit",a.spirit],["Tradition",a.tradition]];
+  return '<div class="strip">'+rows.map(([nm,v])=>
+    '<div class="row"><div class="nm">'+esc(nm)+'</div>'+
+    '<div style="flex:1"><div class="track"><div class="bar" style="width:'+v+'%"></div></div></div>'+
+    '<div class="pct">'+v+'</div></div>').join("")+'</div>';
 }
 function voicesDetail(t){
   const v=DATA.voices&&DATA.voices[t.id]; if(!v) return "";
