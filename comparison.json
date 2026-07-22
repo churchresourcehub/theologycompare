@@ -148,5 +148,49 @@
     { "id": "sbc", "name": "Southern Baptist", "family": "Baptist", "blurb": "The biblicist pole: Scripture alone, believer's baptism, symbolic ordinances, conversion-centered.", "pos": { "sacramental": 93, "tradprog": 22, "gracewill": 42, "authority": 72, "security": 15, "atonement": 70, "plan": 75 } },
     { "id": "fundamentalist", "name": "Independent Fundamental / fundamentalist", "family": "Baptist", "blurb": "Biblicist and separatist; the hard edge of the pole, often dispensational.", "pos": { "sacramental": 96, "tradprog": 9, "gracewill": 40, "authority": 68, "security": 15, "atonement": 70, "plan": 90 } },
     { "id": "ucc-unitarian", "name": "UCC / Unitarian (progressive)", "family": "Anglican", "blurb": "Off the sacramental axis entirely; defined mainly by the progressive pole of the second axis. Included as the far-progressive marker.", "pos": { "sacramental": 66, "tradprog": 92, "gracewill": 60, "authority": 85, "security": 60, "atonement": 90, "plan": 25 } }
-  ]
+  ],
+
+  "voices_note": "Representative authors and leaders for each family — founders, classic theologians, and contemporary figures, each recognized within its own tradition. Illustrative, not exhaustive; for Woods to add to or correct.",
+  "voices": {
+    "Catholic": { "note": "Taught through the Magisterium; these are shapers and teachers within it.", "groups": [
+      { "label": "Founders & shapers", "people": ["Augustine of Hippo — the great Latin Father", "Thomas Aquinas — the Summa Theologiae, the Church's common doctor", "Ignatius of Loyola — founder of the Jesuits"] },
+      { "label": "Theologians", "people": ["John Henry Newman — convert cardinal", "Karl Rahner — 20th-century systematic theologian", "Joseph Ratzinger (Benedict XVI) — theologian and pope"] },
+      { "label": "Contemporary voices", "people": ["Pope Francis — the living magisterial voice", "Bishop Robert Barron — Word on Fire", "Scott Hahn — apologist and Scripture scholar"] }
+    ] },
+    "Orthodox": { "note": "Read with the mind of the Church; the Fathers hold pride of place.", "groups": [
+      { "label": "The Fathers", "people": ["Athanasius of Alexandria — defender of Nicaea", "The Cappadocians — Basil the Great and the two Gregories", "John Chrysostom — the golden-mouthed preacher", "Gregory Palamas — theologian of the divine energies"] },
+      { "label": "Modern theologians", "people": ["Vladimir Lossky — mystical theology of the Eastern Church", "Alexander Schmemann — liturgical theology", "John Zizioulas — being as communion"] },
+      { "label": "Contemporary voices", "people": ["Kallistos Ware — The Orthodox Way", "John Behr — patristics scholar"] }
+    ] },
+    "Anglican": { "note": "The via media; the Prayer Book and the Thirty-nine Articles frame it.", "groups": [
+      { "label": "Founders & shapers", "people": ["Thomas Cranmer — the Book of Common Prayer", "Richard Hooker — Laws of Ecclesiastical Polity"] },
+      { "label": "Theologians", "people": ["Lancelot Andrewes — Caroline divine", "C.S. Lewis — lay apologist", "John Stott — evangelical Anglican", "N.T. Wright — New Testament scholar"] },
+      { "label": "Contemporary voices", "people": ["Rowan Williams — former Archbishop of Canterbury", "Justin Welby — Archbishop of Canterbury", "Michael Curry — Episcopal Presiding Bishop"] }
+    ] },
+    "Lutheran": { "note": "The Book of Concord; strands run from confessional (LCMS) to mainline (ELCA).", "groups": [
+      { "label": "Founders", "people": ["Martin Luther — the Reformation's spark", "Philip Melanchthon — the Augsburg Confession"] },
+      { "label": "Theologians", "people": ["Martin Chemnitz — second Martin of the Confession", "Dietrich Bonhoeffer — The Cost of Discipleship", "Wolfhart Pannenberg — modern systematician"] },
+      { "label": "Contemporary voices", "people": ["Robert Jenson — systematic theologian", "Matthew Harrison — LCMS president"] }
+    ] },
+    "Wesleyan/Methodist": { "note": "The anchor tradition; Scripture read with tradition, reason, and experience.", "groups": [
+      { "label": "Founders", "people": ["John Wesley — the movement's founder", "Charles Wesley — hymnwriter of the revival", "Francis Asbury — American Methodism", "Phoebe Palmer — the holiness movement"] },
+      { "label": "Theologians", "people": ["Albert Outler — Wesley scholar and editor", "Thomas C. Oden — paleo-orthodoxy", "Randy Maddox — Responsible Grace", "Don Thorsen — Calvin vs. Wesley"] },
+      { "label": "Contemporary voices", "people": ["Will Willimon — preacher and bishop", "Adam Hamilton — Church of the Resurrection", "Woods Lisenby — the systematic behind this site"] }
+    ] },
+    "Reformed": { "note": "Westminster and Dort; strands from confessional (PCA) to mainline (PCUSA) to New Calvinist.", "groups": [
+      { "label": "Founders", "people": ["John Calvin — the Institutes", "Ulrich Zwingli — the Swiss Reformation", "John Knox — the Scottish Reformation"] },
+      { "label": "Theologians", "people": ["Jonathan Edwards — colonial theologian of revival", "Charles Hodge & B.B. Warfield — Old Princeton", "Herman Bavinck & Abraham Kuyper — Dutch neo-Calvinism"] },
+      { "label": "Contemporary voices", "people": ["R.C. Sproul — Ligonier Ministries", "Tim Keller — Redeemer, New Calvinist", "John Piper — Desiring God"] }
+    ] },
+    "Baptist": { "note": "Soul competency and believer's baptism; strands from General/Free Will to Reformed to Southern Baptist.", "groups": [
+      { "label": "Founders", "people": ["John Smyth & Thomas Helwys — the first Baptists", "The Particular Baptists — the 1689 Confession"] },
+      { "label": "Theologians", "people": ["John Bunyan — The Pilgrim's Progress", "Charles Spurgeon — the Prince of Preachers", "E.Y. Mullins — soul competency"] },
+      { "label": "Contemporary voices", "people": ["Billy Graham — the evangelist", "Rick Warren — The Purpose Driven Life", "Al Mohler — Southern Seminary"] }
+    ] },
+    "Pentecostal": { "note": "Spirit baptism and the gifts; Wesleyan-holiness roots, born at Azusa Street (1906).", "groups": [
+      { "label": "Founders", "people": ["Charles Parham — early Pentecostal teacher", "William J. Seymour — the Azusa Street revival"] },
+      { "label": "Leaders", "people": ["Aimee Semple McPherson — founder of the Foursquare Church", "Oral Roberts — healing evangelist", "David du Plessis — 'Mr. Pentecost'"] },
+      { "label": "Theologians", "people": ["Gordon Fee — New Testament scholar", "Amos Yong & Frank Macchia — Pentecostal theology"] }
+    ] }
+  }
 }

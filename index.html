@@ -62,6 +62,16 @@
   .node rect{cursor:pointer}
   .node text{fill:#fff;font-size:11.5px;font-weight:600;pointer-events:none}
   .edge{stroke:var(--line);stroke-width:1.6;fill:none;opacity:.7}
+  /* authors & leaders */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:8px}
+  .vcard{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+  .vcname{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:4px}
+  .vnote2{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:2px}
+  .vglabel{font-family:var(--sans);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin:13px 0 5px}
+  .vlist{list-style:none;padding:0;margin:0}
+  .vlist li{font-size:13px;line-height:1.5;padding:4px 0;border-bottom:1px solid #f0ebe0;color:var(--muted)}
+  .vlist li:last-child{border-bottom:none}
+  .vlist li b{color:var(--ink);font-family:var(--serif);font-weight:600}
   /* axis strip */
   .strip{margin:3px 0}
   .strip .row{display:flex;align-items:center;gap:8px;margin:6px 0}
@@ -125,6 +135,7 @@
         <button class="tab" data-view="matrix">Doctrine matrix</button>
         <button class="tab" data-view="mindmap">Mind maps</button>
         <button class="tab" data-view="tree">Genealogy</button>
+        <button class="tab" data-view="voices">Authors &amp; leaders</button>
         <button id="askBtn">Ask &amp; compare</button>
       </div>
     </header>
@@ -176,7 +187,7 @@ fetch("comparison.json").then(r=>r.json()).then(d=>{
 function setView(v){
   state.view=v;
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===v));
-  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree}[v])();
+  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree,voices:renderVoices}[v])();
 }
 window.addEventListener("resize",()=>{ if(["map","spectrum","tree","mindmap"].includes(state.view)) setView(state.view); });
 
@@ -412,6 +423,29 @@ function renderTree(){
 }
 function nodeW(n){ return Math.max(84,estW(n.name,11.5)+18); }
 
+// ---------- AUTHORS & LEADERS ----------
+function renderVoices(){
+  const vp=$("#viewport");
+  let h='<div class="vtitle">Authors &amp; leaders</div>'+
+    '<p class="vnote">A few representative voices for each family — founders, classic theologians, and contemporary leaders, each recognized within its own tradition. Illustrative, not exhaustive.</p>'+
+    '<div class="vgrid">';
+  DATA.families.forEach(f=>{
+    const v=DATA.voices&&DATA.voices[f]; if(!v) return;
+    const col=FAM_COLOR[f];
+    h+='<div class="vcard" style="border-top:3px solid '+col+'">'+
+       '<div class="vcname" style="color:'+col+'">'+esc(f)+'</div>';
+    if(v.note) h+='<div class="vnote2">'+esc(v.note)+'</div>';
+    (v.groups||[]).forEach(g=>{
+      h+='<div class="vglabel">'+esc(g.label)+'</div><ul class="vlist">'+
+        (g.people||[]).map(p=>{ const i=p.indexOf(' — '); const nm=i<0?p:p.slice(0,i), rest=i<0?"":p.slice(i+3);
+          return '<li><b>'+esc(nm)+'</b>'+(rest?' — '+esc(rest):'')+'</li>'; }).join("")+'</ul>';
+    });
+    h+='</div>';
+  });
+  h+='</div><p class="caption">Illustrative only — Woods can add, cut, or correct any name; the Methodist column is the anchor and can grow from his own influences.</p>';
+  vp.innerHTML=h;
+}
+
 // ---------- DETAIL PANEL ----------
 function axisStrip(pos){
   return '<div class="strip">'+DATA.axes.map(a=>{
@@ -493,6 +527,10 @@ function buildChunks(){
     text:t.name+" (family: "+t.family+"). "+t.blurb,key:(t.name+" "+t.family+" "+t.blurb).toLowerCase()}));
   DATA.axes.forEach(a=> CHUNKS.push({type:"axis",name:"Spectrum: "+a.label,
     text:'The "'+a.label+'" spectrum runs from '+a.left+" to "+a.right+".",key:(a.label+" "+a.left+" "+a.right).toLowerCase()}));
+  if(DATA.voices) Object.keys(DATA.voices).forEach(f=>{ const v=DATA.voices[f];
+    const ppl=(v.groups||[]).map(g=>g.label+": "+(g.people||[]).join("; ")).join(". ");
+    CHUNKS.push({type:"figures",name:f+" — authors & leaders",
+      text:"Representative "+f+" authors and leaders. "+ppl,key:(f+" "+ppl).toLowerCase()}); });
 }
 function retrieve(q){
   const toks=q.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
