@@ -495,7 +495,7 @@
       }
     }
   ],
-  "voices_note": "Representative authors and leaders for each tradition on the map and spectrum, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. The final 'Influencers' group lists the most popular online/social-media voices associated with that stream — by reach, not endorsement, and affiliations are loose. Illustrative, not exhaustive; for Woods to add to or correct.",
+  "voices_note": "Authors and leaders for each tradition, listed only where the person identifies (or identified) with that tradition, not merely sits near it theologically. Groups run founders/classic figures, contemporary voices, popular authors ('On the shelf today'), and living 'Current Notable Figures'. Women and persons of color included wherever the tradition has them. Illustrative, not exhaustive; for Woods to refine.",
   "voices": {
     "orthodox": {
       "note": "Read with the mind of the Church; the Fathers hold pride of place.",
@@ -528,7 +528,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Jonathan Pageau — The Symbolic World (YouTube)",
             "Fr. Josiah Trenham — Patristic Nectar",
@@ -569,7 +569,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Fr. Mike Schmitz — Bible in a Year (chart-topping podcast)",
             "Bishop Robert Barron — Word on Fire",
@@ -601,16 +601,15 @@
         {
           "label": "On the shelf today",
           "people": [
-            "Fleming Rutledge — The Crucifixion",
-            "Esau McCaulley — Reading While Black",
-            "C.S. Lewis — Mere Christianity"
+            "Rowan Williams — Being Christian (former Archbishop of Canterbury)",
+            "Sarah Coakley — God, Sexuality, and the Self"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
-            "N.T. Wright — widely followed lectures and interviews",
-            "Tish Harrison Warren — writer on liturgical spirituality"
+            "Rowan Williams — widely read Anglican theologian",
+            "Martin Warner — Bishop of Chichester (Anglo-Catholic)"
           ]
         }
       ]
@@ -644,7 +643,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Bryan Wolfmueller — online teaching and podcasts",
             "Chris Rosebrough — Fighting for the Faith",
@@ -680,7 +679,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Nadia Bolz-Weber — author, speaker, The Corners"
           ]
@@ -712,14 +711,16 @@
           "label": "On the shelf today",
           "people": [
             "Barbara Brown Taylor — An Altar in the World",
-            "Sara Miles — Take This Bread"
+            "Sara Miles — Take This Bread",
+            "Fleming Rutledge — The Crucifixion"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Barbara Brown Taylor — best-selling author and preacher",
-            "Michael Curry — viral royal-wedding sermon"
+            "Michael Curry — former Presiding Bishop",
+            "Diana Butler Bass — author and public commentator"
           ]
         }
       ]
@@ -759,12 +760,11 @@
           "label": "On the shelf today",
           "people": [
             "Adam Hamilton — Making Sense of the Bible",
-            "James Bryan Smith — The Good and Beautiful God",
             "J.D. Walt — Seedbed's Wake-Up Call"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Seedbed / New Room — Wesleyan renewal (traditionalist, largely GMC)",
             "Adam Hamilton — widely shared online sermons (UMC)"
@@ -797,15 +797,14 @@
           "label": "On the shelf today",
           "people": [
             "Nancy Guthrie — Bible teacher and author",
-            "Paul David Tripp — New Morning Mercies",
-            "Gloria Furman — author"
+            "Paul David Tripp — New Morning Mercies"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
-            "Tim Keller — sermons and writing widely shared online",
-            "The Gospel Coalition — the Keller-cofounded platform"
+            "Kevin DeYoung — PCA pastor and author",
+            "The Gospel Coalition — the platform Tim Keller cofounded"
           ]
         }
       ]
@@ -838,9 +837,9 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
-            "Diana Butler Bass — author and public commentator"
+            "Bruce Reyes-Chow — PCUSA pastor and author, former Moderator"
           ]
         }
       ]
@@ -873,7 +872,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Shane Claiborne — Red Letter Christians",
             "Greg Boyd — ReKnew teaching online",
@@ -908,7 +907,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Max Lucado — best-selling author with wide online reach"
           ]
@@ -938,16 +937,16 @@
         {
           "label": "On the shelf today",
           "people": [
-            "T.D. Jakes — bishop and author",
             "Jentezen Franklin — Fasting",
             "John & Lisa Bevere — Messenger International",
             "Jack Hayford — The Church On The Way"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Levi Lusko — Fresh Life Church, large online reach",
+            "Christine Caine — Hillsong-formed, A21 (Pentecostal)",
             "broader charismatic media (Bethel, Hillsong) sits just outside the AoG"
           ]
         }
@@ -984,7 +983,7 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "John Piper — Desiring God, Ask Pastor John",
             "Paul Washer — viral sermon clips",
@@ -1020,10 +1019,9 @@
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Rick Warren — huge online following",
-            "Christine Caine — A21, speaker",
             "Bob Goff — best-selling author"
           ]
         }
@@ -1046,13 +1044,12 @@
           "label": "On the shelf today",
           "people": [
             "John Mark Comer — The Ruthless Elimination of Hurry",
-            "Christine Caine — Undaunted",
             "Levi Lusko — author and pastor",
             "Jefferson Bethke — Jesus > Religion"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
             "Steven Furtick — Elevation, top online sermons",
             "Craig Groeschel — YouVersion Bible app; leadership podcast",
@@ -1098,7 +1095,6 @@
           "people": [
             "Billy Graham — the evangelist",
             "Fred Luter — first African-American SBC president",
-            "Beth Moore — Bible teacher and author",
             "David Platt — Radical",
             "Al Mohler — Southern Seminary"
           ]
@@ -1106,18 +1102,15 @@
         {
           "label": "On the shelf today",
           "people": [
-            "Tony Evans — The Urban Alternative",
-            "Priscilla Shirer — Fervent, Bible teacher",
             "Charles Stanley — In Touch Ministries",
             "J.D. Greear — author, former SBC president"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
-            "Beth Moore — large online following",
-            "Jackie Hill Perry — author and speaker",
-            "David Platt — sermons widely shared"
+            "J.D. Greear — pastor and former SBC president",
+            "Al Mohler — Southern Seminary; The Briefing podcast"
           ]
         }
       ]
@@ -1159,15 +1152,15 @@
         {
           "label": "On the shelf today",
           "people": [
-            "Brian McLaren — A New Kind of Christian",
-            "Rachel Held Evans — Searching for Sunday"
+            "Otis Moss III — Dancing in the Darkness (Trinity UCC, Chicago)"
           ]
         },
         {
-          "label": "Influencers (online)",
+          "label": "Current Notable Figures",
           "people": [
-            "John Pavlovitz — widely read progressive blogger",
-            "Rob Bell — author and podcaster (progressive)"
+            "Otis Moss III — pastor of Trinity UCC and author",
+            "Traci Blackmon — UCC minister and justice leader",
+            "John Dorhauer — former UCC General Minister and President"
           ]
         }
       ]
