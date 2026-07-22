@@ -544,8 +544,8 @@ function otherVoicesCard(){
   const o=DATA.other_voices; if(!o||!o.length) return "";
   return '<div class="vcard vother">'+
     '<div class="vcname" style="color:var(--muted)">Other notable voices</div>'+
-    '<div class="vnote2">Widely read authors who sit adjacent to or between the traditions and don’t cleanly belong to one — several have left the local church or crossed streams. Each is tagged with what they most identify as.</div>'+
-    '<ul class="vlist volist">'+o.map(p=>'<li><b>'+esc(p.name)+'</b> — '+esc(p.note)+'</li>').join("")+'</ul>'+
+    '<div class="vnote2">Widely read authors whose professed church isn’t one of the traditions mapped here — nondenominational, non-institutional, or a body like the ACNA. Each lists the church they profess and the tradition their current theology most aligns with.</div>'+
+    '<ul class="vlist volist">'+o.map(p=>'<li><b>'+esc(p.name)+'</b> — '+esc(p.professed)+'; theology aligns with <b>'+esc(p.aligns)+'</b></li>').join("")+'</ul>'+
     '</div>';
 }
 function renderVoices(){
@@ -662,9 +662,9 @@ function buildChunks(){
       CHUNKS.push({type:"figures",name:t.name+" — authors & leaders",
         text:"Representative "+t.name+" ("+t.family+") authors and leaders. "+ppl,
         key:(t.name+" "+t.family+" "+ppl).toLowerCase()}); }); }
-  if(DATA.other_voices){ const ov=DATA.other_voices.map(p=>p.name+" ("+p.note+")").join("; ");
+  if(DATA.other_voices){ const ov=DATA.other_voices.map(p=>p.name+" (professed: "+p.professed+"; theology aligns with "+p.aligns+")").join("; ");
     CHUNKS.push({type:"figures",name:"Other notable voices",
-      text:"Popular authors adjacent to or between the traditions, tagged with what they identify as: "+ov,
+      text:"Popular authors whose professed church is not one of the mapped traditions, with the tradition their theology aligns with: "+ov,
       key:("other notable voices "+ov).toLowerCase()}); }
 }
 function retrieve(q){
