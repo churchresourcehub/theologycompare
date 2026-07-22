@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparative Theology — Woods Lisenby</title>
+<style>
+  :root{ color-scheme: light;
+    --bg:#faf8f3; --panel:#ffffff; --ink:#2a251e; --muted:#6d6455; --faint:#9a9384; --rule:#e7e0d3;
+    --found:#c07a33; --found-e:#9c5f22; --key:#8a5c86; --key-e:#6c4468; --branch:#2f7d68; --branch-e:#1f5a49;
+    --line:#cdc4b2; --user:#eef2f6; --bot:#fbf6ea;
+    --serif:Georgia,'Iowan Old Style',Palatino,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  #wrap{display:flex;height:100%;overflow:hidden}
+  #main{flex:1;display:flex;flex-direction:column;min-width:0}
+  header{padding:16px 22px 6px;flex:0 0 auto}
+  header h1{font-family:var(--serif);font-weight:600;font-size:21px;margin:0}
+  header p.sub{margin:5px 0 0;color:var(--muted);font-size:12.5px;max-width:760px;line-height:1.5}
+  .tabs{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:12px 0 4px}
+  .tab{background:#f1ece1;border:1px solid var(--rule);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+  .tab:hover{background:#e9e2d3}
+  .tab.active{background:var(--branch);color:#fff;border-color:var(--branch)}
+  #askBtn{margin-left:auto;background:var(--key);color:#fff;border:none;border-radius:20px;padding:8px 17px;font-size:13px;font-weight:600;cursor:pointer}
+  #askBtn:hover{background:var(--key-e)}
+  #viewport{flex:1;overflow:auto;padding:8px 22px 26px;position:relative}
+  .vtitle{font-family:var(--serif);font-size:19px;margin:8px 0 2px}
+  .vnote{color:var(--muted);font-size:12.5px;line-height:1.5;max-width:820px;margin:0 0 12px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:10px 0 6px}
+  .ctl label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin-right:6px}
+  select{font-family:var(--sans);font-size:13px;padding:6px 9px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:center;font-size:11.5px;color:var(--muted);margin:12px 0 4px}
+  .legend .sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  svg{display:block;max-width:100%}
+  svg text{font-family:var(--sans)}
+  .dot{cursor:pointer}
+  .lbl{font-size:11px;fill:var(--ink);cursor:pointer}
+  .lbl.anchor{font-weight:700}
+  .pole{font-size:12px;fill:var(--muted);font-weight:600}
+  .axttl{font-size:11px;fill:var(--faint);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+  .leader{stroke:var(--line);stroke-width:1;opacity:.7}
+  .grid{stroke:var(--rule);stroke-width:1}
+  .gridmid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
+  /* matrix */
+  .mxwrap{overflow-x:auto;margin-top:6px;border:1px solid var(--rule);border-radius:10px;background:#fff}
+  table.mx{border-collapse:collapse;width:100%;font-size:12.5px}
+  table.mx th,table.mx td{border:1px solid var(--rule);padding:9px 11px;text-align:left;vertical-align:top;line-height:1.4}
+  table.mx thead th{position:sticky;top:0;background:#f4efe6;font-family:var(--sans);font-size:11px;letter-spacing:.5px;color:var(--ink);z-index:2}
+  table.mx tbody th{background:#faf8f3;font-family:var(--serif);font-size:13.5px;font-weight:600;min-width:130px;position:sticky;left:0;z-index:1}
+  table.mx td{cursor:pointer;min-width:150px;color:var(--muted)}
+  table.mx td:hover{background:#fbf6ea;color:var(--ink)}
+  table.mx .anchorcol{background:#eef5f1}
+  table.mx thead th.anchorcol{background:#dcebe3;color:var(--branch-e)}
+  /* mindmap chooser */
+  .chooser{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+  .fchip{border:none;border-radius:16px;padding:5px 12px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;opacity:.55;transition:.12s}
+  .fchip.on,.fchip:hover{opacity:1}
+  .mmhead{font-family:var(--serif);font-size:17px;margin:14px 0 2px}
+  .mmblurb{color:var(--muted);font-size:13px;line-height:1.55;max-width:760px;margin:2px 0 8px}
+  .node rect{cursor:pointer}
+  .node text{fill:#fff;font-size:11.5px;font-weight:600;pointer-events:none}
+  .edge{stroke:var(--line);stroke-width:1.6;fill:none;opacity:.7}
+  /* axis strip */
+  .strip{margin:3px 0}
+  .strip .row{display:flex;align-items:center;gap:8px;margin:6px 0}
+  .strip .nm{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--faint);font-weight:700;width:112px;flex:0 0 auto;text-align:right}
+  .strip .track{position:relative;flex:1;height:8px;background:#efe9dc;border-radius:6px}
+  .strip .pip{position:absolute;top:-3px;width:14px;height:14px;border-radius:50%;background:var(--branch);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX(-7px)}
+  .strip .poles{display:flex;justify-content:space-between;font-size:10px;color:var(--faint);margin:1px 0 0}
+  /* panel */
+  #panel{width:0;flex:0 0 auto;background:var(--panel);border-left:1px solid var(--rule);overflow:hidden;transition:width .25s ease;display:flex;flex-direction:column}
+  #panel.open{width:min(430px,92vw)}
+  .phead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--rule);flex:0 0 auto}
+  .phead .pt{font-family:var(--serif);font-size:16px;font-weight:600;flex:1;min-width:0}
+  .pswitch{display:flex;border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+  .pswitch button{background:#f4efe6;border:none;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+  .pswitch button.on{background:var(--branch);color:#fff}
+  #closeX{width:30px;height:30px;font-size:20px;color:var(--muted);background:#f4efe6;border:1px solid var(--rule);border-radius:50%;cursor:pointer;line-height:1;padding:0;flex:0 0 auto}
+  #pbody{flex:1;overflow:auto;padding:16px 16px 20px}
+  .dtitle{font-family:var(--serif);font-size:20px;margin:0 0 2px}
+  .fam{display:inline-block;color:#fff;border-radius:14px;padding:2px 10px;font-size:11.5px;font-weight:700;margin:4px 0 2px}
+  .dbody{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink)}
+  .dsec{font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--found-e);border-bottom:1px solid var(--rule);padding-bottom:5px;margin:20px 0 9px;font-weight:700}
+  .celllist{list-style:none;padding:0;margin:0}
+  .celllist li{padding:8px 0;border-bottom:1px solid var(--rule);font-size:13px;line-height:1.45}
+  .celllist li b{font-family:var(--sans);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px;font-weight:700}
+  .srcnote{background:#fbf3e6;border:1px solid #e7d4b3;border-radius:9px;padding:10px 12px;font-size:12px;color:#5c5140;line-height:1.5;margin-top:12px}
+  .srclist{font-size:12px;color:var(--muted);line-height:1.6;margin:4px 0 0;padding-left:18px}
+  /* chat */
+  #chat{display:none;flex:1;overflow:auto;padding:14px}
+  .msg{margin:0 0 12px;line-height:1.55}
+  .msg.u{background:var(--user);border-radius:12px;padding:9px 12px;margin-left:34px;font-size:13.5px}
+  .msg.a{background:var(--bot);border:1px solid var(--rule);border-radius:12px;padding:11px 13px;margin-right:18px;font-family:var(--serif);font-size:14.5px}
+  .msg.a .src{margin-top:8px;font-family:var(--sans);font-size:11px;color:var(--muted)}
+  .msg.sys{color:var(--faint);font-size:12.5px;font-style:italic;text-align:center}
+  .askhead{padding:2px 2px 10px}
+  .askhead h3{font-family:var(--serif);font-size:16px;margin:0 0 4px}
+  .askhead p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.5}
+  .suggest{margin-top:8px}
+  .suggest .s{display:inline-block;background:#f1ece1;border:1px solid var(--rule);border-radius:16px;padding:5px 11px;margin:4px 6px 0 0;font-size:12.5px;cursor:pointer;color:var(--ink)}
+  .suggest .s:hover{background:#e9e2d3}
+  #inbar{display:none;gap:8px;padding:11px 13px;border-top:1px solid var(--rule);background:#fff;flex:0 0 auto}
+  #q{flex:1;border:1px solid var(--rule);border-radius:18px;padding:9px 13px;font-size:13.5px;font-family:var(--sans);resize:none;max-height:110px;outline:none}
+  #q:focus{border-color:var(--branch)}
+  #send{background:var(--branch);color:#fff;border:none;border-radius:18px;padding:0 17px;font-weight:600;cursor:pointer}
+  #send:disabled{opacity:.5;cursor:default}
+  #tooltip{position:fixed;pointer-events:none;background:#2a251e;color:#fff;font-size:12px;line-height:1.4;padding:7px 10px;border-radius:8px;max-width:240px;opacity:0;transition:opacity .1s;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  #tooltip b{color:#f4d9a8}
+  .caption{font-size:11.5px;color:var(--faint);line-height:1.5;margin-top:10px;max-width:760px}
+  a.homelink{color:var(--branch-e);font-weight:600;text-decoration:none;font-size:12px}
+  @media(max-width:640px){ header{padding:12px 14px 4px} #viewport{padding:6px 12px 20px} }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="main">
+    <header>
+      <h1>Comparative Theology</h1>
+      <p class="sub">How the Christian traditions relate — in what they believe and how they branched. The Wesleyan/Methodist tradition is the anchor; every other tradition is drawn fairly from its own authoritative voice. <a class="homelink" href="../">&larr; back to the Theology systematic</a></p>
+      <div class="tabs">
+        <button class="tab" data-view="map">Two-axis map</button>
+        <button class="tab" data-view="spectrum">Spectrum</button>
+        <button class="tab" data-view="matrix">Doctrine matrix</button>
+        <button class="tab" data-view="mindmap">Mind maps</button>
+        <button class="tab" data-view="tree">Genealogy</button>
+        <button id="askBtn">Ask &amp; compare</button>
+      </div>
+    </header>
+    <div id="viewport"><div style="color:var(--muted);padding:30px 0">Loading the comparison data&hellip;</div></div>
+  </div>
+
+  <div id="panel">
+    <div class="phead">
+      <div class="pt" id="ptitle">Ask &amp; compare</div>
+      <div class="pswitch" id="pswitch" style="display:none">
+        <button data-p="detail" id="swDetail">Reading</button>
+        <button data-p="bot" id="swBot">Ask</button>
+      </div>
+      <button id="closeX">&times;</button>
+    </div>
+    <div id="pbody"></div>
+    <div id="chat"></div>
+    <div id="inbar">
+      <textarea id="q" rows="1" placeholder="How does Methodist justification compare to Reformed?"></textarea>
+      <button id="send">Send</button>
+    </div>
+  </div>
+</div>
+<div id="tooltip"></div>
+
+<script>
+const FAM_COLOR = {
+  "Catholic":"#b5432f", "Orthodox":"#c99a2e", "Anglican":"#7a4fa0", "Lutheran":"#3f7fb0",
+  "Wesleyan/Methodist":"#2f7d68", "Reformed":"#2c4c7c", "Baptist":"#9c6b2f", "Pentecostal":"#b0447a"
+};
+const ANCHOR = "Wesleyan/Methodist";
+let DATA=null, AXES={}, CHUNKS=[];
+let state = { view:"map", axis:"sacramental", mx:"sacramental", my:"tradprog", trad:"methodist" };
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,txt){ const e=document.createElementNS(NS,tag); for(const k in (attrs||{})) e.setAttribute(k,attrs[k]); if(txt!=null) e.textContent=txt; return e; }
+function estW(s,px){ return String(s).length*(px*0.58)+8; }
+
+// ---------- load ----------
+fetch("comparison.json").then(r=>r.json()).then(d=>{
+  DATA=d; d.axes.forEach(a=>AXES[a.id]=a);
+  buildChunks();
+  document.querySelectorAll(".tab").forEach(t=> t.onclick=()=>{ setView(t.dataset.view); });
+  setView("map");
+}).catch(e=>{ $("#viewport").innerHTML='<div style="color:#b5432f;padding:30px 0">Could not load comparison.json — '+esc(e.message)+'</div>'; });
+
+function setView(v){
+  state.view=v;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===v));
+  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree}[v])();
+}
+window.addEventListener("resize",()=>{ if(["map","spectrum","tree","mindmap"].includes(state.view)) setView(state.view); });
+
+function axisSelect(id,val){
+  return '<select id="'+id+'">'+DATA.axes.map(a=>'<option value="'+a.id+'"'+(a.id===val?" selected":"")+'>'+esc(a.label)+'</option>').join("")+'</select>';
+}
+function famLegend(){
+  return '<div class="legend">'+Object.keys(FAM_COLOR).map(f=>'<div><span class="sw" style="background:'+FAM_COLOR[f]+'"></span>'+esc(f)+'</div>').join("")+'</div>';
+}
+
+// ---------- SPECTRUM ----------
+function renderSpectrum(){
+  const a=AXES[state.axis];
+  const vp=$("#viewport");
+  vp.innerHTML='<div class="vtitle">Spectrum</div>'+
+    '<p class="vnote">One axis at a time. Each tradition sits where its own commitments place it — the same body can land in a very different spot on a different axis.</p>'+
+    '<div class="controls"><div class="ctl"><label>Axis</label>'+axisSelect("axSel",state.axis)+'</div></div>'+
+    '<div id="svgbox"></div>'+famLegend()+
+    '<p class="caption">Tap any tradition to read its position and open the compare bot.</p>';
+  $("#axSel").onchange=e=>{ state.axis=e.target.value; renderSpectrum(); };
+
+  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||vp.clientWidth-4);
+  const padL=24,padR=24, x0=padL, x1=W-padR;
+  const items=DATA.traditions.map(t=>({t,x:x0+(t.pos[a.id]/100)*(x1-x0)})).sort((p,q)=>p.x-q.x);
+  // lane-pack labels above axis
+  const laneRight=[]; const GAP=8, LH=20;
+  items.forEach(it=>{ const w=estW(it.t.name,11), half=w/2; const left=it.x-half;
+    let lane=0; while(lane<laneRight.length && laneRight[lane] > left-GAP) lane++;
+    laneRight[lane]=it.x+half; it.lane=lane; });
+  const maxLane=Math.max(1,laneRight.length);
+  const topPad=18, axisY=topPad+maxLane*LH+22, H=axisY+64;
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  // axis line + ticks
+  svg.appendChild(el("line",{x1:x0,y1:axisY,x2:x1,y2:axisY,class:"grid"}));
+  [0,25,50,75,100].forEach(p=>{ const x=x0+(p/100)*(x1-x0);
+    svg.appendChild(el("line",{x1:x,y1:axisY-4,x2:x,y2:axisY+4,class:"gridmid"})); });
+  items.forEach(it=>{
+    const anchor=it.t.family===ANCHOR;
+    const ly=topPad+it.lane*LH+11;
+    svg.appendChild(el("line",{x1:it.x,y1:axisY,x2:it.x,y2:ly+3,class:"leader"}));
+    const dot=el("circle",{cx:it.x,cy:axisY,r:anchor?7:5,fill:FAM_COLOR[it.t.family],stroke:"#fff","stroke-width":anchor?2:1.4,class:"dot"});
+    dot.onclick=()=>openDetail({trad:it.t.id}); svg.appendChild(dot);
+    const half=estW(it.t.name,11)/2, lx=Math.max(half+2,Math.min(W-half-2,it.x)); // keep inside the svg
+    const tx=el("text",{x:lx,y:ly,"text-anchor":"middle",class:"lbl"+(anchor?" anchor":"")},it.t.name);
+    tx.style.cursor="pointer"; tx.onclick=()=>openDetail({trad:it.t.id}); svg.appendChild(tx);
+  });
+  svg.appendChild(el("text",{x:x0,y:axisY+26,"text-anchor":"start",class:"pole"},"◀ "+a.left));
+  svg.appendChild(el("text",{x:x1,y:axisY+26,"text-anchor":"end",class:"pole"},a.right+" ▶"));
+  svg.appendChild(el("text",{x:(x0+x1)/2,y:axisY+50,"text-anchor":"middle",class:"axttl"},a.label));
+  box.innerHTML=""; box.appendChild(svg);
+}
+
+// ---------- TWO-AXIS MAP ----------
+function renderMap(){
+  const vp=$("#viewport");
+  vp.innerHTML='<div class="vtitle">Two-axis map</div>'+
+    '<p class="vnote">Pick any two spectrums for the horizontal and vertical axes. The default (sacramental → biblicist against traditional → progressive) is the clearest single picture of the field.</p>'+
+    '<div class="controls">'+
+      '<div class="ctl"><label>Horizontal</label>'+axisSelect("mxSel",state.mx)+'</div>'+
+      '<div class="ctl"><label>Vertical</label>'+axisSelect("mySel",state.my)+'</div></div>'+
+    '<div id="svgbox"></div>'+famLegend()+
+    '<p class="caption">Hover a point for its one-line description; tap to open its reading and the compare bot.</p>';
+  $("#mxSel").onchange=e=>{ state.mx=e.target.value; renderMap(); };
+  $("#mySel").onchange=e=>{ state.my=e.target.value; renderMap(); };
+  const ax=AXES[state.mx], ay=AXES[state.my];
+  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||vp.clientWidth-4), H=Math.min(560,Math.max(420,W*0.62));
+  const mL=64,mR=120,mT=30,mB=54, x0=mL,x1=W-mR,y0=H-mB,y1=mT;
+  const px=v=>x0+(v/100)*(x1-x0), py=v=>y0+(v/100)*(y1-y0);
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  // frame + mid gridlines
+  svg.appendChild(el("rect",{x:x0,y:y1,width:x1-x0,height:y0-y1,fill:"#fff",stroke:"var(--rule)"}));
+  svg.appendChild(el("line",{x1:px(50),y1:y1,x2:px(50),y2:y0,class:"gridmid"}));
+  svg.appendChild(el("line",{x1:x0,y1:py(50),x2:x1,y2:py(50),class:"gridmid"}));
+  // axis pole labels
+  svg.appendChild(el("text",{x:x0,y:y0+22,"text-anchor":"start",class:"pole"},"◀ "+ax.left));
+  svg.appendChild(el("text",{x:x1,y:y0+22,"text-anchor":"end",class:"pole"},ax.right+" ▶"));
+  svg.appendChild(el("text",{x:(x0+x1)/2,y:y0+40,"text-anchor":"middle",class:"axttl"},ax.label));
+  const ymid=(y0+y1)/2;
+  svg.appendChild(el("text",{x:x0-10,y:y1+4,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+(y1+4)+")"},ay.right+" ▶"));
+  svg.appendChild(el("text",{x:x0-10,y:y0,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+y0+")"},"◀ "+ay.left));
+  svg.appendChild(el("text",{x:x0-42,y:ymid,"text-anchor":"middle",class:"axttl",transform:"rotate(-90 "+(x0-42)+" "+ymid+")"},ay.label));
+  // points
+  DATA.traditions.forEach(t=>{
+    const anchor=t.family===ANCHOR;
+    const cx=px(t.pos[ax.id]), cy=py(t.pos[ay.id]); // high value = up (py maps 100→top)
+    const g=el("g",{});
+    if(anchor) g.appendChild(el("circle",{cx,cy,r:11,fill:"none",stroke:FAM_COLOR[t.family],"stroke-width":1.5,opacity:.5}));
+    const dot=el("circle",{cx,cy,r:anchor?7:5.5,fill:FAM_COLOR[t.family],stroke:"#fff","stroke-width":1.6,class:"dot"});
+    g.appendChild(dot);
+    const lx=cx+9<x1-70?cx+9:cx-9, anc=cx+9<x1-70?"start":"end";
+    const tx=el("text",{x:lx,y:cy+3.5,"text-anchor":anc,class:"lbl"+(anchor?" anchor":"")},t.name);
+    g.appendChild(tx);
+    const show=ev=>{ g.parentNode.appendChild(g); dot.setAttribute("r",anchor?9:7.5); tip(ev,"<b>"+esc(t.name)+"</b><br>"+esc(t.blurb)); };
+    g.onmousemove=show; g.onmouseenter=show;
+    g.onmouseleave=()=>{ dot.setAttribute("r",anchor?7:5.5); untip(); };
+    g.style.cursor="pointer"; g.onclick=()=>openDetail({trad:t.id});
+    svg.appendChild(g);
+  });
+  box.innerHTML=""; box.appendChild(svg);
+}
+
+// ---------- DOCTRINE MATRIX ----------
+function renderMatrix(){
+  const vp=$("#viewport"), fams=DATA.families;
+  let h='<div class="vtitle">Doctrine matrix</div>'+
+    '<p class="vnote">Families across the top, doctrines down the side. The Methodist column is highlighted as the anchor. Tap any cell to read it, see its sourcing, and compare across the row.</p>'+
+    '<div class="mxwrap"><table class="mx"><thead><tr><th></th>';
+  fams.forEach(f=>{ const a=f===ANCHOR; h+='<th class="'+(a?"anchorcol":"")+'" style="border-top:3px solid '+FAM_COLOR[f]+'">'+esc(f)+'</th>'; });
+  h+='</tr></thead><tbody>';
+  DATA.doctrines.forEach(d=>{ h+='<tr><th>'+esc(d.label)+'</th>';
+    fams.forEach(f=>{ const a=f===ANCHOR; h+='<td class="'+(a?"anchorcol":"")+'" data-doc="'+d.id+'" data-fam="'+esc(f)+'">'+esc(d.cells[f])+'</td>'; });
+    h+='</tr>'; });
+  h+='</tbody></table></div><p class="caption">Every cell is drawn from that tradition’s own confessional voice; fuller sourced essays are being added.</p>';
+  vp.innerHTML=h;
+  vp.querySelectorAll("td[data-doc]").forEach(td=> td.onclick=()=>openDetail({doc:td.dataset.doc,fam:td.dataset.fam}));
+}
+
+// ---------- MIND MAPS ----------
+function renderMindmap(){
+  const vp=$("#viewport");
+  const t=DATA.traditions.find(x=>x.id===state.trad)||DATA.traditions[0];
+  let chooser='<div class="chooser">'+DATA.traditions.map(x=>
+    '<button class="fchip'+(x.id===t.id?" on":"")+'" style="background:'+FAM_COLOR[x.family]+'" data-t="'+x.id+'">'+esc(x.name)+'</button>').join("")+'</div>';
+  vp.innerHTML='<div class="vtitle">Per-tradition mind maps</div>'+
+    '<p class="vnote">A single tradition, with its stance on each doctrine spun out from the center — the same shape as the main systematic, so the bot can walk across them to compare.</p>'+
+    chooser+
+    '<div class="mmhead" style="color:'+FAM_COLOR[t.family]+'">'+esc(t.name)+'</div>'+
+    '<div class="mmblurb">'+esc(t.blurb)+'</div>'+
+    '<div id="svgbox"></div>';
+  vp.querySelectorAll(".fchip").forEach(b=> b.onclick=()=>{ state.trad=b.dataset.t; renderMindmap(); });
+  drawMindmap(t);
+}
+function drawMindmap(t){
+  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||900), H=Math.min(620,Math.max(460,W*0.66));
+  const cx=W/2, cy=H/2, R=Math.min(W,H)/2-96;
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  const docs=DATA.doctrines, n=docs.length, col=FAM_COLOR[t.family];
+  // edges first
+  const pts=docs.map((d,i)=>{ const ang=-Math.PI/2 + i*2*Math.PI/n; return {d,x:cx+Math.cos(ang)*R,y:cy+Math.sin(ang)*R}; });
+  pts.forEach(p=> svg.appendChild(el("path",{d:"M"+cx+","+cy+" Q"+((cx+p.x)/2)+","+((cy+p.y)/2)+" "+p.x+","+p.y,class:"edge"})));
+  // doctrine nodes
+  pts.forEach(p=>{
+    const w=Math.max(96,estW(p.d.label,11.5)+18), hh=30, x=p.x-w/2, y=p.y-hh/2;
+    const g=el("g",{class:"node"});
+    g.appendChild(el("rect",{x,y,width:w,height:hh,rx:9,fill:"#fff",stroke:col,"stroke-width":1.6}));
+    const tx=el("text",{x:p.x,y:p.y+4,"text-anchor":"middle"},p.d.label);
+    tx.setAttribute("font-size","11"); tx.style.fill=col; // inline style beats the .node text CSS rule
+    g.appendChild(tx);
+    g.style.cursor="pointer"; g.onclick=()=>openDetail({doc:p.d.id,fam:t.family});
+    const show=ev=>tip(ev,"<b>"+esc(p.d.label)+"</b><br>"+esc(p.d.cells[t.family]));
+    g.onmousemove=show; g.onmouseenter=show; g.onmouseleave=untip;
+    svg.appendChild(g);
+  });
+  // center
+  const cw=Math.max(130,estW(t.name,13)+20);
+  const g=el("g",{class:"node"});
+  g.appendChild(el("rect",{x:cx-cw/2,y:cy-22,width:cw,height:44,rx:12,fill:col,stroke:"#fff","stroke-width":2}));
+  const t1=el("text",{x:cx,y:cy+2,"text-anchor":"middle",fill:"#fff"},t.name); t1.setAttribute("font-size","12.5");
+  g.appendChild(t1);
+  svg.appendChild(g);
+  box.innerHTML=""; box.appendChild(svg);
+}
+
+// ---------- GENEALOGY TREE ----------
+const TREE = {name:"Early Church", sub:"Apostolic & Nicene", children:[
+  {name:"Eastern Orthodox", year:"1054 — Great Schism", family:"Orthodox", tid:"orthodox"},
+  {name:"Western (Latin) Church", year:"1054", family:"Catholic", children:[
+    {name:"Roman Catholic", family:"Catholic", tid:"catholic"},
+    {name:"Reformation", year:"1517", family:"Reformed", children:[
+      {name:"Lutheran", family:"Lutheran", children:[
+        {name:"Lutheran (LCMS)", family:"Lutheran", tid:"lcms"},
+        {name:"Lutheran (ELCA)", family:"Lutheran", tid:"elca"} ]},
+      {name:"Reformed (Calvin)", family:"Reformed", children:[
+        {name:"Presbyterian", family:"Reformed", children:[
+          {name:"PCA / EPC", family:"Reformed", tid:"pca"},
+          {name:"PCUSA", family:"Reformed", tid:"pcusa"} ]},
+        {name:"New Calvinist", family:"Reformed", tid:"new-calvinist"},
+        {name:"Congregational → UCC", family:"Reformed", tid:"ucc-unitarian"} ]},
+      {name:"Anglican (English Ref.)", family:"Anglican", children:[
+        {name:"Anglo-Catholic", family:"Anglican", tid:"anglo-catholic"},
+        {name:"Episcopal (US)", family:"Anglican", tid:"episcopal"},
+        {name:"Methodist / Wesleyan", year:"1738 — Wesley", family:"Wesleyan/Methodist", children:[
+          {name:"UMC", family:"Wesleyan/Methodist", tid:"methodist"},
+          {name:"Holiness → Pentecostal", year:"1906 — Azusa", family:"Pentecostal", tid:"pentecostal"} ]} ]},
+      {name:"Anabaptist (Radical Ref.)", family:"Baptist", children:[
+        {name:"Anabaptist / Mennonite", family:"Baptist", tid:"anabaptist"} ]},
+      {name:"Baptist", year:"17th c.", family:"Baptist", children:[
+        {name:"Southern Baptist", family:"Baptist", tid:"sbc"},
+        {name:"General / Free Will", family:"Baptist", tid:"free-will-baptist"},
+        {name:"Restorationist", family:"Baptist", tid:"restorationist"},
+        {name:"Fundamentalist", family:"Baptist", tid:"fundamentalist"},
+        {name:"Seeker evangelical", family:"Baptist", tid:"seeker-evangelical"},
+        {name:"Nondenom megachurch", family:"Baptist", tid:"nondenom-mega"} ]}
+    ]}
+  ]}
+]};
+function renderTree(){
+  const vp=$("#viewport");
+  vp.innerHTML='<div class="vtitle">Genealogy</div>'+
+    '<p class="vnote">The historical branching, left to right in time: the one Church, the Great Schism of 1054, the Reformation of 1517, and the Protestant fan-out. Colored leaves are the living traditions on the other views — tap one to open it.</p>'+
+    '<div id="svgbox" style="overflow-x:auto"></div>'+
+    '<p class="caption">This is the standard historical outline; a few bodies (e.g. the UCC via Congregationalism, Pentecostalism via the Holiness movement) are placed by descent. Woods can adjust the branching.</p>';
+  const box=$("#svgbox");
+  const rowH=34, colW=178, nodeH=26, mL=14, mT=16;
+  const ctx={leaf:0,rowH,maxDepth:0};
+  (function layout(n,depth){ n.depth=depth; ctx.maxDepth=Math.max(ctx.maxDepth,depth);
+    if(n.children&&n.children.length){ n.children.forEach(c=>layout(c,depth+1)); n.y=(n.children[0]._y+n.children[n.children.length-1]._y)/2; }
+    else { n._y=ctx.leaf*rowH+rowH/2+mT; ctx.leaf++; n.y=n._y; }
+    if(n.children) n._y=n.y;
+  })(TREE,0);
+  const H=ctx.leaf*rowH+mT*2+14, W=mL+(ctx.maxDepth+1)*colW+40;
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  const nodes=[];
+  (function collect(n){ n._x=mL+n.depth*colW; nodes.push(n); (n.children||[]).forEach(collect); })(TREE);
+  // edges
+  nodes.forEach(n=> (n.children||[]).forEach(c=>{
+    const x1=n._x+nodeW(n), y1=n.y, x2=c._x, y2=c.y, mx=(x1+x2)/2;
+    svg.appendChild(el("path",{d:"M"+x1+","+y1+" C"+mx+","+y1+" "+mx+","+y2+" "+x2+","+y2,class:"edge"}));
+  }));
+  // nodes
+  nodes.forEach(n=>{
+    const w=nodeW(n), leaf=!n.children, col=FAM_COLOR[n.family]||"#8a7f6a";
+    const g=el("g",{});
+    if(n.year) g.appendChild(el("text",{x:n._x,y:n.y-nodeH/2-4,class:"axttl"},n.year));
+    g.appendChild(el("rect",{x:n._x,y:n.y-nodeH/2,width:w,height:nodeH,rx:8,
+      fill:leaf?col:"#fff",stroke:col,"stroke-width":leaf?1.5:1.8}));
+    const tx=el("text",{x:n._x+10,y:n.y+4,fill:leaf?"#fff":col}); tx.setAttribute("font-size","11.5");
+    tx.setAttribute("font-weight",leaf?"600":"700"); tx.textContent=n.name; g.appendChild(tx);
+    if(n.tid){ g.style.cursor="pointer"; g.onclick=()=>openDetail({trad:n.tid}); }
+    svg.appendChild(g);
+  });
+  box.innerHTML=""; box.appendChild(svg);
+}
+function nodeW(n){ return Math.max(84,estW(n.name,11.5)+18); }
+
+// ---------- DETAIL PANEL ----------
+function axisStrip(pos){
+  return '<div class="strip">'+DATA.axes.map(a=>{
+    const v=pos[a.id];
+    return '<div class="row"><div class="nm">'+esc(a.label)+'</div>'+
+      '<div style="flex:1"><div class="track"><div class="pip" style="left:'+v+'%;background:var(--branch)"></div></div>'+
+      '<div class="poles"><span>'+esc(a.left)+'</span><span>'+esc(a.right)+'</span></div></div></div>';
+  }).join("")+'</div>';
+}
+function openDetail(ref){
+  openPanel("detail");
+  const body=$("#pbody");
+  if(ref.trad){
+    const t=DATA.traditions.find(x=>x.id===ref.trad);
+    $("#ptitle").textContent="Reading";
+    let h='<div class="dtitle">'+esc(t.name)+'</div>'+
+      '<span class="fam" style="background:'+FAM_COLOR[t.family]+'">'+esc(t.family)+'</span>'+
+      '<div class="dbody" style="margin-top:8px">'+esc(t.blurb)+'</div>'+
+      '<div class="dsec">Where it sits</div>'+axisStrip(t.pos)+
+      '<div class="dsec">Its positions, doctrine by doctrine</div><ul class="celllist">'+
+      DATA.doctrines.map(d=>'<li><b>'+esc(d.label)+'</b>'+esc(d.cells[t.family])+'</li>').join("")+'</ul>'+
+      sourceNote(t.family)+
+      '<div class="srcnote">Want a side-by-side? <a href="#" id="toBot" style="color:var(--branch-e);font-weight:600">Ask the compare bot</a> how '+esc(t.name)+' relates to another tradition.</div>';
+    body.innerHTML=h;
+    $("#toBot").onclick=e=>{ e.preventDefault(); openPanel("bot"); $("#q").value="How does "+t.name+" compare to Methodist on justification and grace?"; $("#q").focus(); };
+  } else {
+    const d=DATA.doctrines.find(x=>x.id===ref.doc), f=ref.fam;
+    $("#ptitle").textContent="Reading";
+    let h='<div class="dtitle">'+esc(d.label)+'</div>'+
+      '<span class="fam" style="background:'+FAM_COLOR[f]+'">'+esc(f)+'</span>'+
+      '<div class="dbody" style="margin-top:8px">'+esc(d.cells[f])+'</div>'+
+      '<div class="dsec">Across the families</div><ul class="celllist">'+
+      DATA.families.map(ff=>'<li><b style="color:'+FAM_COLOR[ff]+'">'+esc(ff)+(ff===f?" • shown above":"")+'</b>'+esc(d.cells[ff])+'</li>').join("")+'</ul>'+
+      sourceNote(f);
+    body.innerHTML=h;
+  }
+}
+function sourceNote(fam){
+  const src=(DATA.family_sources&&DATA.family_sources[fam])||[];
+  return '<div class="dsec">Sourcing</div>'+
+    '<div style="font-size:12.5px;color:var(--muted);line-height:1.5">Drawn from '+esc(fam)+'’s own authoritative voice:</div>'+
+    '<ul class="srclist">'+src.map(s=>'<li>'+esc(s)+'</li>').join("")+'</ul>'+
+    '<div class="srcnote">Fuller sourced essays (denomination statement + a seminary text + Woods’s material for the Methodist column) are being written and will expand this section.</div>';
+}
+
+// ---------- PANEL PLUMBING ----------
+function openPanel(mode){
+  $("#panel").classList.add("open");
+  $("#pswitch").style.display="flex";
+  setPanelMode(mode);
+}
+function setPanelMode(mode){
+  const bot=mode==="bot";
+  $("#swBot").classList.toggle("on",bot); $("#swDetail").classList.toggle("on",!bot);
+  $("#pbody").style.display=bot?"none":"block";
+  $("#chat").style.display=bot?"block":"none";
+  $("#inbar").style.display=bot?"flex":"none";
+  $("#ptitle").textContent=bot?"Ask & compare":"Reading";
+  if(bot && !$("#chat").dataset.init){ initChat(); $("#chat").dataset.init="1"; }
+}
+$("#closeX").onclick=()=>$("#panel").classList.remove("open");
+$("#askBtn").onclick=()=>openPanel("bot");
+$("#swBot").onclick=()=>setPanelMode("bot");
+$("#swDetail").onclick=()=>{ if(!$("#pbody").innerHTML.trim()) openDetail({trad:"methodist"}); setPanelMode("detail"); };
+
+// ---------- TOOLTIP ----------
+function tip(ev,html){ const t=$("#tooltip"); t.innerHTML=html; t.style.opacity="1";
+  const x=ev.clientX+14, y=ev.clientY+14; t.style.left=Math.min(x,innerWidth-250)+"px"; t.style.top=y+"px"; }
+function untip(){ $("#tooltip").style.opacity="0"; }
+
+// ---------- BOT ----------
+const STOP=new Set("the a an and or of to in on for with is are as be it its how does do what which than vs compare between about their they them this that from".split(" "));
+function buildChunks(){
+  CHUNKS=[];
+  DATA.doctrines.forEach(d=> DATA.families.forEach(f=>
+    CHUNKS.push({type:"doctrine",name:f+" — "+d.label,text:"On "+d.label+", "+f+" holds: "+d.cells[f],
+      key:(f+" "+d.label+" "+d.cells[f]).toLowerCase()})));
+  DATA.traditions.forEach(t=> CHUNKS.push({type:"tradition",name:t.name,
+    text:t.name+" (family: "+t.family+"). "+t.blurb,key:(t.name+" "+t.family+" "+t.blurb).toLowerCase()}));
+  DATA.axes.forEach(a=> CHUNKS.push({type:"axis",name:"Spectrum: "+a.label,
+    text:'The "'+a.label+'" spectrum runs from '+a.left+" to "+a.right+".",key:(a.label+" "+a.left+" "+a.right).toLowerCase()}));
+}
+function retrieve(q){
+  const toks=q.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
+  const scored=CHUNKS.map(c=>{ let s=0; toks.forEach(w=>{ if(c.key.includes(w)) s+=1; }); return {c,s}; });
+  const named=scored.filter(x=> x.c.type==="tradition" && q.toLowerCase().includes(x.c.name.toLowerCase().split(" (")[0].slice(0,8)));
+  named.forEach(x=>x.s+=4);
+  let top=scored.filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,14).map(x=>x.c);
+  if(!top.length) top=CHUNKS.filter(c=>c.key.includes("methodist")||c.key.includes("wesleyan")).slice(0,10);
+  return top;
+}
+const SYS='You are the guide for a Comparative Theology site. The anchor voice is Wesleyan/Methodist (Woods Lisenby’s tradition), but you must represent every tradition fairly from its OWN authoritative self-understanding, never a rival’s caricature. Rules: answer ONLY from the SOURCES provided; never invent quotations; where a source states a position directly, state it directly and plainly; when traditions differ, lay the contrast out even-handedly; when a tradition spans a range (e.g. Reformed vs. mainline, general vs. Reformed Baptist), say so. Be clear and concise — a few short paragraphs. End major claims by naming the tradition, not a page citation.';
+function initChat(){
+  $("#chat").innerHTML='<div class="askhead"><h3>Ask &amp; compare</h3>'+
+    '<p>Answers are drawn from the comparison data and each tradition’s own voice. This is the starting corpus; the sourced reading essays will deepen it.</p>'+
+    '<div class="suggest">'+[
+      "How does Methodist justification compare to Reformed?",
+      "Who thinks salvation can be lost, and who doesn’t?",
+      "Compare the Lord’s Supper across Catholic, Lutheran, Methodist, and Baptist.",
+      "What separates Wesleyan grace from Calvinist grace?"
+    ].map(s=>'<span class="s">'+esc(s)+'</span>').join("")+'</div></div>';
+  $("#chat").querySelectorAll(".s").forEach(s=> s.onclick=()=>{ $("#q").value=s.textContent; send(); });
+}
+function addMsg(cls,html){ const d=document.createElement("div"); d.className="msg "+cls; d.innerHTML=html; $("#chat").appendChild(d); $("#chat").scrollTop=$("#chat").scrollHeight; return d; }
+let busy=false;
+async function send(){
+  const q=$("#q").value.trim(); if(!q||busy) return;
+  busy=true; $("#send").disabled=true; $("#q").value="";
+  addMsg("u",esc(q));
+  const sources=retrieve(q).map(c=>({type:c.type,name:c.name,text:c.text}));
+  const thinking=addMsg("sys","comparing…");
+  try{
+    const r=await fetch("/api/chat",{method:"POST",headers:{"content-type":"application/json"},
+      body:JSON.stringify({prompt:SYS+"\n\nQUESTION: "+q,question:q,sources})});
+    const j=await r.json(); thinking.remove();
+    if(j.error){ addMsg("sys","The bot backend isn’t live yet ("+esc(j.error)+"). Add ANTHROPIC_API_KEY to enable it."); }
+    else{ addMsg("a",esc(j.text).replace(/\n/g,"<br>")+
+      '<div class="src">Drawn from: '+sources.slice(0,6).map(s=>esc(s.name)).join(" · ")+'</div>'); }
+  }catch(e){ thinking.remove(); addMsg("sys","Couldn’t reach the bot backend. It works once deployed with an API key."); }
+  busy=false; $("#send").disabled=false; $("#q").focus();
+}
+$("#send").onclick=send;
+$("#q").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); send(); } });
+$("#q").addEventListener("input",e=>{ e.target.style.height="auto"; e.target.style.height=Math.min(110,e.target.scrollHeight)+"px"; });
+</script>
+</body>
+</html>
