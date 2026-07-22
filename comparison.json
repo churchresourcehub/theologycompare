@@ -366,7 +366,8 @@
         "security": 80,
         "atonement": 90,
         "plan": 40
-      }
+      },
+      "card_denoms": "the Amish, the Brethren, the Hutterites, and the Bruderhof"
     },
     {
       "id": "restorationist",
@@ -380,7 +381,8 @@
         "security": 80,
         "atonement": 90,
         "plan": 50
-      }
+      },
+      "card_denoms": "the Christian Churches / Churches of Christ and the Disciples of Christ"
     },
     {
       "id": "pentecostal",
@@ -422,7 +424,8 @@
         "security": 40,
         "atonement": 85,
         "plan": 65
-      }
+      },
+      "card_denoms": "the Willow Creek and Saddleback networks and other seeker-model community churches"
     },
     {
       "id": "nondenom-mega",
@@ -436,7 +439,8 @@
         "security": 40,
         "atonement": 80,
         "plan": 70
-      }
+      },
+      "card_denoms": "Acts 29, the ARC network, and independent nondenominational megachurches"
     },
     {
       "id": "free-will-baptist",
@@ -450,7 +454,8 @@
         "security": 90,
         "atonement": 92,
         "plan": 70
-      }
+      },
+      "card_denoms": "General Baptists and other free-will (Arminian) Baptist bodies"
     },
     {
       "id": "sbc",
@@ -464,7 +469,8 @@
         "security": 15,
         "atonement": 70,
         "plan": 75
-      }
+      },
+      "card_denoms": "the National and Progressive National Baptist Conventions, American Baptist Churches USA, and independent Baptist churches"
     },
     {
       "id": "fundamentalist",
@@ -478,7 +484,8 @@
         "security": 15,
         "atonement": 70,
         "plan": 90
-      }
+      },
+      "card_denoms": "independent fundamental Baptist (IFB) churches and separatist Bible churches"
     },
     {
       "id": "ucc-unitarian",
@@ -1337,6 +1344,86 @@
       "name": "Priscilla Shirer",
       "professed": "nondenominational Bible teacher",
       "aligns": "Baptist / evangelical"
+    },
+    {
+      "name": "Joyce Meyer",
+      "professed": "nondenominational, charismatic",
+      "aligns": "charismatic / Word of Faith"
+    },
+    {
+      "name": "Joel Osteen",
+      "professed": "nondenominational (Lakewood Church)",
+      "aligns": "Word of Faith / prosperity"
+    },
+    {
+      "name": "Lysa TerKeurst",
+      "professed": "nondenominational (Proverbs 31 Ministries)",
+      "aligns": "evangelical"
+    },
+    {
+      "name": "John Eldredge",
+      "professed": "nondenominational (Ransomed Heart)",
+      "aligns": "evangelical"
+    },
+    {
+      "name": "Mark Batterson",
+      "professed": "nondenominational (National Community Church)",
+      "aligns": "evangelical / charismatic"
+    },
+    {
+      "name": "Sarah Young",
+      "professed": "Presbyterian (PCA)",
+      "aligns": "Reformed evangelical"
+    },
+    {
+      "name": "Ann Voskamp",
+      "professed": "broadly evangelical",
+      "aligns": "evangelical"
+    },
+    {
+      "name": "Jen Hatmaker",
+      "professed": "progressive; formerly evangelical",
+      "aligns": "progressive / mainline"
+    },
+    {
+      "name": "Gary Chapman",
+      "professed": "Southern Baptist",
+      "aligns": "evangelical"
+    },
+    {
+      "name": "Eric Metaxas",
+      "professed": "evangelical (raised Greek Orthodox)",
+      "aligns": "evangelical"
+    },
+    {
+      "name": "Kristin Kobes Du Mez",
+      "professed": "Christian Reformed (CRC)",
+      "aligns": "Reformed"
+    },
+    {
+      "name": "Richard Rohr",
+      "professed": "Roman Catholic (Franciscan friar)",
+      "aligns": "progressive contemplative"
+    },
+    {
+      "name": "Henri Nouwen",
+      "professed": "Roman Catholic (priest)",
+      "aligns": "Catholic contemplative"
+    },
+    {
+      "name": "Richard Foster",
+      "professed": "Quaker (Friends)",
+      "aligns": "evangelical / spiritual formation"
+    },
+    {
+      "name": "Dallas Willard",
+      "professed": "Southern Baptist (ordained)",
+      "aligns": "evangelical / spiritual formation"
+    },
+    {
+      "name": "A.W. Tozer",
+      "professed": "Christian & Missionary Alliance",
+      "aligns": "evangelical"
     }
   ],
   "family_denominations": {
@@ -1348,5 +1435,103 @@
     "Reformed": "the PCUSA, the PCA, the EPC and OPC; the Reformed Church in America and the Christian Reformed Church; and the Congregational churches",
     "Baptist": "the Southern Baptist Convention, the National and Progressive National Baptist Conventions, American Baptist Churches USA, and the Free Will Baptists; the Churches of Christ; Mennonite and other Anabaptist churches; and many nondenominational and community churches",
     "Pentecostal": "the Assemblies of God, the Church of God in Christ (COGIC), the Church of God (Cleveland, TN), the Foursquare Church, and the wider charismatic movement"
-  }
+  },
+  "woods_favorites": [
+    {
+      "name": "Karl Barth",
+      "note": "Swiss Reformed; neo-orthodox (Church Dogmatics)"
+    },
+    {
+      "name": "Rob Bell",
+      "note": "nondenominational, then post-church; progressive"
+    },
+    {
+      "name": "Wendell Berry",
+      "note": "Baptist (Kentucky); agrarian poet and essayist"
+    },
+    {
+      "name": "Sarah Bessey",
+      "note": "progressive (charismatic background); Jesus Feminist"
+    },
+    {
+      "name": "Dietrich Bonhoeffer",
+      "note": "Lutheran (Confessing Church); The Cost of Discipleship"
+    },
+    {
+      "name": "Brené Brown",
+      "note": "Episcopalian; research professor and author"
+    },
+    {
+      "name": "Diana Butler Bass",
+      "note": "Episcopalian; author and public commentator"
+    },
+    {
+      "name": "Tony Campolo",
+      "note": "American Baptist; progressive evangelical (Red Letter Christians)"
+    },
+    {
+      "name": "Francis Chan",
+      "note": "nondenominational; left his megachurch for house churches"
+    },
+    {
+      "name": "Peter Enns",
+      "note": "progressive, formerly Reformed; The Bible for Normal People"
+    },
+    {
+      "name": "Rachel Held Evans",
+      "note": "Episcopalian (raised evangelical); Searching for Sunday"
+    },
+    {
+      "name": "Gustavo Gutiérrez",
+      "note": "Roman Catholic (Dominican); liberation theology"
+    },
+    {
+      "name": "Adam Hamilton",
+      "note": "United Methodist; Church of the Resurrection"
+    },
+    {
+      "name": "Randy Maddox",
+      "note": "United Methodist; Wesley scholar (Responsible Grace)"
+    },
+    {
+      "name": "Brennan Manning",
+      "note": "Roman Catholic (former Franciscan); The Ragamuffin Gospel"
+    },
+    {
+      "name": "M. Robert Mulholland Jr.",
+      "note": "United Methodist (Asbury); Invitation to a Journey"
+    },
+    {
+      "name": "Elaine Pagels",
+      "note": "Episcopalian; historian of early Christianity"
+    },
+    {
+      "name": "Eugene Peterson",
+      "note": "Presbyterian (PCUSA) pastor; The Message"
+    },
+    {
+      "name": "Richard Rohr",
+      "note": "Roman Catholic (Franciscan); contemplative"
+    },
+    {
+      "name": "Andy Stanley",
+      "note": "nondenominational (North Point); evangelical"
+    },
+    {
+      "name": "Lovett Weems",
+      "note": "United Methodist; church-leadership scholar"
+    },
+    {
+      "name": "John Wesley",
+      "note": "Anglican priest; founder of Methodism"
+    },
+    {
+      "name": "N.T. Wright",
+      "note": "Anglican (Church of England); New Testament scholar"
+    },
+    {
+      "name": "Brian Zahnd",
+      "note": "nondenominational (Word of Life Church); post-evangelical"
+    }
+  ]
 }
