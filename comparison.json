@@ -1,155 +1,501 @@
 {
   "version": "0.2 (2026-07-08)",
   "note": "Data model for the standalone comparative-theology site. Two layers: (1) a doctrine matrix at the confessional-FAMILY level, and (2) a finer set of traditions/movements each carrying coordinates on several independent axes, so any single spectrum or any 2-axis map can be drawn from the same data. Each family/tradition is represented from its own authoritative voice. Positions are 0-100 on each axis (0 = left label, 100 = right label). These are v1 placements for Woods to refine.",
-
   "axes": [
-    { "id": "sacramental", "label": "liturgy and sacrament", "left": "sacramental", "right": "biblicist" },
-    { "id": "gracewill", "label": "grace and the will", "left": "God's sovereignty (monergism)", "right": "human response (synergism)" },
-    { "id": "authority", "label": "locus of authority", "left": "church and tradition", "right": "individual conscience" },
-    { "id": "security", "label": "salvation security", "left": "once saved, always saved", "right": "can be forfeited" },
-    { "id": "atonement", "label": "extent of the atonement", "left": "limited / particular", "right": "unlimited" },
-    { "id": "plan", "label": "God's plan across time", "left": "covenant / one people", "right": "dispensational" }
+    {
+      "id": "sacramental",
+      "label": "liturgy and sacrament",
+      "left": "sacramental",
+      "right": "biblicist"
+    },
+    {
+      "id": "gracewill",
+      "label": "grace and the will",
+      "left": "God's sovereignty (monergism)",
+      "right": "human response (synergism)"
+    },
+    {
+      "id": "authority",
+      "label": "locus of authority",
+      "left": "church and tradition",
+      "right": "individual conscience"
+    },
+    {
+      "id": "security",
+      "label": "salvation security",
+      "left": "once saved, always saved",
+      "right": "can be forfeited"
+    },
+    {
+      "id": "atonement",
+      "label": "extent of the atonement",
+      "left": "limited / particular",
+      "right": "unlimited"
+    },
+    {
+      "id": "plan",
+      "label": "God's plan across time",
+      "left": "covenant / one people",
+      "right": "dispensational"
+    }
   ],
-
-  "families": ["Catholic", "Orthodox", "Anglican", "Lutheran", "Wesleyan/Methodist", "Reformed", "Baptist", "Pentecostal"],
+  "families": [
+    "Catholic",
+    "Orthodox",
+    "Anglican",
+    "Lutheran",
+    "Wesleyan/Methodist",
+    "Reformed",
+    "Baptist",
+    "Pentecostal"
+  ],
   "anchor": "Wesleyan/Methodist",
-
   "family_sources": {
-    "Catholic": ["Catechism of the Catholic Church", "Vatican II documents"],
-    "Orthodox": ["The Orthodox Church / The Orthodox Way (Kallistos Ware)", "the Nicene faith and the Fathers"],
-    "Anglican": ["Thirty-nine Articles", "Book of Common Prayer"],
-    "Lutheran": ["Book of Concord / Augsburg Confession"],
-    "Wesleyan/Methodist": ["umc.org/en/who-we-are/what-we-believe", "Wesley's Sermons and Notes", "Thorsen, Calvin vs. Wesley", "Woods Lisenby loci"],
-    "Reformed": ["Westminster Confession", "Canons of Dort", "Heidelberg Catechism"],
-    "Baptist": ["Baptist Faith and Message (SBC)", "the 1689 London Baptist Confession for the Reformed side"],
-    "Pentecostal": ["Assemblies of God Statement of Fundamental Truths"]
+    "Catholic": [
+      "Catechism of the Catholic Church",
+      "Vatican II documents"
+    ],
+    "Orthodox": [
+      "The Orthodox Church / The Orthodox Way (Kallistos Ware)",
+      "the Nicene faith and the Fathers"
+    ],
+    "Anglican": [
+      "Thirty-nine Articles",
+      "Book of Common Prayer"
+    ],
+    "Lutheran": [
+      "Book of Concord / Augsburg Confession"
+    ],
+    "Wesleyan/Methodist": [
+      "umc.org/en/who-we-are/what-we-believe",
+      "Wesley's Sermons and Notes",
+      "Thorsen, Calvin vs. Wesley",
+      "Woods Lisenby loci"
+    ],
+    "Reformed": [
+      "Westminster Confession",
+      "Canons of Dort",
+      "Heidelberg Catechism"
+    ],
+    "Baptist": [
+      "Baptist Faith and Message (SBC)",
+      "the 1689 London Baptist Confession for the Reformed side"
+    ],
+    "Pentecostal": [
+      "Assemblies of God Statement of Fundamental Truths"
+    ]
   },
-
   "doctrines": [
-    { "id": "scripture", "label": "authority of Scripture", "cells": {
-      "Catholic": "Scripture and Tradition together, interpreted by the Magisterium",
-      "Orthodox": "Scripture within Holy Tradition, read with the mind of the Church",
-      "Anglican": "Scripture supreme, read alongside tradition and reason",
-      "Lutheran": "sola scriptura; the norm of norms, creeds subordinate",
-      "Wesleyan/Methodist": "Scripture primary, read with tradition, reason, and experience",
-      "Reformed": "sola scriptura; Scripture the final judge over all tradition",
-      "Baptist": "sola scriptura; strong biblicism and individual soul competency",
-      "Pentecostal": "sola scriptura, with a lively expectation of the Spirit still speaking" } },
-
-    { "id": "will", "label": "the human will", "cells": {
-      "Catholic": "wounded by sin but able to cooperate with grace",
-      "Orthodox": "ancestral sin wounds the will but does not destroy its freedom",
-      "Anglican": "the Articles affirm depravity; prevenient grace restores response",
-      "Lutheran": "total depravity; the will is bound until regeneration",
-      "Wesleyan/Methodist": "depravity is real, but prevenient grace frees the will to respond",
-      "Reformed": "total depravity; the will is in bondage",
-      "Baptist": "varies: general Baptists free, Reformed Baptists bound",
-      "Pentecostal": "free to respond; conversion is a genuine decision" } },
-
-    { "id": "grace", "label": "grace", "cells": {
-      "Catholic": "infused and cooperated with, mediated through the sacraments",
-      "Orthodox": "synergy: grace (God's uncreated energies) and freedom cooperate",
-      "Anglican": "prevenient grace enables; the tradition holds a range",
-      "Lutheran": "given through the means of grace, and resistible",
-      "Wesleyan/Methodist": "prevenient and resistible; grace goes before and enables all",
-      "Reformed": "irresistible and effectual, given to the elect",
-      "Baptist": "generally enabling and resistible (non-Calvinist majority)",
-      "Pentecostal": "resistible; the Spirit empowers, often with Wesleyan-holiness roots" } },
-
-    { "id": "election", "label": "election / predestination", "cells": {
-      "Catholic": "predestination held together with real human freedom",
-      "Orthodox": "grounded in God's foreknowledge, never predestination to damnation",
-      "Anglican": "Article XVII affirms predestination, read variously",
-      "Lutheran": "unconditional election to salvation only, not to damnation",
-      "Wesleyan/Methodist": "conditional election in view of foreseen faith; whosoever will",
-      "Reformed": "unconditional election; strict Calvinism adds double predestination",
-      "Baptist": "varies: general = conditional, Reformed = unconditional",
-      "Pentecostal": "conditional; the offer is to whosoever" } },
-
-    { "id": "atonement", "label": "extent of the atonement", "cells": {
-      "Catholic": "sufficient for all, applied through the Church's means",
-      "Orthodox": "for all; framed less as payment than as Christ the victor and healer",
-      "Anglican": "sufficient for all; the tradition holds a range",
-      "Lutheran": "universal in scope, received through faith",
-      "Wesleyan/Methodist": "unlimited: Christ died for everyone",
-      "Reformed": "limited / particular: Christ died for the elect",
-      "Baptist": "varies: general = unlimited, Reformed = limited",
-      "Pentecostal": "unlimited; often includes healing in the atonement" } },
-
-    { "id": "justification", "label": "justification", "cells": {
-      "Catholic": "by grace through faith working in love; righteousness infused, not only declared",
-      "Orthodox": "framed as healing and participation more than a courtroom verdict",
-      "Anglican": "by faith (Article XI), rooted in the Reformation",
-      "Lutheran": "by faith alone; imputed righteousness, its central article",
-      "Wesleyan/Methodist": "by faith alone, but joined to real inward change",
-      "Reformed": "by faith alone; righteousness imputed (forensic)",
-      "Baptist": "by faith alone; forensic and imputed",
-      "Pentecostal": "by faith; a genuine conversion and new birth" } },
-
-    { "id": "sanctification", "label": "sanctification / holiness", "cells": {
-      "Catholic": "growth in infused grace, aided by the sacraments",
-      "Orthodox": "theosis: being made, by grace, a partaker of the divine nature",
-      "Anglican": "growth in grace through word and sacrament",
-      "Lutheran": "simul justus et peccator; growth by returning to baptism",
-      "Wesleyan/Methodist": "central; entire sanctification and Christian perfection are possible",
-      "Reformed": "progressive; never completed in this life",
-      "Baptist": "progressive growth in the Christian life",
-      "Pentecostal": "holiness plus Spirit baptism as empowerment; sometimes a second work" } },
-
-    { "id": "perseverance", "label": "can salvation be lost?", "cells": {
-      "Catholic": "yes: grace can be lost by mortal sin and restored through penance",
-      "Orthodox": "salvation is an ongoing synergy; one can turn away",
-      "Anglican": "the Articles do not require eternal security; a range is held",
-      "Lutheran": "yes: falling away is possible",
-      "Wesleyan/Methodist": "yes: salvation can be forfeited; assurance by the Spirit's witness",
-      "Reformed": "no: the elect persevere and cannot finally fall",
-      "Baptist": "commonly no: once saved, always saved (eternal security)",
-      "Pentecostal": "commonly yes: one can fall away (Arminian majority)" } },
-
-    { "id": "supper", "label": "the Lord's Supper", "cells": {
-      "Catholic": "transubstantiation: the elements become Christ's body and blood",
-      "Orthodox": "a true mystery: the real presence affirmed, the how left unexplained",
-      "Anglican": "real spiritual presence; the tradition ranges from memorial to high",
-      "Lutheran": "real presence in, with, and under the elements (sacramental union)",
-      "Wesleyan/Methodist": "spiritual real presence; a means of grace at an open table",
-      "Reformed": "spiritual real presence, received by faith",
-      "Baptist": "a memorial; the elements are symbols (an ordinance)",
-      "Pentecostal": "an ordinance; the elements are symbolic" } },
-
-    { "id": "baptism", "label": "baptism", "cells": {
-      "Catholic": "a regenerating sacrament; infants are baptized",
-      "Orthodox": "a regenerating mystery; infants baptized and chrismated",
-      "Anglican": "a regenerating sign; infants are baptized",
-      "Lutheran": "a regenerating means of grace; infants are baptized",
-      "Wesleyan/Methodist": "a means of grace; infants baptized, but not automatic",
-      "Reformed": "a covenant sign; infants are baptized",
-      "Baptist": "believer's baptism only; a symbol, by immersion",
-      "Pentecostal": "believer's baptism, plus a distinct baptism in the Spirit" } }
+    {
+      "id": "scripture",
+      "label": "authority of Scripture",
+      "cells": {
+        "Catholic": "Scripture and Tradition together, interpreted by the Magisterium",
+        "Orthodox": "Scripture within Holy Tradition, read with the mind of the Church",
+        "Anglican": "Scripture supreme, read alongside tradition and reason",
+        "Lutheran": "sola scriptura; the norm of norms, creeds subordinate",
+        "Wesleyan/Methodist": "Scripture primary, read with tradition, reason, and experience",
+        "Reformed": "sola scriptura; Scripture the final judge over all tradition",
+        "Baptist": "sola scriptura; strong biblicism and individual soul competency",
+        "Pentecostal": "sola scriptura, with a lively expectation of the Spirit still speaking"
+      }
+    },
+    {
+      "id": "will",
+      "label": "the human will",
+      "cells": {
+        "Catholic": "wounded by sin but able to cooperate with grace",
+        "Orthodox": "ancestral sin wounds the will but does not destroy its freedom",
+        "Anglican": "the Articles affirm depravity; prevenient grace restores response",
+        "Lutheran": "total depravity; the will is bound until regeneration",
+        "Wesleyan/Methodist": "depravity is real, but prevenient grace frees the will to respond",
+        "Reformed": "total depravity; the will is in bondage",
+        "Baptist": "varies: general Baptists free, Reformed Baptists bound",
+        "Pentecostal": "free to respond; conversion is a genuine decision"
+      }
+    },
+    {
+      "id": "grace",
+      "label": "grace",
+      "cells": {
+        "Catholic": "infused and cooperated with, mediated through the sacraments",
+        "Orthodox": "synergy: grace (God's uncreated energies) and freedom cooperate",
+        "Anglican": "prevenient grace enables; the tradition holds a range",
+        "Lutheran": "given through the means of grace, and resistible",
+        "Wesleyan/Methodist": "prevenient and resistible; grace goes before and enables all",
+        "Reformed": "irresistible and effectual, given to the elect",
+        "Baptist": "generally enabling and resistible (non-Calvinist majority)",
+        "Pentecostal": "resistible; the Spirit empowers, often with Wesleyan-holiness roots"
+      }
+    },
+    {
+      "id": "election",
+      "label": "election / predestination",
+      "cells": {
+        "Catholic": "predestination held together with real human freedom",
+        "Orthodox": "grounded in God's foreknowledge, never predestination to damnation",
+        "Anglican": "Article XVII affirms predestination, read variously",
+        "Lutheran": "unconditional election to salvation only, not to damnation",
+        "Wesleyan/Methodist": "conditional election in view of foreseen faith; whosoever will",
+        "Reformed": "unconditional election; strict Calvinism adds double predestination",
+        "Baptist": "varies: general = conditional, Reformed = unconditional",
+        "Pentecostal": "conditional; the offer is to whosoever"
+      }
+    },
+    {
+      "id": "atonement",
+      "label": "extent of the atonement",
+      "cells": {
+        "Catholic": "sufficient for all, applied through the Church's means",
+        "Orthodox": "for all; framed less as payment than as Christ the victor and healer",
+        "Anglican": "sufficient for all; the tradition holds a range",
+        "Lutheran": "universal in scope, received through faith",
+        "Wesleyan/Methodist": "unlimited: Christ died for everyone",
+        "Reformed": "limited / particular: Christ died for the elect",
+        "Baptist": "varies: general = unlimited, Reformed = limited",
+        "Pentecostal": "unlimited; often includes healing in the atonement"
+      }
+    },
+    {
+      "id": "justification",
+      "label": "justification",
+      "cells": {
+        "Catholic": "by grace through faith working in love; righteousness infused, not only declared",
+        "Orthodox": "framed as healing and participation more than a courtroom verdict",
+        "Anglican": "by faith (Article XI), rooted in the Reformation",
+        "Lutheran": "by faith alone; imputed righteousness, its central article",
+        "Wesleyan/Methodist": "by faith alone, but joined to real inward change",
+        "Reformed": "by faith alone; righteousness imputed (forensic)",
+        "Baptist": "by faith alone; forensic and imputed",
+        "Pentecostal": "by faith; a genuine conversion and new birth"
+      }
+    },
+    {
+      "id": "sanctification",
+      "label": "sanctification / holiness",
+      "cells": {
+        "Catholic": "growth in infused grace, aided by the sacraments",
+        "Orthodox": "theosis: being made, by grace, a partaker of the divine nature",
+        "Anglican": "growth in grace through word and sacrament",
+        "Lutheran": "simul justus et peccator; growth by returning to baptism",
+        "Wesleyan/Methodist": "central; entire sanctification and Christian perfection are possible",
+        "Reformed": "progressive; never completed in this life",
+        "Baptist": "progressive growth in the Christian life",
+        "Pentecostal": "holiness plus Spirit baptism as empowerment; sometimes a second work"
+      }
+    },
+    {
+      "id": "perseverance",
+      "label": "can salvation be lost?",
+      "cells": {
+        "Catholic": "yes: grace can be lost by mortal sin and restored through penance",
+        "Orthodox": "salvation is an ongoing synergy; one can turn away",
+        "Anglican": "the Articles do not require eternal security; a range is held",
+        "Lutheran": "yes: falling away is possible",
+        "Wesleyan/Methodist": "yes: salvation can be forfeited; assurance by the Spirit's witness",
+        "Reformed": "no: the elect persevere and cannot finally fall",
+        "Baptist": "commonly no: once saved, always saved (eternal security)",
+        "Pentecostal": "commonly yes: one can fall away (Arminian majority)"
+      }
+    },
+    {
+      "id": "supper",
+      "label": "the Lord's Supper",
+      "cells": {
+        "Catholic": "transubstantiation: the elements become Christ's body and blood",
+        "Orthodox": "a true mystery: the real presence affirmed, the how left unexplained",
+        "Anglican": "real spiritual presence; the tradition ranges from memorial to high",
+        "Lutheran": "real presence in, with, and under the elements (sacramental union)",
+        "Wesleyan/Methodist": "spiritual real presence; a means of grace at an open table",
+        "Reformed": "spiritual real presence, received by faith",
+        "Baptist": "a memorial; the elements are symbols (an ordinance)",
+        "Pentecostal": "an ordinance; the elements are symbolic"
+      }
+    },
+    {
+      "id": "baptism",
+      "label": "baptism",
+      "cells": {
+        "Catholic": "a regenerating sacrament; infants are baptized",
+        "Orthodox": "a regenerating mystery; infants baptized and chrismated",
+        "Anglican": "a regenerating sign; infants are baptized",
+        "Lutheran": "a regenerating means of grace; infants are baptized",
+        "Wesleyan/Methodist": "a means of grace; infants baptized, but not automatic",
+        "Reformed": "a covenant sign; infants are baptized",
+        "Baptist": "believer's baptism only; a symbol, by immersion",
+        "Pentecostal": "believer's baptism, plus a distinct baptism in the Spirit"
+      }
+    }
   ],
-
   "traditions": [
-    { "id": "orthodox", "name": "Eastern Orthodox", "family": "Orthodox", "blurb": "Patristic and liturgical; mystery, the Mysteries, and theosis. Practice sits beside Rome, but its participatory, apophatic spirit reaches toward Wesley.", "pos": { "sacramental": 6, "gracewill": 60, "authority": 8, "security": 88, "atonement": 90, "plan": 20 } },
-    { "id": "catholic", "name": "Roman Catholic", "family": "Catholic", "blurb": "Church, Tradition, and Magisterium together; seven sacraments; transubstantiation; grace mediated through the sacramental life.", "pos": { "sacramental": 12, "gracewill": 55, "authority": 5, "security": 88, "atonement": 90, "plan": 20 } },
-    { "id": "anglo-catholic", "name": "Anglo-Catholic", "family": "Anglican", "blurb": "The sacramental, apostolic wing of Anglicanism; high liturgy and Prayer Book piety.", "pos": { "sacramental": 20, "gracewill": 50, "authority": 25, "security": 70, "atonement": 82, "plan": 25 } },
-    { "id": "lcms", "name": "Lutheran (LCMS)", "family": "Lutheran", "blurb": "Confessional Lutheranism; sola scriptura plus real presence, strongly liturgical and doctrinally conservative.", "pos": { "sacramental": 34, "gracewill": 15, "authority": 35, "security": 75, "atonement": 85, "plan": 30 } },
-    { "id": "elca", "name": "Lutheran (ELCA)", "family": "Lutheran", "blurb": "Mainline Lutheranism; the same sacramental core as the LCMS, in the more liberal of the two major US Lutheran bodies.", "pos": { "sacramental": 38, "gracewill": 30, "authority": 50, "security": 70, "atonement": 90, "plan": 25 } },
-    { "id": "episcopal", "name": "Episcopal (US)", "family": "Anglican", "blurb": "The US expression of Anglicanism; deeply sacramental, and more liberal than much of the global Anglican Communion.", "pos": { "sacramental": 24, "gracewill": 55, "authority": 45, "security": 70, "atonement": 85, "plan": 25 } },
-    { "id": "methodist", "name": "Methodist / Wesleyan (UMC)", "family": "Wesleyan/Methodist", "blurb": "The via media: means of grace joined to revival warmth. Center of the field, which is why it can bridge in several directions.", "pos": { "sacramental": 50, "gracewill": 70, "authority": 45, "security": 88, "atonement": 95, "plan": 30 } },
-    { "id": "pca", "name": "Presbyterian (PCA / EPC)", "family": "Reformed", "blurb": "Confessional Reformed; Westminster, covenantal, paedobaptist, conservative.", "pos": { "sacramental": 58, "gracewill": 10, "authority": 40, "security": 5, "atonement": 15, "plan": 15 } },
-    { "id": "pcusa", "name": "Presbyterian (PCUSA)", "family": "Reformed", "blurb": "Mainline Reformed; shares the Westminster heritage of the PCA, in the more liberal, mainline branch.", "pos": { "sacramental": 52, "gracewill": 30, "authority": 55, "security": 30, "atonement": 70, "plan": 20 } },
-    { "id": "anabaptist", "name": "Anabaptist / Mennonite", "family": "Baptist", "blurb": "The believers' church: discipleship, peace, and separation from the world; believer's baptism.", "pos": { "sacramental": 82, "gracewill": 70, "authority": 70, "security": 80, "atonement": 90, "plan": 40 } },
-    { "id": "restorationist", "name": "Restorationist (Churches of Christ)", "family": "Baptist", "blurb": "No creed but the Bible; believer's baptism, often tied to regeneration; congregational.", "pos": { "sacramental": 75, "gracewill": 70, "authority": 75, "security": 80, "atonement": 90, "plan": 50 } },
-    { "id": "pentecostal", "name": "Pentecostal / charismatic (AoG)", "family": "Pentecostal", "blurb": "Spirit baptism and the gifts; experiential and low-sacrament, with Wesleyan-holiness roots.", "pos": { "sacramental": 74, "gracewill": 72, "authority": 78, "security": 82, "atonement": 92, "plan": 75 } },
-    { "id": "new-calvinist", "name": "New Calvinist / Reformed evangelical", "family": "Reformed", "blurb": "Acts 29, the Gospel Coalition, Piper, Keller: TULIP soteriology in a largely baptistic, Bible-expositional key.", "pos": { "sacramental": 81, "gracewill": 12, "authority": 55, "security": 5, "atonement": 15, "plan": 25 } },
-    { "id": "seeker-evangelical", "name": "Mainstream / seeker evangelical", "family": "Baptist", "blurb": "Saddleback, Willow Creek: conversionist, contemporary, light on doctrine by design.", "pos": { "sacramental": 84, "gracewill": 65, "authority": 80, "security": 40, "atonement": 85, "plan": 65 } },
-    { "id": "nondenom-mega", "name": "Nondenominational megachurch", "family": "Baptist", "blurb": "Highlands, North Point, Elevation, 3 Circle: a baptist, reformed, and charismatic amalgam; the fastest-growing space.", "pos": { "sacramental": 82, "gracewill": 60, "authority": 82, "security": 40, "atonement": 80, "plan": 70 } },
-    { "id": "free-will-baptist", "name": "General / Free Will Baptist", "family": "Baptist", "blurb": "Conversionist, believer's baptism, non-Calvinist, resistible grace, salvation can be lost.", "pos": { "sacramental": 88, "gracewill": 78, "authority": 80, "security": 90, "atonement": 92, "plan": 70 } },
-    { "id": "sbc", "name": "Southern Baptist", "family": "Baptist", "blurb": "The biblicist pole: Scripture alone, believer's baptism, symbolic ordinances, conversion-centered.", "pos": { "sacramental": 93, "gracewill": 42, "authority": 72, "security": 15, "atonement": 70, "plan": 75 } },
-    { "id": "fundamentalist", "name": "Independent Fundamental / fundamentalist", "family": "Baptist", "blurb": "Biblicist and separatist; the hard edge of the pole, often dispensational.", "pos": { "sacramental": 96, "gracewill": 40, "authority": 68, "security": 15, "atonement": 70, "plan": 90 } },
-    { "id": "ucc-unitarian", "name": "UCC / Unitarian (progressive)", "family": "Anglican", "blurb": "The liberal Protestant tradition descended from New England Congregationalism; non-creedal and congregational, holding the broadest doctrinal latitude of the bodies shown here.", "pos": { "sacramental": 66, "gracewill": 60, "authority": 85, "security": 60, "atonement": 90, "plan": 25 } }
+    {
+      "id": "orthodox",
+      "name": "Eastern Orthodox",
+      "family": "Orthodox",
+      "blurb": "Patristic and liturgical; mystery, the Mysteries, and theosis. Practice sits beside Rome, but its participatory, apophatic spirit reaches toward Wesley.",
+      "pos": {
+        "sacramental": 6,
+        "gracewill": 60,
+        "authority": 8,
+        "security": 88,
+        "atonement": 90,
+        "plan": 20
+      }
+    },
+    {
+      "id": "catholic",
+      "name": "Roman Catholic",
+      "family": "Catholic",
+      "blurb": "Church, Tradition, and Magisterium together; seven sacraments; transubstantiation; grace mediated through the sacramental life.",
+      "pos": {
+        "sacramental": 12,
+        "gracewill": 55,
+        "authority": 5,
+        "security": 88,
+        "atonement": 90,
+        "plan": 20
+      }
+    },
+    {
+      "id": "anglo-catholic",
+      "name": "Anglo-Catholic",
+      "family": "Anglican",
+      "blurb": "The sacramental, apostolic wing of Anglicanism; high liturgy and Prayer Book piety.",
+      "pos": {
+        "sacramental": 20,
+        "gracewill": 50,
+        "authority": 25,
+        "security": 70,
+        "atonement": 82,
+        "plan": 25
+      }
+    },
+    {
+      "id": "lcms",
+      "name": "Lutheran (LCMS)",
+      "family": "Lutheran",
+      "blurb": "Confessional Lutheranism; sola scriptura plus real presence, strongly liturgical and doctrinally conservative.",
+      "pos": {
+        "sacramental": 34,
+        "gracewill": 15,
+        "authority": 35,
+        "security": 75,
+        "atonement": 85,
+        "plan": 30
+      }
+    },
+    {
+      "id": "elca",
+      "name": "Lutheran (ELCA)",
+      "family": "Lutheran",
+      "blurb": "Mainline Lutheranism; the same sacramental core as the LCMS, in the more liberal of the two major US Lutheran bodies.",
+      "pos": {
+        "sacramental": 38,
+        "gracewill": 30,
+        "authority": 50,
+        "security": 70,
+        "atonement": 90,
+        "plan": 25
+      }
+    },
+    {
+      "id": "episcopal",
+      "name": "Episcopal (US)",
+      "family": "Anglican",
+      "blurb": "The US expression of Anglicanism; deeply sacramental, and more liberal than much of the global Anglican Communion.",
+      "pos": {
+        "sacramental": 24,
+        "gracewill": 55,
+        "authority": 45,
+        "security": 70,
+        "atonement": 85,
+        "plan": 25
+      }
+    },
+    {
+      "id": "methodist",
+      "name": "Methodist / Wesleyan (UMC)",
+      "family": "Wesleyan/Methodist",
+      "blurb": "The via media: means of grace joined to revival warmth. Center of the field, which is why it can bridge in several directions.",
+      "pos": {
+        "sacramental": 50,
+        "gracewill": 70,
+        "authority": 45,
+        "security": 88,
+        "atonement": 95,
+        "plan": 30
+      }
+    },
+    {
+      "id": "pca",
+      "name": "Presbyterian (PCA / EPC)",
+      "family": "Reformed",
+      "blurb": "Confessional Reformed; Westminster, covenantal, paedobaptist, conservative.",
+      "pos": {
+        "sacramental": 58,
+        "gracewill": 10,
+        "authority": 40,
+        "security": 5,
+        "atonement": 15,
+        "plan": 15
+      }
+    },
+    {
+      "id": "pcusa",
+      "name": "Presbyterian (PCUSA)",
+      "family": "Reformed",
+      "blurb": "Mainline Reformed; shares the Westminster heritage of the PCA, in the more liberal, mainline branch.",
+      "pos": {
+        "sacramental": 52,
+        "gracewill": 30,
+        "authority": 55,
+        "security": 30,
+        "atonement": 70,
+        "plan": 20
+      }
+    },
+    {
+      "id": "anabaptist",
+      "name": "Anabaptist / Mennonite",
+      "family": "Baptist",
+      "blurb": "The believers' church: discipleship, peace, and separation from the world; believer's baptism.",
+      "pos": {
+        "sacramental": 82,
+        "gracewill": 70,
+        "authority": 70,
+        "security": 80,
+        "atonement": 90,
+        "plan": 40
+      }
+    },
+    {
+      "id": "restorationist",
+      "name": "Restorationist (Churches of Christ)",
+      "family": "Baptist",
+      "blurb": "No creed but the Bible; believer's baptism, often tied to regeneration; congregational.",
+      "pos": {
+        "sacramental": 75,
+        "gracewill": 70,
+        "authority": 75,
+        "security": 80,
+        "atonement": 90,
+        "plan": 50
+      }
+    },
+    {
+      "id": "pentecostal",
+      "name": "Pentecostal / charismatic (AoG)",
+      "family": "Pentecostal",
+      "blurb": "Spirit baptism and the gifts; experiential and low-sacrament, with Wesleyan-holiness roots.",
+      "pos": {
+        "sacramental": 74,
+        "gracewill": 72,
+        "authority": 78,
+        "security": 82,
+        "atonement": 92,
+        "plan": 75
+      }
+    },
+    {
+      "id": "new-calvinist",
+      "name": "New Calvinist / Reformed evangelical",
+      "family": "Reformed",
+      "blurb": "Acts 29, the Gospel Coalition, Piper, Keller: TULIP soteriology in a largely baptistic, Bible-expositional key.",
+      "pos": {
+        "sacramental": 81,
+        "gracewill": 12,
+        "authority": 55,
+        "security": 5,
+        "atonement": 15,
+        "plan": 25
+      }
+    },
+    {
+      "id": "seeker-evangelical",
+      "name": "Mainstream / seeker evangelical",
+      "family": "Baptist",
+      "blurb": "Saddleback, Willow Creek: conversionist, contemporary, light on doctrine by design.",
+      "pos": {
+        "sacramental": 84,
+        "gracewill": 65,
+        "authority": 80,
+        "security": 40,
+        "atonement": 85,
+        "plan": 65
+      }
+    },
+    {
+      "id": "nondenom-mega",
+      "name": "Nondenominational megachurch",
+      "family": "Baptist",
+      "blurb": "Highlands, North Point, Elevation, 3 Circle: a baptist, reformed, and charismatic amalgam; the fastest-growing space.",
+      "pos": {
+        "sacramental": 82,
+        "gracewill": 60,
+        "authority": 82,
+        "security": 40,
+        "atonement": 80,
+        "plan": 70
+      }
+    },
+    {
+      "id": "free-will-baptist",
+      "name": "General / Free Will Baptist",
+      "family": "Baptist",
+      "blurb": "Conversionist, believer's baptism, non-Calvinist, resistible grace, salvation can be lost.",
+      "pos": {
+        "sacramental": 88,
+        "gracewill": 78,
+        "authority": 80,
+        "security": 90,
+        "atonement": 92,
+        "plan": 70
+      }
+    },
+    {
+      "id": "sbc",
+      "name": "Southern Baptist",
+      "family": "Baptist",
+      "blurb": "The biblicist pole: Scripture alone, believer's baptism, symbolic ordinances, conversion-centered.",
+      "pos": {
+        "sacramental": 93,
+        "gracewill": 42,
+        "authority": 72,
+        "security": 15,
+        "atonement": 70,
+        "plan": 75
+      }
+    },
+    {
+      "id": "fundamentalist",
+      "name": "Independent Fundamental / fundamentalist",
+      "family": "Baptist",
+      "blurb": "Biblicist and separatist; the hard edge of the pole, often dispensational.",
+      "pos": {
+        "sacramental": 96,
+        "gracewill": 40,
+        "authority": 68,
+        "security": 15,
+        "atonement": 70,
+        "plan": 90
+      }
+    },
+    {
+      "id": "ucc-unitarian",
+      "name": "UCC / Unitarian (progressive)",
+      "family": "Anglican",
+      "blurb": "The liberal Protestant tradition descended from New England Congregationalism; non-creedal and congregational, holding the broadest doctrinal latitude of the bodies shown here.",
+      "pos": {
+        "sacramental": 66,
+        "gracewill": 60,
+        "authority": 85,
+        "security": 60,
+        "atonement": 90,
+        "plan": 25
+      }
+    }
   ],
-
-  "voices_note": "Representative authors and leaders for each tradition on the map and spectrum — founders, classic theologians, and contemporary figures, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. Illustrative, not exhaustive; for Woods to add to or correct.",
+  "voices_note": "Representative authors and leaders for each tradition on the map and spectrum, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. The final 'Influencers' group lists the most popular online/social-media voices associated with that stream — by reach, not endorsement, and affiliations are loose. Illustrative, not exhaustive; for Woods to add to or correct.",
   "voices": {
     "orthodox": {
       "note": "Read with the mind of the Church; the Fathers hold pride of place.",
@@ -171,6 +517,14 @@
             "Kallistos Ware — The Orthodox Way",
             "Elisabeth Behr-Sigel — French Orthodox theologian",
             "Frederica Mathewes-Green — American Orthodox writer"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Jonathan Pageau — The Symbolic World (YouTube)",
+            "Fr. Josiah Trenham — Patristic Nectar",
+            "Jay Dyer — online apologetics and debate"
           ]
         }
       ]
@@ -197,6 +551,14 @@
             "Elizabeth Johnson — feminist systematic theologian",
             "Pope Francis — the living magisterial voice"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Fr. Mike Schmitz — Bible in a Year (chart-topping podcast)",
+            "Bishop Robert Barron — Word on Fire",
+            "Matt Fradd — Pints with Aquinas"
+          ]
         }
       ]
     },
@@ -218,6 +580,13 @@
             "Evelyn Underhill — writer on mysticism and prayer",
             "Michael Ramsey — Archbishop of Canterbury",
             "Austin Farrer — philosopher-theologian"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "N.T. Wright — widely followed lectures and interviews",
+            "Tish Harrison Warren — writer on liturgical spirituality"
           ]
         }
       ]
@@ -241,6 +610,14 @@
             "Rosa Young — mother of Black Lutheranism in Alabama",
             "Matthew Harrison — LCMS president"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Bryan Wolfmueller — online teaching and podcasts",
+            "Chris Rosebrough — Fighting for the Faith",
+            "The 1517 platform — Reformation resources"
+          ]
         }
       ]
     },
@@ -261,6 +638,12 @@
             "Elizabeth Eaton — first woman to serve as ELCA Presiding Bishop",
             "Nadia Bolz-Weber — pastor and author",
             "Barbara Rossing — New Testament scholar"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Nadia Bolz-Weber — author, speaker, The Corners"
           ]
         }
       ]
@@ -284,6 +667,13 @@
             "Verna Dozier — lay theologian and teacher",
             "Katharine Jefferts Schori — first woman Presiding Bishop",
             "Michael Curry — Presiding Bishop and preacher"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Barbara Brown Taylor — best-selling author and preacher",
+            "Michael Curry — viral royal-wedding sermon"
           ]
         }
       ]
@@ -318,6 +708,13 @@
             "Will Willimon — preacher and bishop",
             "Adam Hamilton — Church of the Resurrection"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Seedbed — Wesleyan discipleship platform",
+            "Adam Hamilton — widely shared online sermons"
+          ]
         }
       ]
     },
@@ -341,6 +738,13 @@
             "Ligon Duncan — Reformed Theological Seminary",
             "Irwyn Ince — first African-American moderator of the PCA General Assembly"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Tim Keller — sermons and writing widely shared online",
+            "The Gospel Coalition — the Keller-cofounded platform"
+          ]
         }
       ]
     },
@@ -361,6 +765,12 @@
             "Letty Russell — feminist theologian",
             "Katie Geneva Cannon — first African-American woman ordained in the tradition; womanist ethics",
             "Cynthia Rigby — systematic theologian"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Diana Butler Bass — author and public commentator"
           ]
         }
       ]
@@ -384,6 +794,14 @@
             "Drew Hart — Trouble I've Seen",
             "Malinda Elizabeth Berry — Mennonite theologian"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Shane Claiborne — Red Letter Christians",
+            "Greg Boyd — ReKnew teaching online",
+            "Drew Hart — author and speaker"
+          ]
         }
       ]
     },
@@ -403,6 +821,12 @@
           "people": [
             "Marshall Keeble — influential African-American evangelist",
             "Max Lucado — pastor and best-selling author"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Max Lucado — best-selling author with wide online reach"
           ]
         }
       ]
@@ -425,6 +849,13 @@
             "Amos Yong — Pentecostal systematic theologian",
             "Cheryl Bridges Johns — Pentecostal formation",
             "Estrelda Alexander — historian of Black Pentecostalism"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Levi Lusko — Fresh Life Church, large online reach",
+            "broader charismatic media (Bethel, Hillsong) sits just outside the AoG"
           ]
         }
       ]
@@ -449,6 +880,15 @@
             "Jen Wilkin — women's Bible teacher",
             "Nancy Guthrie — Bible teacher and author"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "John Piper — Desiring God, Ask Pastor John",
+            "Paul Washer — viral sermon clips",
+            "Voddie Baucham — widely shared talks",
+            "Allie Beth Stuckey — Relatable podcast"
+          ]
         }
       ]
     },
@@ -469,6 +909,14 @@
             "Andy Stanley — North Point Ministries",
             "Priscilla Shirer — Bible teacher and author"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Rick Warren — huge online following",
+            "Christine Caine — A21, speaker",
+            "Bob Goff — best-selling author"
+          ]
         }
       ]
     },
@@ -483,6 +931,14 @@
             "Craig Groeschel — Life.Church",
             "Chris Hodges — Church of the Highlands",
             "Andy Stanley — North Point"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Steven Furtick — Elevation, top online sermons",
+            "Craig Groeschel — YouVersion Bible app; leadership podcast",
+            "Sadie Robertson Huff — Live Original"
           ]
         }
       ]
@@ -528,6 +984,14 @@
             "David Platt — Radical",
             "Al Mohler — Southern Seminary"
           ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "Beth Moore — large online following",
+            "Jackie Hill Perry — author and speaker",
+            "David Platt — sermons widely shared"
+          ]
         }
       ]
     },
@@ -563,6 +1027,13 @@
             "Washington Gladden — the Social Gospel",
             "William Ellery Channing — Unitarian founder",
             "Yvonne Delk — African-American UCC minister and activist"
+          ]
+        },
+        {
+          "label": "Influencers (online)",
+          "people": [
+            "John Pavlovitz — widely read progressive blogger",
+            "Rob Bell — author and podcaster (progressive)"
           ]
         }
       ]

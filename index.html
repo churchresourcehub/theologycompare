@@ -36,12 +36,17 @@
   svg{display:block;max-width:100%}
   svg text{font-family:var(--sans)}
   .dot{cursor:pointer}
-  .lbl{font-size:11px;fill:var(--ink);cursor:pointer}
+  .lbl{font-size:11px;fill:var(--ink);cursor:pointer;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
   .lbl.anchor{font-weight:700}
   .pole{font-size:12px;fill:var(--muted);font-weight:600}
   .axttl{font-size:11px;fill:var(--faint);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
   .tricorner{font-size:14px;fill:var(--ink);font-weight:700;letter-spacing:1px;text-transform:uppercase}
   .trisub{font-size:10.5px;fill:var(--muted)}
+  .tritype{font-size:10px;fill:var(--faint);font-weight:700;letter-spacing:1px}
+  .tritypesub{font-size:9.5px;fill:var(--faint);font-style:italic}
+  .triedge{font-size:10.5px;fill:var(--muted);font-style:italic;letter-spacing:.4px}
+  .tribox{font-size:10px;fill:var(--muted);font-weight:600}
+  .trifam{font-size:12.5px;font-weight:700;letter-spacing:.3px;paint-order:stroke;stroke:#fff;stroke-width:3.5px;stroke-linejoin:round}
   .leader{stroke:var(--line);stroke-width:1;opacity:.7}
   .grid{stroke:var(--rule);stroke-width:1}
   .gridmid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
@@ -435,58 +440,83 @@ function renderTriangle(){
   if(!A){ vp.innerHTML='<p class="vnote">No authority data.</p>'; return; }
   const c=A.corners;
   vp.innerHTML='<div class="vtitle">Sources of authority</div>'+
-    '<p class="vnote">Our own take on Donald Durnbaugh’s typology of churches. Each tradition is placed by where it locates authority — the <b>Word</b> (Scripture and preaching), the <b>Spirit</b> (experience and revelation), or <b>Tradition</b> (the church and its sacraments). The nearer a corner, the more weight it gives that source; the center holds those that balance all three.</p>'+
+    '<p class="vnote">Our own take on Donald Durnbaugh’s typology of churches. A tradition is placed by where it locates authority — the <b>Word</b> (Scripture and preaching), the <b>Spirit</b> (experience and revelation), or <b>Tradition</b> (the church and its sacraments); the nearer a corner, the more weight it gives that source. Families that split are drawn as a <b>zone</b> spanning their branches — the dots inside are the individual traditions (hover any one). The left side runs sect-type and individualist; the right, church-type and institutional.</p>'+
     '<div id="svgbox"></div>'+famLegend()+
     '<p class="caption">After Donald F. Durnbaugh, <em>The Believers’ Church</em> (1968). Placements are a first pass for Woods to refine. Tap a tradition to read it.</p>';
-  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||vp.clientWidth-4);
-  const padSide=100, padTop=46, padBottom=64;
-  const baseW=W-2*padSide, triH=baseW*0.866, H=padTop+triH+padBottom;
+  const box=$("#svgbox"), W=Math.max(700,box.clientWidth||vp.clientWidth-4);
+  const padSide=152, padTop=78, padBottom=78;
+  const baseW=W-2*padSide, triH=baseW*0.9, H=padTop+triH+padBottom;
   const apex={x:W/2,y:padTop}, bl={x:padSide,y:padTop+triH}, br={x:W-padSide,y:padTop+triH};
-  const pt=a=>{ const w=a.word/100,s=a.spirit/100,t=a.tradition/100;
-    return {x:w*apex.x+s*bl.x+t*br.x, y:w*apex.y+s*bl.y+t*br.y}; };
-  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
-  const mid=(p,q)=>({x:(p.x+q.x)/2,y:(p.y+q.y)/2});
   const G={x:(apex.x+bl.x+br.x)/3,y:(apex.y+bl.y+br.y)/3};
+  const mid=(p,q)=>({x:(p.x+q.x)/2,y:(p.y+q.y)/2});
   const mAB=mid(apex,bl), mBR=mid(bl,br), mCA=mid(br,apex);
-  // white base
+  const pt=a=>({x:(a.word/100)*apex.x+(a.spirit/100)*bl.x+(a.tradition/100)*br.x,
+                y:(a.word/100)*apex.y+(a.spirit/100)*bl.y+(a.tradition/100)*br.y});
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  const T=(x,y,txt,cls,anchor,rot)=>{ const t=el("text",{x,y,"text-anchor":anchor||"middle",class:cls},txt);
+    if(rot!=null) t.setAttribute("transform","rotate("+rot+" "+x+" "+y+")"); svg.appendChild(t); return t; };
+  // white base + three source-of-authority zones
   svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"#fff"}));
-  // three corner zones (one per source of authority), subtly tinted
   const kite=(v,ma,mb,fill)=>svg.appendChild(el("polygon",{points:v.x+","+v.y+" "+ma.x+","+ma.y+" "+G.x+","+G.y+" "+mb.x+","+mb.y,fill:fill,opacity:.5}));
-  kite(apex,mAB,mCA,"#e9dbb6");   // Word
-  kite(bl,mAB,mBR,"#d6e5ee");     // Spirit
-  kite(br,mBR,mCA,"#ecd7d1");     // Tradition
-  // zone boundaries + crisp outline
+  kite(apex,mAB,mCA,"#e9dbb6"); kite(bl,mAB,mBR,"#d6e5ee"); kite(br,mBR,mCA,"#ecd7d1");
   [[G,mAB],[G,mBR],[G,mCA]].forEach(([a,b])=> svg.appendChild(el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:"gridmid"})));
   svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"none",stroke:"var(--rule)","stroke-width":1.4}));
-  // corner labels
-  const corner=(x,y,dy,lab,sub,anchor)=>{
-    const t1=el("text",{x,y:y+dy,"text-anchor":anchor,class:"tricorner"},lab); svg.appendChild(t1);
-    const t2=el("text",{x,y:y+dy+13,"text-anchor":anchor,class:"trisub"},sub); svg.appendChild(t2); };
-  corner(apex.x,apex.y,-20,c.word.label,c.word.sub,"middle");
-  corner(bl.x,bl.y,26,c.spirit.label,c.spirit.sub,"middle");
-  corner(br.x,br.y,26,c.tradition.label,c.tradition.sub,"middle");
-  // points, with vertical label de-collision + leader lines where nudged
-  const items=DATA.traditions.map(tr=>{ const a=A.pos[tr.id]; if(!a) return null;
-    const p=pt(a), toRight=p.x<W*0.58;
-    return {tr,a,p,toRight,anchor:tr.family===ANCHOR,lx:toRight?p.x+10:p.x-10,ly:p.y+3.5}; }).filter(Boolean);
-  const LH=14;
-  [items.filter(i=>i.toRight),items.filter(i=>!i.toRight)].forEach(arr=>{ arr.sort((a,b)=>a.p.y-b.p.y);
-    for(let k=1;k<arr.length;k++) if(arr[k].ly-arr[k-1].ly<LH) arr[k].ly=arr[k-1].ly+LH; });
-  items.forEach(it=>{ const {tr,a,p,toRight,anchor,lx,ly}=it;
+  // corner triads
+  T(apex.x,apex.y-32,c.word.label,"tricorner"); T(apex.x,apex.y-18,"the Son · the sermon","trisub");
+  T(bl.x,bl.y+26,c.spirit.label,"tricorner"); T(bl.x,bl.y+40,"the Holy Ghost · revelation","trisub");
+  T(br.x,br.y+26,c.tradition.label,"tricorner"); T(br.x,br.y+40,"the Father · the sacrament","trisub");
+  // sect / church type (outer top corners)
+  T(bl.x-6,30,"SECT-TYPE","tritype","start"); T(bl.x-6,43,"Corpus Christi","tritypesub","start");
+  T(br.x+6,30,"CHURCH-TYPE","tritype","end"); T(br.x+6,43,"Corpus Christianum","tritypesub","end");
+  // edge labels, rotated along the sides
+  const edge=(from,to,frac,txt)=>{ const x=from.x+(to.x-from.x)*frac, y=from.y+(to.y-from.y)*frac;
+    const ang=Math.atan2(to.y-from.y,to.x-from.x)*180/Math.PI;
+    const nx=G.x-x, ny=G.y-y, nl=Math.hypot(nx,ny), off=22;
+    T(x+nx/nl*off,y+ny/nl*off,txt,"triedge","middle",ang); };
+  edge(bl,apex,0.30,"Mystics"); edge(bl,apex,0.70,"Believers’ Churches");
+  edge(apex,br,0.30,"Classical Protestantism"); edge(apex,br,0.72,"Catholic Churches");
+  // bottom axis
+  T(bl.x,bl.y+58,"◀ individualism","pole","start"); T(br.x,br.y+58,"institutionalism ▶","pole","end");
+  // building-type boxes (Chapel / Meeting House / Cathedral)
+  const boxlab=(x,y,txt)=>{ const w=estW(txt,10.5)+14;
+    svg.appendChild(el("rect",{x:x-w/2,y:y-10,width:w,height:20,rx:4,fill:"#fff",stroke:"var(--faint)","stroke-width":1,opacity:.92}));
+    T(x,y+3.5,txt,"tribox"); };
+  boxlab(apex.x,apex.y+26,"Chapel");
+  boxlab(mAB.x-54,mAB.y,"Meeting House"); boxlab(mCA.x+54,mCA.y,"Cathedral");
+  // --- data: family zones (variance) + individual tradition dots ---
+  const byFam={}; DATA.traditions.forEach(tr=>{ const a=A.pos[tr.id]; if(!a) return; (byFam[tr.family]=byFam[tr.family]||[]).push({tr,a,p:pt(a)}); });
+  const famLabels=[];
+  DATA.families.forEach(f=>{ const m=byFam[f]; if(!m||m.length<2) return; const col=FAM_COLOR[f];
+    const xs=m.map(o=>o.p.x), ys=m.map(o=>o.p.y);
+    const cx=(Math.min(...xs)+Math.max(...xs))/2, cy=(Math.min(...ys)+Math.max(...ys))/2;
+    const rx=Math.max(28,(Math.max(...xs)-Math.min(...xs))/2+19), ry=Math.max(22,(Math.max(...ys)-Math.min(...ys))/2+17);
+    svg.appendChild(el("ellipse",{cx,cy,rx,ry,fill:col,opacity:.09,stroke:col,"stroke-width":1.3,"stroke-dasharray":"5 4"}));
+    famLabels.push({x:cx,y:cy-ry-5,txt:f,col}); });
+  // dots for every tradition
+  const singles=[];
+  DATA.traditions.forEach(tr=>{ const a=A.pos[tr.id]; if(!a) return; const p=pt(a), anchor=tr.family===ANCHOR, single=byFam[tr.family].length<2;
     const g=el("g",{});
-    if(anchor) g.appendChild(el("circle",{cx:p.x,cy:p.y,r:11,fill:"none",stroke:FAM_COLOR[tr.family],"stroke-width":1.5,opacity:.5}));
-    if(Math.abs(ly-(p.y+3.5))>2) g.appendChild(el("line",{x1:p.x,y1:p.y,x2:lx,y2:ly-3.5,class:"leader"}));
-    const dot=el("circle",{cx:p.x,cy:p.y,r:anchor?7:5.5,fill:FAM_COLOR[tr.family],stroke:"#fff","stroke-width":1.6,class:"dot"});
+    if(anchor) g.appendChild(el("circle",{cx:p.x,cy:p.y,r:11,fill:"none",stroke:FAM_COLOR[tr.family],"stroke-width":1.5,opacity:.55}));
+    const dot=el("circle",{cx:p.x,cy:p.y,r:anchor?7:5,fill:FAM_COLOR[tr.family],stroke:"#fff","stroke-width":1.6,class:"dot"});
     g.appendChild(dot);
-    const tx=el("text",{x:lx,y:ly,"text-anchor":toRight?"start":"end",class:"lbl"+(anchor?" anchor":"")},tr.name);
-    g.appendChild(tx);
-    const show=ev=>{ g.parentNode.appendChild(g); dot.setAttribute("r",anchor?9:7.5);
-      tip(ev,"<b>"+esc(tr.name)+"</b><br>Word "+a.word+" · Spirit "+a.spirit+" · Tradition "+a.tradition); };
-    g.onmousemove=show; g.onmouseenter=show;
-    g.onmouseleave=()=>{ dot.setAttribute("r",anchor?7:5.5); untip(); };
+    const show=ev=>{ g.parentNode.appendChild(g); dot.setAttribute("r",anchor?9:7);
+      tip(ev,"<b>"+esc(tr.name)+"</b> · "+esc(tr.family)+"<br>Word "+a.word+" · Spirit "+a.spirit+" · Tradition "+a.tradition); };
+    g.onmousemove=show; g.onmouseenter=show; g.onmouseleave=()=>{ dot.setAttribute("r",anchor?7:5); untip(); };
     g.style.cursor="pointer"; g.onclick=()=>openDetail({trad:tr.id});
     svg.appendChild(g);
+    if(single) singles.push({tr,a,p,anchor});
   });
+  // always-on labels for the single-tradition families, de-collided
+  const LH=15;
+  [singles.filter(s=>s.p.x<W*0.55),singles.filter(s=>s.p.x>=W*0.55)].forEach((arr,side)=>{ const toRight=side===0;
+    arr.sort((a,b)=>a.p.y-b.p.y); let prev=-1e9;
+    arr.forEach(s=>{ let ly=s.p.y+3.5; if(ly-prev<LH) ly=prev+LH; prev=ly; s.ly=ly; s.toRight=toRight; }); });
+  singles.forEach(s=>{ const lx=s.toRight?s.p.x+10:s.p.x-10;
+    if(Math.abs(s.ly-(s.p.y+3.5))>2) svg.appendChild(el("line",{x1:s.p.x,y1:s.p.y,x2:lx,y2:s.ly-3.5,class:"leader"}));
+    const tx=el("text",{x:lx,y:s.ly,"text-anchor":s.toRight?"start":"end",class:"lbl"+(s.anchor?" anchor":"")},s.tr.name);
+    tx.style.cursor="pointer"; tx.onclick=()=>openDetail({trad:s.tr.id}); svg.appendChild(tx); });
+  // family-zone labels on top
+  famLabels.forEach(l=>{ const t=T(l.x,l.y,l.txt,"trifam"); t.style.fill=l.col; });
   box.innerHTML=""; box.appendChild(svg);
 }
 
@@ -510,7 +540,7 @@ function renderVoices(){
   let h='<div class="vtitle">Authors &amp; leaders</div>'+
     '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
     '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+'</div>'+
-    '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. Where a tradition’s recognized leadership is historically narrow, the list is shorter by necessity, not by judgment.</p>';
+    '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. The <b>Influencers</b> list names the most popular online voices for each stream by reach, not endorsement, and affiliations there are loose. Where a tradition’s recognized leadership is historically narrow, the list is shorter by necessity, not by judgment.</p>';
   vp.innerHTML=h;
 }
 
@@ -563,7 +593,7 @@ function authStrip(a){
 }
 function voicesDetail(t){
   const v=DATA.voices&&DATA.voices[t.id]; if(!v) return "";
-  const people=(v.groups||[]).flatMap(g=>g.people||[]);
+  const people=(v.groups||[]).filter(g=>!/^Influencers/.test(g.label)).flatMap(g=>g.people||[]);
   if(!people.length) return "";
   return '<div class="dsec">Voices to read</div><ul class="celllist">'+
     people.map(p=>{ const i=p.indexOf(' — '); const nm=i<0?p:p.slice(0,i), rest=i<0?"":p.slice(i+3);
