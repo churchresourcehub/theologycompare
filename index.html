@@ -168,7 +168,7 @@ const FAM_COLOR = {
 };
 const ANCHOR = "Wesleyan/Methodist";
 let DATA=null, AXES={}, CHUNKS=[];
-let state = { view:"map", axis:"sacramental", mx:"sacramental", my:"tradprog", trad:"methodist" };
+let state = { view:"map", axis:"sacramental", mx:"sacramental", my:"gracewill", trad:"methodist" };
 
 const $ = s=>document.querySelector(s);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -244,7 +244,7 @@ function renderSpectrum(){
 function renderMap(){
   const vp=$("#viewport");
   vp.innerHTML='<div class="vtitle">Two-axis map</div>'+
-    '<p class="vnote">Pick any two spectrums for the horizontal and vertical axes. The default (sacramental → biblicist against traditional → progressive) is the clearest single picture of the field.</p>'+
+    '<p class="vnote">Pick any two spectrums for the horizontal and vertical axes. The default pairs liturgy and sacrament with grace and the will — two of the deepest doctrinal divides.</p>'+
     '<div class="controls">'+
       '<div class="ctl"><label>Horizontal</label>'+axisSelect("mxSel",state.mx)+'</div>'+
       '<div class="ctl"><label>Vertical</label>'+axisSelect("mySel",state.my)+'</div></div>'+
