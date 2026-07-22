@@ -154,7 +154,6 @@
         <button class="tab" data-view="matrix">Doctrine matrix</button>
         <button class="tab" data-view="mindmap">Mind maps</button>
         <button class="tab" data-view="tree">Genealogy</button>
-        <button class="tab" data-view="triangle">Sources of authority</button>
         <button class="tab" data-view="voices">Authors &amp; leaders</button>
         <button id="askBtn">Ask &amp; compare</button>
       </div>
@@ -207,7 +206,7 @@ fetch("comparison.json").then(r=>r.json()).then(d=>{
 function setView(v){
   state.view=v;
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===v));
-  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree,triangle:renderTriangle,voices:renderVoices}[v])();
+  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree,voices:renderVoices}[v])();
 }
 window.addEventListener("resize",()=>{ if(["map","spectrum","tree","mindmap"].includes(state.view)) setView(state.view); });
 
@@ -584,7 +583,6 @@ function openDetail(ref){
       '<span class="fam" style="background:'+FAM_COLOR[t.family]+'">'+esc(t.family)+'</span>'+
       '<div class="dbody" style="margin-top:8px">'+esc(t.blurb)+'</div>'+
       '<div class="dsec">Where it sits</div>'+axisStrip(t.pos)+
-      (DATA.authority&&DATA.authority.pos[t.id]?'<div class="dsec">Source of authority</div>'+authStrip(DATA.authority.pos[t.id]):"")+
       '<div class="dsec">Its positions, doctrine by doctrine</div><ul class="celllist">'+
       DATA.doctrines.map(d=>'<li><b>'+esc(d.label)+'</b>'+esc(d.cells[t.family])+'</li>').join("")+'</ul>'+
       voicesDetail(t)+
