@@ -70,6 +70,10 @@
   .node text{fill:#fff;font-size:11.5px;font-weight:600;pointer-events:none}
   .edge{stroke:var(--line);stroke-width:1.6;fill:none;opacity:.7}
   /* authors & leaders */
+  .vkey{background:#fbf9f4;border:1px solid var(--rule);border-radius:10px;padding:12px 15px;margin:10px 0 14px}
+  .vklabel{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:6px}
+  .vkey .legend{margin:0 0 8px}
+  .vkey p{font-size:12.5px;color:var(--muted);line-height:1.55;margin:0;max-width:80ch}
   .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:8px}
   .vcard{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
   .vcname{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:1px}
@@ -550,8 +554,12 @@ function otherVoicesCard(){
 }
 function renderVoices(){
   const vp=$("#viewport");
+  const bap=FAM_COLOR["Baptist"], ang=FAM_COLOR["Anglican"];
   let h='<div class="vtitle">Authors &amp; leaders</div>'+
     '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders — listed only where the person identifies (or identified) with that tradition, not merely sits near it. Women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
+    '<div class="vkey"><div class="vklabel">Reading the colors — the word under each tradition is its theological family</div>'+
+      famLegend()+
+      '<p>These are the eight confessional families the site sorts by, the columns of the doctrine matrix. A tradition’s family is its nearest <b>doctrinal</b> kin, not its denominational label, so a few land in surprising places. The <b style="color:'+bap+'">Baptist</b> family holds every believer’s-baptism, congregational, low-sacrament church — the nondenominational megachurches, the seeker churches, and the Restorationist Churches of Christ — not only the Baptists. The progressive <b>UCC / Unitarian</b> sits at the liberal edge of the <b style="color:'+ang+'">Anglican</b> family, its closest fit among the eight for a broad, non-confessional body, though its own roots are Congregationalist.</p></div>'+
     '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+otherVoicesCard()+'</div>'+
     '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. &ldquo;Current Notable Figures&rdquo; lists living voices by reach, not endorsement. The final &ldquo;Other notable voices&rdquo; card holds popular authors who don’t self-identify with one of these traditions, each tagged with what they do identify as.</p>';
   vp.innerHTML=h;
