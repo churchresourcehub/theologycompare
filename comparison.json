@@ -1338,5 +1338,15 @@
       "professed": "nondenominational Bible teacher",
       "aligns": "Baptist / evangelical"
     }
-  ]
+  ],
+  "family_denominations": {
+    "Catholic": "the Roman Catholic Church and the Eastern-rite Catholic churches (Maronite, Melkite, Ukrainian Greek Catholic)",
+    "Orthodox": "the Eastern Orthodox churches (Greek, Russian, Antiochian, OCA) and the Oriental Orthodox churches (Armenian Apostolic, Coptic, Ethiopian, Syriac)",
+    "Anglican": "the Episcopal Church, the Anglican Church in North America (ACNA), and the Church of England and wider Anglican Communion; at the edge, the United Church of Christ",
+    "Lutheran": "the ELCA, the Lutheran Church–Missouri Synod (LCMS), the Wisconsin Synod (WELS), and the North American Lutheran Church",
+    "Wesleyan/Methodist": "the United Methodist Church and the Global Methodist Church; the AME, AME Zion, and CME churches; the Church of the Nazarene, the Free Methodist Church, the Wesleyan Church, and the Salvation Army",
+    "Reformed": "the PCUSA, the PCA, the EPC and OPC; the Reformed Church in America and the Christian Reformed Church; and the Congregational churches",
+    "Baptist": "the Southern Baptist Convention, the National and Progressive National Baptist Conventions, American Baptist Churches USA, and the Free Will Baptists; the Churches of Christ; Mennonite and other Anabaptist churches; and many nondenominational and community churches",
+    "Pentecostal": "the Assemblies of God, the Church of God in Christ (COGIC), the Church of God (Cleveland, TN), the Foursquare Church, and the wider charismatic movement"
+  }
 }

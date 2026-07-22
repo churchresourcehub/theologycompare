@@ -82,6 +82,8 @@
   .vcname{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:1px}
   .vfam{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;opacity:.72;margin-bottom:6px}
   .vnote2{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:2px}
+  .vfamden{font-size:11px;color:var(--faint);line-height:1.5;margin:0 0 4px}
+  .vfamden span{font-weight:700;letter-spacing:.4px;text-transform:uppercase;font-size:9.5px}
   .vglabel{font-family:var(--sans);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin:13px 0 5px}
   .vlist{list-style:none;padding:0;margin:0}
   .vlist li{font-size:13px;line-height:1.5;padding:4px 0;border-bottom:1px solid #f0ebe0;color:var(--muted)}
@@ -142,8 +144,14 @@
   #tooltip b{color:#f4d9a8}
   .caption{font-size:11.5px;color:var(--faint);line-height:1.5;margin-top:10px;max-width:760px}
   a.homelink{color:var(--branch-e);font-weight:600;text-decoration:none;font-size:12px}
-  @media(max-width:640px){
-    header{padding:12px 14px 4px} #viewport{padding:6px 12px 20px}
+  @media (max-width:640px), (max-height:540px){
+    /* release the fixed app-shell so the header scrolls away and content gets the full screen */
+    html,body{height:auto}
+    #wrap{display:block;height:auto;overflow:visible}
+    #main{display:block}
+    header{padding:12px 14px 4px}
+    #viewport{overflow:visible;height:auto;padding:6px 12px 20px}
+    #panel{position:fixed;top:0;right:0;height:100%;z-index:40}
     .mobilenote{display:block;margin:8px 0 2px;padding:8px 11px;background:#fbf3e6;border:1px solid #e7d4b3;
       border-radius:8px;font-size:12px;line-height:1.45;color:#5c5140}
     #svgbox{border:1px solid var(--rule);border-radius:8px;background:#fff}
@@ -541,9 +549,11 @@ function renderTriangle(){
 function voicesCard(t){
   const v=DATA.voices&&DATA.voices[t.id]; if(!v) return "";
   const col=FAM_COLOR[t.family];
+  const dens=DATA.family_denominations&&DATA.family_denominations[t.family];
   let h='<div class="vcard" style="border-top:3px solid '+col+'">'+
      '<div class="vcname" style="color:'+col+'">'+esc(t.name)+'</div>'+
-     '<div class="vfam" style="color:'+col+'">'+esc(t.family)+'</div>';
+     '<div class="vfam" style="color:'+col+'">'+esc(t.family)+'</div>'+
+     (dens?'<div class="vfamden"><span>In this family:</span> '+esc(dens)+'</div>':'');
   if(v.note) h+='<div class="vnote2">'+esc(v.note)+'</div>';
   (v.groups||[]).forEach(g=>{
     h+='<div class="vglabel">'+esc(g.label)+'</div><ul class="vlist">'+
@@ -677,6 +687,10 @@ function buildChunks(){
       CHUNKS.push({type:"figures",name:t.name+" — authors & leaders",
         text:"Representative "+t.name+" ("+t.family+") authors and leaders. "+ppl,
         key:(t.name+" "+t.family+" "+ppl).toLowerCase()}); }); }
+  if(DATA.family_denominations) Object.keys(DATA.family_denominations).forEach(f=>
+    CHUNKS.push({type:"family",name:f+" — denominations",
+      text:"The "+f+" family includes "+DATA.family_denominations[f]+".",
+      key:(f+" family denominations includes "+DATA.family_denominations[f]).toLowerCase()}));
   if(DATA.other_voices){ const ov=DATA.other_voices.map(p=>p.name+" (professed: "+p.professed+"; theology aligns with "+p.aligns+")").join("; ");
     CHUNKS.push({type:"figures",name:"Other notable voices",
       text:"Popular authors whose professed church is not one of the mapped traditions, with the tradition their theology aligns with: "+ov,
