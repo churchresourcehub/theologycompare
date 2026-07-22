@@ -40,6 +40,8 @@
   .lbl.anchor{font-weight:700}
   .pole{font-size:12px;fill:var(--muted);font-weight:600}
   .axttl{font-size:11px;fill:var(--faint);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+  .tricorner{font-size:14px;fill:var(--ink);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .trisub{font-size:10.5px;fill:var(--muted)}
   .leader{stroke:var(--line);stroke-width:1;opacity:.7}
   .grid{stroke:var(--rule);stroke-width:1}
   .gridmid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
@@ -65,7 +67,8 @@
   /* authors & leaders */
   .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:8px}
   .vcard{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
-  .vcname{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:4px}
+  .vcname{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:1px}
+  .vfam{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;opacity:.72;margin-bottom:6px}
   .vnote2{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:2px}
   .vglabel{font-family:var(--sans);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin:13px 0 5px}
   .vlist{list-style:none;padding:0;margin:0}
@@ -135,6 +138,7 @@
         <button class="tab" data-view="matrix">Doctrine matrix</button>
         <button class="tab" data-view="mindmap">Mind maps</button>
         <button class="tab" data-view="tree">Genealogy</button>
+        <button class="tab" data-view="triangle">Sources of authority</button>
         <button class="tab" data-view="voices">Authors &amp; leaders</button>
         <button id="askBtn">Ask &amp; compare</button>
       </div>
@@ -187,7 +191,7 @@ fetch("comparison.json").then(r=>r.json()).then(d=>{
 function setView(v){
   state.view=v;
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.view===v));
-  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree,voices:renderVoices}[v])();
+  ({map:renderMap,spectrum:renderSpectrum,matrix:renderMatrix,mindmap:renderMindmap,tree:renderTree,triangle:renderTriangle,voices:renderVoices}[v])();
 }
 window.addEventListener("resize",()=>{ if(["map","spectrum","tree","mindmap"].includes(state.view)) setView(state.view); });
 
@@ -423,26 +427,80 @@ function renderTree(){
 }
 function nodeW(n){ return Math.max(84,estW(n.name,11.5)+18); }
 
+// ---------- SOURCES OF AUTHORITY (ternary triangle) ----------
+function renderTriangle(){
+  const vp=$("#viewport"), A=DATA.authority;
+  if(!A){ vp.innerHTML='<p class="vnote">No authority data.</p>'; return; }
+  const c=A.corners;
+  vp.innerHTML='<div class="vtitle">Sources of authority</div>'+
+    '<p class="vnote">Our own take on Donald Durnbaugh’s typology of churches. Each tradition is placed by where it locates authority — the <b>Word</b> (Scripture and preaching), the <b>Spirit</b> (experience and revelation), or <b>Tradition</b> (the church and its sacraments). The nearer a corner, the more weight it gives that source; the center holds those that balance all three.</p>'+
+    '<div id="svgbox"></div>'+famLegend()+
+    '<p class="caption">After Donald F. Durnbaugh, <em>The Believers’ Church</em> (1968). Placements are a first pass for Woods to refine. Tap a tradition to read it.</p>';
+  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||vp.clientWidth-4);
+  const padSide=100, padTop=46, padBottom=64;
+  const baseW=W-2*padSide, triH=baseW*0.866, H=padTop+triH+padBottom;
+  const apex={x:W/2,y:padTop}, bl={x:padSide,y:padTop+triH}, br={x:W-padSide,y:padTop+triH};
+  const pt=a=>{ const w=a.word/100,s=a.spirit/100,t=a.tradition/100;
+    return {x:w*apex.x+s*bl.x+t*br.x, y:w*apex.y+s*bl.y+t*br.y}; };
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  // triangle + medians
+  svg.appendChild(el("polygon",{points:apex.x+","+apex.y+" "+bl.x+","+bl.y+" "+br.x+","+br.y,fill:"#fff",stroke:"var(--rule)","stroke-width":1.4}));
+  const mid=(p,q)=>({x:(p.x+q.x)/2,y:(p.y+q.y)/2});
+  [[apex,mid(bl,br)],[bl,mid(apex,br)],[br,mid(apex,bl)]].forEach(([a,b])=>
+    svg.appendChild(el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:"gridmid"})));
+  // corner labels
+  const corner=(x,y,dy,lab,sub,anchor)=>{
+    const t1=el("text",{x,y:y+dy,"text-anchor":anchor,class:"tricorner"},lab); svg.appendChild(t1);
+    const t2=el("text",{x,y:y+dy+13,"text-anchor":anchor,class:"trisub"},sub); svg.appendChild(t2); };
+  corner(apex.x,apex.y,-20,c.word.label,c.word.sub,"middle");
+  corner(bl.x,bl.y,26,c.spirit.label,c.spirit.sub,"middle");
+  corner(br.x,br.y,26,c.tradition.label,c.tradition.sub,"middle");
+  // points, with vertical label de-collision + leader lines where nudged
+  const items=DATA.traditions.map(tr=>{ const a=A.pos[tr.id]; if(!a) return null;
+    const p=pt(a), toRight=p.x<W*0.58;
+    return {tr,a,p,toRight,anchor:tr.family===ANCHOR,lx:toRight?p.x+10:p.x-10,ly:p.y+3.5}; }).filter(Boolean);
+  const LH=14;
+  [items.filter(i=>i.toRight),items.filter(i=>!i.toRight)].forEach(arr=>{ arr.sort((a,b)=>a.p.y-b.p.y);
+    for(let k=1;k<arr.length;k++) if(arr[k].ly-arr[k-1].ly<LH) arr[k].ly=arr[k-1].ly+LH; });
+  items.forEach(it=>{ const {tr,a,p,toRight,anchor,lx,ly}=it;
+    const g=el("g",{});
+    if(anchor) g.appendChild(el("circle",{cx:p.x,cy:p.y,r:11,fill:"none",stroke:FAM_COLOR[tr.family],"stroke-width":1.5,opacity:.5}));
+    if(Math.abs(ly-(p.y+3.5))>2) g.appendChild(el("line",{x1:p.x,y1:p.y,x2:lx,y2:ly-3.5,class:"leader"}));
+    const dot=el("circle",{cx:p.x,cy:p.y,r:anchor?7:5.5,fill:FAM_COLOR[tr.family],stroke:"#fff","stroke-width":1.6,class:"dot"});
+    g.appendChild(dot);
+    const tx=el("text",{x:lx,y:ly,"text-anchor":toRight?"start":"end",class:"lbl"+(anchor?" anchor":"")},tr.name);
+    g.appendChild(tx);
+    const show=ev=>{ g.parentNode.appendChild(g); dot.setAttribute("r",anchor?9:7.5);
+      tip(ev,"<b>"+esc(tr.name)+"</b><br>Word "+a.word+" · Spirit "+a.spirit+" · Tradition "+a.tradition); };
+    g.onmousemove=show; g.onmouseenter=show;
+    g.onmouseleave=()=>{ dot.setAttribute("r",anchor?7:5.5); untip(); };
+    g.style.cursor="pointer"; g.onclick=()=>openDetail({trad:tr.id});
+    svg.appendChild(g);
+  });
+  box.innerHTML=""; box.appendChild(svg);
+}
+
 // ---------- AUTHORS & LEADERS ----------
+function voicesCard(t){
+  const v=DATA.voices&&DATA.voices[t.id]; if(!v) return "";
+  const col=FAM_COLOR[t.family];
+  let h='<div class="vcard" style="border-top:3px solid '+col+'">'+
+     '<div class="vcname" style="color:'+col+'">'+esc(t.name)+'</div>'+
+     '<div class="vfam" style="color:'+col+'">'+esc(t.family)+'</div>';
+  if(v.note) h+='<div class="vnote2">'+esc(v.note)+'</div>';
+  (v.groups||[]).forEach(g=>{
+    h+='<div class="vglabel">'+esc(g.label)+'</div><ul class="vlist">'+
+      (g.people||[]).map(p=>{ const i=p.indexOf(' — '); const nm=i<0?p:p.slice(0,i), rest=i<0?"":p.slice(i+3);
+        return '<li><b>'+esc(nm)+'</b>'+(rest?' — '+esc(rest):'')+'</li>'; }).join("")+'</ul>';
+  });
+  return h+'</div>';
+}
 function renderVoices(){
   const vp=$("#viewport");
   let h='<div class="vtitle">Authors &amp; leaders</div>'+
-    '<p class="vnote">A few representative voices for each family — founders, classic theologians, and contemporary leaders, each recognized within its own tradition. Illustrative, not exhaustive.</p>'+
-    '<div class="vgrid">';
-  DATA.families.forEach(f=>{
-    const v=DATA.voices&&DATA.voices[f]; if(!v) return;
-    const col=FAM_COLOR[f];
-    h+='<div class="vcard" style="border-top:3px solid '+col+'">'+
-       '<div class="vcname" style="color:'+col+'">'+esc(f)+'</div>';
-    if(v.note) h+='<div class="vnote2">'+esc(v.note)+'</div>';
-    (v.groups||[]).forEach(g=>{
-      h+='<div class="vglabel">'+esc(g.label)+'</div><ul class="vlist">'+
-        (g.people||[]).map(p=>{ const i=p.indexOf(' — '); const nm=i<0?p:p.slice(0,i), rest=i<0?"":p.slice(i+3);
-          return '<li><b>'+esc(nm)+'</b>'+(rest?' — '+esc(rest):'')+'</li>'; }).join("")+'</ul>';
-    });
-    h+='</div>';
-  });
-  h+='</div><p class="caption">Illustrative only — Woods can add, cut, or correct any name; the Methodist column is the anchor and can grow from his own influences.</p>';
+    '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
+    '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+'</div>'+
+    '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. Where a tradition’s recognized leadership is historically narrow, the list is shorter by necessity, not by judgment.</p>';
   vp.innerHTML=h;
 }
 
@@ -467,6 +525,7 @@ function openDetail(ref){
       '<div class="dsec">Where it sits</div>'+axisStrip(t.pos)+
       '<div class="dsec">Its positions, doctrine by doctrine</div><ul class="celllist">'+
       DATA.doctrines.map(d=>'<li><b>'+esc(d.label)+'</b>'+esc(d.cells[t.family])+'</li>').join("")+'</ul>'+
+      voicesDetail(t)+
       sourceNote(t.family)+
       '<div class="srcnote">Want a side-by-side? <a href="#" id="toBot" style="color:var(--branch-e);font-weight:600">Ask the compare bot</a> how '+esc(t.name)+' relates to another tradition.</div>';
     body.innerHTML=h;
@@ -482,6 +541,14 @@ function openDetail(ref){
       sourceNote(f);
     body.innerHTML=h;
   }
+}
+function voicesDetail(t){
+  const v=DATA.voices&&DATA.voices[t.id]; if(!v) return "";
+  const people=(v.groups||[]).flatMap(g=>g.people||[]);
+  if(!people.length) return "";
+  return '<div class="dsec">Voices to read</div><ul class="celllist">'+
+    people.map(p=>{ const i=p.indexOf(' — '); const nm=i<0?p:p.slice(0,i), rest=i<0?"":p.slice(i+3);
+      return '<li><b style="text-transform:none;letter-spacing:0;font-family:var(--serif);font-size:14px;color:var(--ink);display:inline">'+esc(nm)+'</b>'+(rest?' — '+esc(rest):'')+'</li>'; }).join("")+'</ul>';
 }
 function sourceNote(fam){
   const src=(DATA.family_sources&&DATA.family_sources[fam])||[];
@@ -527,10 +594,12 @@ function buildChunks(){
     text:t.name+" (family: "+t.family+"). "+t.blurb,key:(t.name+" "+t.family+" "+t.blurb).toLowerCase()}));
   DATA.axes.forEach(a=> CHUNKS.push({type:"axis",name:"Spectrum: "+a.label,
     text:'The "'+a.label+'" spectrum runs from '+a.left+" to "+a.right+".",key:(a.label+" "+a.left+" "+a.right).toLowerCase()}));
-  if(DATA.voices) Object.keys(DATA.voices).forEach(f=>{ const v=DATA.voices[f];
-    const ppl=(v.groups||[]).map(g=>g.label+": "+(g.people||[]).join("; ")).join(". ");
-    CHUNKS.push({type:"figures",name:f+" — authors & leaders",
-      text:"Representative "+f+" authors and leaders. "+ppl,key:(f+" "+ppl).toLowerCase()}); });
+  if(DATA.voices){ const T={}; DATA.traditions.forEach(t=>T[t.id]=t);
+    Object.keys(DATA.voices).forEach(id=>{ const v=DATA.voices[id], t=T[id]; if(!t) return;
+      const ppl=(v.groups||[]).map(g=>g.label+": "+(g.people||[]).join("; ")).join(". ");
+      CHUNKS.push({type:"figures",name:t.name+" — authors & leaders",
+        text:"Representative "+t.name+" ("+t.family+") authors and leaders. "+ppl,
+        key:(t.name+" "+t.family+" "+ppl).toLowerCase()}); }); }
 }
 function retrieve(q){
   const toks=q.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));

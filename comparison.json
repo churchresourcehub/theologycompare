@@ -149,47 +149,537 @@
     { "id": "ucc-unitarian", "name": "UCC / Unitarian (progressive)", "family": "Anglican", "blurb": "The liberal Protestant tradition descended from New England Congregationalism; non-creedal and congregational, holding the broadest doctrinal latitude of the bodies shown here.", "pos": { "sacramental": 66, "gracewill": 60, "authority": 85, "security": 60, "atonement": 90, "plan": 25 } }
   ],
 
-  "voices_note": "Representative authors and leaders for each family — founders, classic theologians, and contemporary figures, each recognized within its own tradition. Illustrative, not exhaustive; for Woods to add to or correct.",
+  "voices_note": "Representative authors and leaders for each tradition on the map and spectrum — founders, classic theologians, and contemporary figures, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. Illustrative, not exhaustive; for Woods to add to or correct.",
   "voices": {
-    "Catholic": { "note": "Taught through the Magisterium; these are shapers and teachers within it.", "groups": [
-      { "label": "Founders & shapers", "people": ["Augustine of Hippo — the great Latin Father", "Thomas Aquinas — the Summa Theologiae, the Church's common doctor", "Ignatius of Loyola — founder of the Jesuits"] },
-      { "label": "Theologians", "people": ["John Henry Newman — convert cardinal", "Karl Rahner — 20th-century systematic theologian", "Joseph Ratzinger (Benedict XVI) — theologian and pope"] },
-      { "label": "Contemporary voices", "people": ["Pope Francis — the living magisterial voice", "Bishop Robert Barron — Word on Fire", "Scott Hahn — apologist and Scripture scholar"] }
-    ] },
-    "Orthodox": { "note": "Read with the mind of the Church; the Fathers hold pride of place.", "groups": [
-      { "label": "The Fathers", "people": ["Athanasius of Alexandria — defender of Nicaea", "The Cappadocians — Basil the Great and the two Gregories", "John Chrysostom — the golden-mouthed preacher", "Gregory Palamas — theologian of the divine energies"] },
-      { "label": "Modern theologians", "people": ["Vladimir Lossky — mystical theology of the Eastern Church", "Alexander Schmemann — liturgical theology", "John Zizioulas — being as communion"] },
-      { "label": "Contemporary voices", "people": ["Kallistos Ware — The Orthodox Way", "John Behr — patristics scholar"] }
-    ] },
-    "Anglican": { "note": "The via media; the Prayer Book and the Thirty-nine Articles frame it.", "groups": [
-      { "label": "Founders & shapers", "people": ["Thomas Cranmer — the Book of Common Prayer", "Richard Hooker — Laws of Ecclesiastical Polity"] },
-      { "label": "Theologians", "people": ["Lancelot Andrewes — Caroline divine", "C.S. Lewis — lay apologist", "John Stott — evangelical Anglican", "N.T. Wright — New Testament scholar"] },
-      { "label": "Contemporary voices", "people": ["Rowan Williams — former Archbishop of Canterbury", "Justin Welby — Archbishop of Canterbury", "Michael Curry — Episcopal Presiding Bishop"] }
-    ] },
-    "Lutheran": { "note": "The Book of Concord; strands run from confessional (LCMS) to mainline (ELCA).", "groups": [
-      { "label": "Founders", "people": ["Martin Luther — the Reformation's spark", "Philip Melanchthon — the Augsburg Confession"] },
-      { "label": "Theologians", "people": ["Martin Chemnitz — second Martin of the Confession", "Dietrich Bonhoeffer — The Cost of Discipleship", "Wolfhart Pannenberg — modern systematician"] },
-      { "label": "Contemporary voices", "people": ["Robert Jenson — systematic theologian", "Matthew Harrison — LCMS president"] }
-    ] },
-    "Wesleyan/Methodist": { "note": "The anchor tradition; Scripture read with tradition, reason, and experience.", "groups": [
-      { "label": "Founders", "people": ["John Wesley — the movement's founder", "Charles Wesley — hymnwriter of the revival", "Francis Asbury — American Methodism", "Phoebe Palmer — the holiness movement"] },
-      { "label": "Theologians", "people": ["Albert Outler — Wesley scholar and editor", "Thomas C. Oden — paleo-orthodoxy", "Randy Maddox — Responsible Grace", "Don Thorsen — Calvin vs. Wesley"] },
-      { "label": "Contemporary voices", "people": ["Will Willimon — preacher and bishop", "Adam Hamilton — Church of the Resurrection", "Woods Lisenby — the systematic behind this site"] }
-    ] },
-    "Reformed": { "note": "Westminster and Dort; strands from confessional (PCA) to mainline (PCUSA) to New Calvinist.", "groups": [
-      { "label": "Founders", "people": ["John Calvin — the Institutes", "Ulrich Zwingli — the Swiss Reformation", "John Knox — the Scottish Reformation"] },
-      { "label": "Theologians", "people": ["Jonathan Edwards — colonial theologian of revival", "Charles Hodge & B.B. Warfield — Old Princeton", "Herman Bavinck & Abraham Kuyper — Dutch neo-Calvinism"] },
-      { "label": "Contemporary voices", "people": ["R.C. Sproul — Ligonier Ministries", "Tim Keller — Redeemer, New Calvinist", "John Piper — Desiring God"] }
-    ] },
-    "Baptist": { "note": "Soul competency and believer's baptism; strands from General/Free Will to Reformed to Southern Baptist.", "groups": [
-      { "label": "Founders", "people": ["John Smyth & Thomas Helwys — the first Baptists", "The Particular Baptists — the 1689 Confession"] },
-      { "label": "Theologians", "people": ["John Bunyan — The Pilgrim's Progress", "Charles Spurgeon — the Prince of Preachers", "E.Y. Mullins — soul competency"] },
-      { "label": "Contemporary voices", "people": ["Billy Graham — the evangelist", "Rick Warren — The Purpose Driven Life", "Al Mohler — Southern Seminary"] }
-    ] },
-    "Pentecostal": { "note": "Spirit baptism and the gifts; Wesleyan-holiness roots, born at Azusa Street (1906).", "groups": [
-      { "label": "Founders", "people": ["Charles Parham — early Pentecostal teacher", "William J. Seymour — the Azusa Street revival"] },
-      { "label": "Leaders", "people": ["Aimee Semple McPherson — founder of the Foursquare Church", "Oral Roberts — healing evangelist", "David du Plessis — 'Mr. Pentecost'"] },
-      { "label": "Theologians", "people": ["Gordon Fee — New Testament scholar", "Amos Yong & Frank Macchia — Pentecostal theology"] }
-    ] }
+    "orthodox": {
+      "note": "Read with the mind of the Church; the Fathers hold pride of place.",
+      "groups": [
+        {
+          "label": "The Fathers",
+          "people": [
+            "Athanasius of Alexandria — defender of Nicaea",
+            "The Cappadocians — Basil the Great and the two Gregories",
+            "John Chrysostom — the golden-mouthed preacher",
+            "Gregory Palamas — theologian of the divine energies"
+          ]
+        },
+        {
+          "label": "Modern voices",
+          "people": [
+            "Vladimir Lossky — mystical theology of the Eastern Church",
+            "Alexander Schmemann — liturgical theology",
+            "Kallistos Ware — The Orthodox Way",
+            "Elisabeth Behr-Sigel — French Orthodox theologian",
+            "Frederica Mathewes-Green — American Orthodox writer"
+          ]
+        }
+      ]
+    },
+    "catholic": {
+      "note": "Taught through the Magisterium; shapers and teachers within it.",
+      "groups": [
+        {
+          "label": "Founders & doctors",
+          "people": [
+            "Augustine of Hippo — the great North African Father",
+            "Thomas Aquinas — the Summa Theologiae",
+            "Catherine of Siena — Doctor of the Church",
+            "Teresa of Avila — Doctor of the Church and mystic"
+          ]
+        },
+        {
+          "label": "Modern & contemporary",
+          "people": [
+            "John Henry Newman — convert cardinal",
+            "Dorothy Day — the Catholic Worker movement",
+            "Oscar Romero — martyred archbishop of El Salvador",
+            "Gustavo Gutierrez — Peruvian liberation theologian",
+            "Elizabeth Johnson — feminist systematic theologian",
+            "Pope Francis — the living magisterial voice"
+          ]
+        }
+      ]
+    },
+    "anglo-catholic": {
+      "note": "The sacramental, apostolic wing of Anglicanism; the Oxford Movement and Prayer Book piety.",
+      "groups": [
+        {
+          "label": "The Oxford Movement",
+          "people": [
+            "John Keble — the movement's spark",
+            "Edward Pusey — its theological anchor",
+            "John Henry Newman — before he entered Rome"
+          ]
+        },
+        {
+          "label": "Later voices",
+          "people": [
+            "Charles Gore — Lux Mundi",
+            "Evelyn Underhill — writer on mysticism and prayer",
+            "Michael Ramsey — Archbishop of Canterbury",
+            "Austin Farrer — philosopher-theologian"
+          ]
+        }
+      ]
+    },
+    "lcms": {
+      "note": "Confessional Lutheranism; the Book of Concord held without reservation.",
+      "groups": [
+        {
+          "label": "Founders & confessors",
+          "people": [
+            "Martin Luther — the Reformation's spark",
+            "Philip Melanchthon — the Augsburg Confession",
+            "Martin Chemnitz — second Martin of the Confession",
+            "C.F.W. Walther — founder of the Missouri Synod"
+          ]
+        },
+        {
+          "label": "Later voices",
+          "people": [
+            "Franz Pieper — Christian Dogmatics",
+            "Rosa Young — mother of Black Lutheranism in Alabama",
+            "Matthew Harrison — LCMS president"
+          ]
+        }
+      ]
+    },
+    "elca": {
+      "note": "Mainline Lutheranism; the same sacramental core in a more liberal body.",
+      "groups": [
+        {
+          "label": "Shapers",
+          "people": [
+            "Martin Luther & Philip Melanchthon — the shared Lutheran root",
+            "Dietrich Bonhoeffer — The Cost of Discipleship",
+            "Wolfhart Pannenberg — modern systematician"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Elizabeth Eaton — first woman to serve as ELCA Presiding Bishop",
+            "Nadia Bolz-Weber — pastor and author",
+            "Barbara Rossing — New Testament scholar"
+          ]
+        }
+      ]
+    },
+    "episcopal": {
+      "note": "The US expression of Anglicanism; deeply sacramental and broadly inclusive.",
+      "groups": [
+        {
+          "label": "Shapers",
+          "people": [
+            "Thomas Cranmer — the Book of Common Prayer",
+            "William Porcher DuBose — American Anglican theologian",
+            "Phillips Brooks — preacher and hymnwriter"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Pauli Murray — first African-American woman ordained an Episcopal priest",
+            "Barbara Harris — first woman bishop in the Anglican Communion",
+            "Verna Dozier — lay theologian and teacher",
+            "Katharine Jefferts Schori — first woman Presiding Bishop",
+            "Michael Curry — Presiding Bishop and preacher"
+          ]
+        }
+      ]
+    },
+    "methodist": {
+      "note": "The anchor tradition; Scripture read with tradition, reason, and experience.",
+      "groups": [
+        {
+          "label": "Founders & the revival",
+          "people": [
+            "John Wesley — the movement's founder",
+            "Charles Wesley — hymnwriter of the revival",
+            "Francis Asbury — American Methodism",
+            "Harry Hosier — pioneering early Black Methodist preacher",
+            "Richard Allen — founder of the AME Church",
+            "Phoebe Palmer — the holiness movement"
+          ]
+        },
+        {
+          "label": "Theologians & teachers",
+          "people": [
+            "Georgia Harkness — first woman to teach theology at a US seminary",
+            "Albert Outler — Wesley scholar and editor",
+            "Thomas C. Oden — paleo-orthodoxy",
+            "Leontine Kelly — first African-American woman elected a UMC bishop",
+            "Randy Maddox — Responsible Grace"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Will Willimon — preacher and bishop",
+            "Adam Hamilton — Church of the Resurrection"
+          ]
+        }
+      ]
+    },
+    "pca": {
+      "note": "Confessional Reformed; Westminster, covenantal, conservative.",
+      "groups": [
+        {
+          "label": "Reformed root & American shapers",
+          "people": [
+            "John Calvin — the Institutes",
+            "John Knox — the Scottish Reformation",
+            "J. Gresham Machen — Christianity and Liberalism",
+            "Cornelius Van Til — presuppositional apologetics"
+          ]
+        },
+        {
+          "label": "Teachers & leaders",
+          "people": [
+            "R.C. Sproul — Ligonier Ministries",
+            "Tim Keller — Redeemer, the PCA's best-known pastor",
+            "Ligon Duncan — Reformed Theological Seminary",
+            "Irwyn Ince — first African-American moderator of the PCA General Assembly"
+          ]
+        }
+      ]
+    },
+    "pcusa": {
+      "note": "Mainline Reformed; the Westminster heritage in a more liberal, ecumenical body.",
+      "groups": [
+        {
+          "label": "Shapers",
+          "people": [
+            "John Calvin & John Knox — the shared Reformed root",
+            "Eugene Carson Blake — ecumenical leader",
+            "Shirley Guthrie — Christian Doctrine"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Letty Russell — feminist theologian",
+            "Katie Geneva Cannon — first African-American woman ordained in the tradition; womanist ethics",
+            "Cynthia Rigby — systematic theologian"
+          ]
+        }
+      ]
+    },
+    "anabaptist": {
+      "note": "The believers' church: discipleship, peace, and community.",
+      "groups": [
+        {
+          "label": "Founders",
+          "people": [
+            "Conrad Grebel — the first Anabaptist",
+            "Michael Sattler — the Schleitheim Confession",
+            "Menno Simons — namesake of the Mennonites"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Ronald Sider — Rich Christians in an Age of Hunger",
+            "Vincent Harding — historian and civil-rights theologian",
+            "Drew Hart — Trouble I've Seen",
+            "Malinda Elizabeth Berry — Mennonite theologian"
+          ]
+        }
+      ]
+    },
+    "restorationist": {
+      "note": "No creed but the Bible; the Stone-Campbell movement, congregational.",
+      "groups": [
+        {
+          "label": "Founders",
+          "people": [
+            "Barton W. Stone — the Cane Ridge revival",
+            "Thomas & Alexander Campbell — the Declaration and Address",
+            "David Lipscomb — Nashville Bible School"
+          ]
+        },
+        {
+          "label": "Later voices",
+          "people": [
+            "Marshall Keeble — influential African-American evangelist",
+            "Max Lucado — pastor and best-selling author"
+          ]
+        }
+      ]
+    },
+    "pentecostal": {
+      "note": "Spirit baptism and the gifts; born at Azusa Street (1906).",
+      "groups": [
+        {
+          "label": "Founders",
+          "people": [
+            "Charles Parham — early Pentecostal teacher",
+            "William J. Seymour — leader of the Azusa Street revival",
+            "Aimee Semple McPherson — founder of the Foursquare Church"
+          ]
+        },
+        {
+          "label": "Teachers & scholars",
+          "people": [
+            "Gordon Fee — New Testament scholar",
+            "Amos Yong — Pentecostal systematic theologian",
+            "Cheryl Bridges Johns — Pentecostal formation",
+            "Estrelda Alexander — historian of Black Pentecostalism"
+          ]
+        }
+      ]
+    },
+    "new-calvinist": {
+      "note": "TULIP soteriology in a Bible-expositional, largely baptistic key; the Gospel Coalition and Acts 29.",
+      "groups": [
+        {
+          "label": "Leading voices",
+          "people": [
+            "John Piper — Desiring God",
+            "Tim Keller — The Reason for God",
+            "D.A. Carson — New Testament scholar",
+            "Wayne Grudem — Systematic Theology"
+          ]
+        },
+        {
+          "label": "Teachers",
+          "people": [
+            "Thabiti Anyabwile — pastor and writer",
+            "Voddie Baucham — preacher and apologist",
+            "Jen Wilkin — women's Bible teacher",
+            "Nancy Guthrie — Bible teacher and author"
+          ]
+        }
+      ]
+    },
+    "seeker-evangelical": {
+      "note": "Conversionist and contemporary, light on doctrine by design; the seeker-church movement.",
+      "groups": [
+        {
+          "label": "Shapers",
+          "people": [
+            "Robert Schuller — an early television precursor",
+            "Rick Warren — Saddleback and The Purpose Driven Life",
+            "Lee Strobel — The Case for Christ"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Andy Stanley — North Point Ministries",
+            "Priscilla Shirer — Bible teacher and author"
+          ]
+        }
+      ]
+    },
+    "nondenom-mega": {
+      "note": "A baptist, reformed, and charismatic amalgam; the fastest-growing space.",
+      "groups": [
+        {
+          "label": "Prominent leaders",
+          "people": [
+            "T.D. Jakes — The Potter's House",
+            "Steven Furtick — Elevation Church",
+            "Craig Groeschel — Life.Church",
+            "Chris Hodges — Church of the Highlands",
+            "Andy Stanley — North Point"
+          ]
+        }
+      ]
+    },
+    "free-will-baptist": {
+      "note": "Conversionist, believer's baptism, non-Calvinist; grace is resistible and salvation can be lost.",
+      "groups": [
+        {
+          "label": "Founders",
+          "people": [
+            "Thomas Helwys — the first General Baptist congregation",
+            "Benjamin Randall — the Free Will Baptist movement in New England",
+            "Paul Palmer — early Free Will Baptist churches in the South"
+          ]
+        },
+        {
+          "label": "Scholars",
+          "people": [
+            "F. Leroy Forlines — The Quest for Truth",
+            "Robert Picirilli — Grace, Faith, Free Will"
+          ]
+        }
+      ]
+    },
+    "sbc": {
+      "note": "Scripture alone, believer's baptism, symbolic ordinances, conversion-centered.",
+      "groups": [
+        {
+          "label": "Founders & shapers",
+          "people": [
+            "E.Y. Mullins — soul competency",
+            "Lottie Moon — missionary and namesake of the missions offering",
+            "Annie Armstrong — missions organizer",
+            "George W. Truett — Dallas pastor"
+          ]
+        },
+        {
+          "label": "Contemporary voices",
+          "people": [
+            "Billy Graham — the evangelist",
+            "Fred Luter — first African-American SBC president",
+            "Beth Moore — Bible teacher and author",
+            "David Platt — Radical",
+            "Al Mohler — Southern Seminary"
+          ]
+        }
+      ]
+    },
+    "fundamentalist": {
+      "note": "Biblicist and separatist; the hard edge of the pole, often dispensational. Leadership is historically narrow, so this is mostly its founders.",
+      "groups": [
+        {
+          "label": "Founders & shapers",
+          "people": [
+            "C.I. Scofield — the Scofield Reference Bible",
+            "R.A. Torrey — editor of The Fundamentals",
+            "William Bell Riley — fundamentalist organizer",
+            "Bob Jones Sr. — evangelist and college founder",
+            "John R. Rice — The Sword of the Lord"
+          ]
+        }
+      ]
+    },
+    "ucc-unitarian": {
+      "note": "The liberal Protestant end, descended from Congregationalism; known for a series of 'firsts.'",
+      "groups": [
+        {
+          "label": "Historic firsts",
+          "people": [
+            "Antoinette Brown Blackwell — first woman ordained in an American denomination",
+            "Lemuel Haynes — first African-American ordained by a Protestant body in America",
+            "Horace Bushnell — Christian Nurture"
+          ]
+        },
+        {
+          "label": "Later voices",
+          "people": [
+            "Washington Gladden — the Social Gospel",
+            "William Ellery Channing — Unitarian founder",
+            "Yvonne Delk — African-American UCC minister and activist"
+          ]
+        }
+      ]
+    }
+  },
+  "authority": {
+    "note": "Our own take on Donald Durnbaugh's 'Typology of Churches': each tradition placed by where it locates authority — the Word (Scripture and preaching), the Spirit (experience and revelation), or Tradition (the church and its sacraments). v1 placements for Woods to refine.",
+    "corners": {
+      "word": {
+        "label": "Word",
+        "sub": "Scripture & preaching"
+      },
+      "spirit": {
+        "label": "Spirit",
+        "sub": "experience & revelation"
+      },
+      "tradition": {
+        "label": "Tradition",
+        "sub": "church & sacrament"
+      }
+    },
+    "pos": {
+      "orthodox": {
+        "word": 15,
+        "spirit": 25,
+        "tradition": 60
+      },
+      "catholic": {
+        "word": 18,
+        "spirit": 17,
+        "tradition": 65
+      },
+      "anglo-catholic": {
+        "word": 25,
+        "spirit": 22,
+        "tradition": 53
+      },
+      "lcms": {
+        "word": 45,
+        "spirit": 12,
+        "tradition": 43
+      },
+      "elca": {
+        "word": 42,
+        "spirit": 18,
+        "tradition": 40
+      },
+      "episcopal": {
+        "word": 25,
+        "spirit": 28,
+        "tradition": 47
+      },
+      "methodist": {
+        "word": 34,
+        "spirit": 34,
+        "tradition": 32
+      },
+      "pca": {
+        "word": 62,
+        "spirit": 8,
+        "tradition": 30
+      },
+      "pcusa": {
+        "word": 46,
+        "spirit": 22,
+        "tradition": 32
+      },
+      "anabaptist": {
+        "word": 46,
+        "spirit": 34,
+        "tradition": 20
+      },
+      "restorationist": {
+        "word": 70,
+        "spirit": 13,
+        "tradition": 17
+      },
+      "pentecostal": {
+        "word": 28,
+        "spirit": 57,
+        "tradition": 15
+      },
+      "new-calvinist": {
+        "word": 70,
+        "spirit": 18,
+        "tradition": 12
+      },
+      "seeker-evangelical": {
+        "word": 42,
+        "spirit": 43,
+        "tradition": 15
+      },
+      "nondenom-mega": {
+        "word": 40,
+        "spirit": 45,
+        "tradition": 15
+      },
+      "free-will-baptist": {
+        "word": 56,
+        "spirit": 29,
+        "tradition": 15
+      },
+      "sbc": {
+        "word": 66,
+        "spirit": 20,
+        "tradition": 14
+      },
+      "fundamentalist": {
+        "word": 80,
+        "spirit": 11,
+        "tradition": 9
+      },
+      "ucc-unitarian": {
+        "word": 27,
+        "spirit": 46,
+        "tradition": 27
+      }
+    }
   }
 }
