@@ -1043,7 +1043,6 @@
         {
           "label": "On the shelf today",
           "people": [
-            "John Mark Comer — The Ruthless Elimination of Hurry",
             "Levi Lusko — author and pastor",
             "Jefferson Bethke — Jesus > Religion"
           ]
@@ -1279,5 +1278,63 @@
         "tradition": 27
       }
     }
-  }
+  },
+  "other_voices": [
+    {
+      "name": "C.S. Lewis",
+      "note": "Anglican (Church of England); read across every tradition"
+    },
+    {
+      "name": "N.T. Wright",
+      "note": "Anglican (Church of England)"
+    },
+    {
+      "name": "Esau McCaulley",
+      "note": "Anglican (ACNA)"
+    },
+    {
+      "name": "Tish Harrison Warren",
+      "note": "Anglican (ACNA)"
+    },
+    {
+      "name": "Rachel Held Evans",
+      "note": "became Episcopalian (raised evangelical)"
+    },
+    {
+      "name": "Beth Moore",
+      "note": "left the SBC in 2021; now Anglican (ACNA)"
+    },
+    {
+      "name": "Rob Bell",
+      "note": "began nondenominational (Mars Hill Bible Church); later left the local church"
+    },
+    {
+      "name": "Francis Chan",
+      "note": "nondenominational; left his megachurch for house churches"
+    },
+    {
+      "name": "John Mark Comer",
+      "note": "nondenominational (Bridgetown Church, Portland)"
+    },
+    {
+      "name": "Brian McLaren",
+      "note": "post-evangelical, emergent; formerly nondenominational"
+    },
+    {
+      "name": "John Pavlovitz",
+      "note": "progressive; formerly United Methodist, then nondenominational"
+    },
+    {
+      "name": "Tony Evans",
+      "note": "nondenominational (Oak Cliff Bible Fellowship)"
+    },
+    {
+      "name": "Priscilla Shirer",
+      "note": "nondenominational Bible teacher"
+    },
+    {
+      "name": "Philip Yancey",
+      "note": "broadly evangelical (raised fundamentalist Baptist)"
+    }
+  ]
 }

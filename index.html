@@ -80,6 +80,11 @@
   .vlist li{font-size:13px;line-height:1.5;padding:4px 0;border-bottom:1px solid #f0ebe0;color:var(--muted)}
   .vlist li:last-child{border-bottom:none}
   .vlist li b{color:var(--ink);font-family:var(--serif);font-weight:600}
+  .vcard.vother{grid-column:1/-1;border-top:3px solid var(--faint);background:#fbf9f4}
+  .vcard.vother .vnote2{max-width:70ch;margin-bottom:10px}
+  .volist{column-count:2;column-gap:34px}
+  .volist li{break-inside:avoid}
+  @media(max-width:620px){ .volist{column-count:1} }
   /* axis strip */
   .strip{margin:3px 0}
   .strip .row{display:flex;align-items:center;gap:8px;margin:6px 0}
@@ -535,12 +540,20 @@ function voicesCard(t){
   });
   return h+'</div>';
 }
+function otherVoicesCard(){
+  const o=DATA.other_voices; if(!o||!o.length) return "";
+  return '<div class="vcard vother">'+
+    '<div class="vcname" style="color:var(--muted)">Other notable voices</div>'+
+    '<div class="vnote2">Widely read authors who sit adjacent to or between the traditions and don’t cleanly belong to one — several have left the local church or crossed streams. Each is tagged with what they most identify as.</div>'+
+    '<ul class="vlist volist">'+o.map(p=>'<li><b>'+esc(p.name)+'</b> — '+esc(p.note)+'</li>').join("")+'</ul>'+
+    '</div>';
+}
 function renderVoices(){
   const vp=$("#viewport");
   let h='<div class="vtitle">Authors &amp; leaders</div>'+
-    '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders, drawn from voices the tradition itself recognizes, with women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
-    '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+'</div>'+
-    '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. The <b>Influencers</b> list names the most popular online voices for each stream by reach, not endorsement, and affiliations there are loose. Where a tradition’s recognized leadership is historically narrow, the list is shorter by necessity, not by judgment.</p>';
+    '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders — listed only where the person identifies (or identified) with that tradition, not merely sits near it. Women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
+    '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+otherVoicesCard()+'</div>'+
+    '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. &ldquo;Current Notable Figures&rdquo; lists living voices by reach, not endorsement. The final &ldquo;Other notable voices&rdquo; card holds popular authors who don’t self-identify with one of these traditions, each tagged with what they do identify as.</p>';
   vp.innerHTML=h;
 }
 
@@ -649,6 +662,10 @@ function buildChunks(){
       CHUNKS.push({type:"figures",name:t.name+" — authors & leaders",
         text:"Representative "+t.name+" ("+t.family+") authors and leaders. "+ppl,
         key:(t.name+" "+t.family+" "+ppl).toLowerCase()}); }); }
+  if(DATA.other_voices){ const ov=DATA.other_voices.map(p=>p.name+" ("+p.note+")").join("; ");
+    CHUNKS.push({type:"figures",name:"Other notable voices",
+      text:"Popular authors adjacent to or between the traditions, tagged with what they identify as: "+ov,
+      key:("other notable voices "+ov).toLowerCase()}); }
 }
 function retrieve(q){
   const toks=q.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
