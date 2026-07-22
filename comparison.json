@@ -314,7 +314,7 @@
     },
     {
       "id": "methodist",
-      "name": "Methodist / Wesleyan (UMC)",
+      "name": "Methodist / Wesleyan (UMC/GMC)",
       "family": "Wesleyan/Methodist",
       "blurb": "The via media: means of grace joined to revival warmth. Center of the field, which is why it can bridge in several directions.",
       "pos": {
@@ -592,7 +592,7 @@
       ]
     },
     "lcms": {
-      "note": "Confessional Lutheranism; the Book of Concord held without reservation.",
+      "note": "Confessional Lutheranism; the Book of Concord held without reservation. Shares its root — Luther, Melanchthon, and Bonhoeffer — with the ELCA, but diverges sharply on Scripture, women's ordination, and ecumenism.",
       "groups": [
         {
           "label": "Founders & confessors",
@@ -607,6 +607,7 @@
           "label": "Later voices",
           "people": [
             "Franz Pieper — Christian Dogmatics",
+            "Dietrich Bonhoeffer — Confessing Church martyr, claimed across Lutheranism",
             "Rosa Young — mother of Black Lutheranism in Alabama",
             "Matthew Harrison — LCMS president"
           ]
@@ -622,7 +623,7 @@
       ]
     },
     "elca": {
-      "note": "Mainline Lutheranism; the same sacramental core in a more liberal body.",
+      "note": "Mainline Lutheranism; the same root as the LCMS — Luther, Melanchthon, Bonhoeffer — in a more liberal body that ordains women and LGBTQ clergy and reads Scripture critically.",
       "groups": [
         {
           "label": "Shapers",
@@ -679,7 +680,7 @@
       ]
     },
     "methodist": {
-      "note": "The anchor tradition; Scripture read with tradition, reason, and experience.",
+      "note": "The anchor tradition; Scripture read with tradition, reason, and experience. Split in 2022 into the centrist-to-progressive UMC and the traditionalist Global Methodist Church (GMC); the figures below are UMC unless noted, with the traditionalist stream now largely in the GMC.",
       "groups": [
         {
           "label": "Founders & the revival",
@@ -697,23 +698,23 @@
           "people": [
             "Georgia Harkness — first woman to teach theology at a US seminary",
             "Albert Outler — Wesley scholar and editor",
-            "Thomas C. Oden — paleo-orthodoxy",
-            "Leontine Kelly — first African-American woman elected a UMC bishop",
-            "Randy Maddox — Responsible Grace"
+            "Thomas C. Oden — paleo-orthodoxy (UMC; a hero to the traditionalist/GMC wing)",
+            "Leontine Kelly — first African-American woman elected a UMC bishop (UMC)",
+            "Randy Maddox — Responsible Grace (UMC)"
           ]
         },
         {
           "label": "Contemporary voices",
           "people": [
-            "Will Willimon — preacher and bishop",
-            "Adam Hamilton — Church of the Resurrection"
+            "Will Willimon — preacher and bishop (UMC)",
+            "Adam Hamilton — Church of the Resurrection (UMC)"
           ]
         },
         {
           "label": "Influencers (online)",
           "people": [
-            "Seedbed — Wesleyan discipleship platform",
-            "Adam Hamilton — widely shared online sermons"
+            "Seedbed / New Room — Wesleyan renewal (traditionalist, largely GMC)",
+            "Adam Hamilton — widely shared online sermons (UMC)"
           ]
         }
       ]
