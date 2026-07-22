@@ -179,8 +179,8 @@
         "Anglican": "growth in grace through word and sacrament",
         "Lutheran": "simul justus et peccator; growth by returning to baptism",
         "Wesleyan/Methodist": "central; entire sanctification and Christian perfection are possible",
-        "Reformed": "progressive; never completed in this life",
-        "Baptist": "progressive growth in the Christian life",
+        "Reformed": "gradual; never completed in this life",
+        "Baptist": "gradual growth in the Christian life",
         "Pentecostal": "holiness plus Spirit baptism as empowerment; sometimes a second work"
       }
     },
@@ -274,7 +274,7 @@
       "id": "lcms",
       "name": "Lutheran (LCMS)",
       "family": "Lutheran",
-      "blurb": "Confessional Lutheranism; sola scriptura plus real presence, strongly liturgical and doctrinally conservative.",
+      "blurb": "Confessional Lutheranism; sola scriptura plus real presence, strongly liturgical and confessional.",
       "pos": {
         "sacramental": 34,
         "gracewill": 15,
@@ -288,7 +288,7 @@
       "id": "elca",
       "name": "Lutheran (ELCA)",
       "family": "Lutheran",
-      "blurb": "Mainline Lutheranism; the same sacramental core as the LCMS, in the more liberal of the two major US Lutheran bodies.",
+      "blurb": "Mainline Lutheranism; the same sacramental core as the LCMS, the mainline of the two major US Lutheran bodies.",
       "pos": {
         "sacramental": 38,
         "gracewill": 30,
@@ -302,7 +302,7 @@
       "id": "episcopal",
       "name": "Episcopal (US)",
       "family": "Anglican",
-      "blurb": "The US expression of Anglicanism; deeply sacramental, and more liberal than much of the global Anglican Communion.",
+      "blurb": "The US expression of Anglicanism; deeply sacramental and broadly inclusive.",
       "pos": {
         "sacramental": 24,
         "gracewill": 55,
@@ -330,7 +330,7 @@
       "id": "pca",
       "name": "Presbyterian (PCA / EPC)",
       "family": "Reformed",
-      "blurb": "Confessional Reformed; Westminster, covenantal, paedobaptist, conservative.",
+      "blurb": "Confessional Reformed; Westminster, covenantal, paedobaptist.",
       "pos": {
         "sacramental": 58,
         "gracewill": 10,
@@ -344,7 +344,7 @@
       "id": "pcusa",
       "name": "Presbyterian (PCUSA)",
       "family": "Reformed",
-      "blurb": "Mainline Reformed; shares the Westminster heritage of the PCA, in the more liberal, mainline branch.",
+      "blurb": "Mainline Reformed; shares the Westminster heritage of the PCA, in the mainline branch.",
       "pos": {
         "sacramental": 52,
         "gracewill": 30,
@@ -489,9 +489,9 @@
     },
     {
       "id": "ucc-unitarian",
-      "name": "UCC / Unitarian (progressive)",
+      "name": "UCC / Unitarian",
       "family": "Anglican",
-      "blurb": "The liberal Protestant tradition descended from New England Congregationalism; non-creedal and congregational, holding the broadest doctrinal latitude of the bodies shown here.",
+      "blurb": "The tradition descended from New England Congregationalism; non-creedal and congregational, holding the broadest doctrinal latitude of the bodies shown here.",
       "pos": {
         "sacramental": 66,
         "gracewill": 60,
@@ -667,7 +667,7 @@
       ]
     },
     "elca": {
-      "note": "Mainline Lutheranism; the same root as the LCMS — Luther, Melanchthon, Bonhoeffer — in a more liberal body that ordains women and LGBTQ clergy and reads Scripture critically.",
+      "note": "Mainline Lutheranism; the same root as the LCMS — Luther, Melanchthon, Bonhoeffer — in a body that ordains women and LGBTQ clergy and reads Scripture critically.",
       "groups": [
         {
           "label": "Shapers",
@@ -741,7 +741,7 @@
       ]
     },
     "methodist": {
-      "note": "The anchor tradition; Scripture read with tradition, reason, and experience. Split in 2022 into the centrist-to-progressive UMC and the traditionalist Global Methodist Church (GMC); the figures below are UMC unless noted, with the traditionalist stream now largely in the GMC.",
+      "note": "The anchor tradition; Scripture read with tradition, reason, and experience. Split in 2022 into the UMC and the traditionalist Global Methodist Church (GMC); the figures below are UMC unless noted, with the traditionalist stream now largely in the GMC.",
       "groups": [
         {
           "label": "Founders & the revival",
@@ -788,7 +788,7 @@
       ]
     },
     "pca": {
-      "note": "Confessional Reformed; Westminster, covenantal, conservative.",
+      "note": "Confessional Reformed; Westminster, covenantal, paedobaptist.",
       "groups": [
         {
           "label": "Reformed root & American shapers",
@@ -825,7 +825,7 @@
       ]
     },
     "pcusa": {
-      "note": "Mainline Reformed; the Westminster heritage in a more liberal, ecumenical body.",
+      "note": "Mainline Reformed; the Westminster heritage in a mainline, ecumenical body.",
       "groups": [
         {
           "label": "Shapers",
@@ -1145,7 +1145,7 @@
       ]
     },
     "ucc-unitarian": {
-      "note": "The liberal Protestant end, descended from Congregationalism; known for a series of 'firsts.'",
+      "note": "The end of the Protestant spectrum descended from Congregationalism; known for a series of 'firsts.'",
       "groups": [
         {
           "label": "Historic firsts",
@@ -1298,7 +1298,7 @@
     {
       "name": "Rob Bell",
       "professed": "nondenominational, then left the local church",
-      "aligns": "progressive / mainline"
+      "aligns": "mainline"
     },
     {
       "name": "Francis Chan",
@@ -1313,12 +1313,12 @@
     {
       "name": "Brian McLaren",
       "professed": "emergent, post-evangelical",
-      "aligns": "progressive / mainline"
+      "aligns": "mainline"
     },
     {
       "name": "John Pavlovitz",
-      "professed": "progressive; ex-United Methodist, then nondenominational",
-      "aligns": "progressive / mainline"
+      "professed": "post-evangelical; ex-United Methodist, then nondenominational",
+      "aligns": "mainline"
     },
     {
       "name": "Beth Moore",
@@ -1382,8 +1382,8 @@
     },
     {
       "name": "Jen Hatmaker",
-      "professed": "progressive; formerly evangelical",
-      "aligns": "progressive / mainline"
+      "professed": "post-evangelical; formerly evangelical",
+      "aligns": "mainline"
     },
     {
       "name": "Gary Chapman",
@@ -1403,7 +1403,7 @@
     {
       "name": "Richard Rohr",
       "professed": "Roman Catholic (Franciscan friar)",
-      "aligns": "progressive contemplative"
+      "aligns": "contemplative"
     },
     {
       "name": "Henri Nouwen",
@@ -1442,8 +1442,12 @@
       "note": "Swiss Reformed; neo-orthodox (Church Dogmatics)"
     },
     {
+      "name": "Diana Butler Bass",
+      "note": "Episcopalian; author and public commentator"
+    },
+    {
       "name": "Rob Bell",
-      "note": "nondenominational, then post-church; progressive"
+      "note": "nondenominational, then post-church; post-evangelical"
     },
     {
       "name": "Wendell Berry",
@@ -1451,7 +1455,7 @@
     },
     {
       "name": "Sarah Bessey",
-      "note": "progressive (charismatic background); Jesus Feminist"
+      "note": "post-evangelical (charismatic background); Jesus Feminist"
     },
     {
       "name": "Dietrich Bonhoeffer",
@@ -1462,12 +1466,8 @@
       "note": "Episcopalian; research professor and author"
     },
     {
-      "name": "Diana Butler Bass",
-      "note": "Episcopalian; author and public commentator"
-    },
-    {
       "name": "Tony Campolo",
-      "note": "American Baptist; progressive evangelical (Red Letter Christians)"
+      "note": "American Baptist; evangelical (Red Letter Christians)"
     },
     {
       "name": "Francis Chan",
@@ -1475,7 +1475,7 @@
     },
     {
       "name": "Peter Enns",
-      "note": "progressive, formerly Reformed; The Bible for Normal People"
+      "note": "post-evangelical, formerly Reformed; The Bible for Normal People"
     },
     {
       "name": "Rachel Held Evans",
@@ -1490,6 +1490,10 @@
       "note": "United Methodist; Church of the Resurrection"
     },
     {
+      "name": "M. Robert Mulholland Jr.",
+      "note": "United Methodist (Asbury); Invitation to a Journey"
+    },
+    {
       "name": "Randy Maddox",
       "note": "United Methodist; Wesley scholar (Responsible Grace)"
     },
@@ -1498,8 +1502,8 @@
       "note": "Roman Catholic (former Franciscan); The Ragamuffin Gospel"
     },
     {
-      "name": "M. Robert Mulholland Jr.",
-      "note": "United Methodist (Asbury); Invitation to a Journey"
+      "name": "Henri Nouwen",
+      "note": "Roman Catholic priest; contemplative (The Return of the Prodigal Son)"
     },
     {
       "name": "Elaine Pagels",

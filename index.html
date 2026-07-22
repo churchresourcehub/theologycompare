@@ -288,8 +288,7 @@ function mapShort(n){ return n
   .replace("Independent Fundamental / fundamentalist","Fundamentalist")
   .replace("Restorationist (Churches of Christ)","Churches of Christ")
   .replace("Pentecostal / charismatic (AoG)","Pentecostal (AoG)")
-  .replace("Anabaptist / Mennonite","Anabaptist")
-  .replace("UCC / Unitarian (progressive)","UCC / Unitarian"); }
+  .replace("Anabaptist / Mennonite","Anabaptist"); }
 function renderMap(){
   const vp=$("#viewport");
   vp.innerHTML='<div class="vtitle">Two-axis map</div>'+
@@ -610,7 +609,7 @@ function renderVoices(){
     '<p class="vnote">Representative voices for each tradition on the map and spectrum — founders, classic theologians, and contemporary leaders — listed only where the person identifies (or identified) with that tradition, not merely sits near it. Women and persons of color included wherever the tradition has them. Illustrative, not exhaustive.</p>'+
     '<div class="vkey"><div class="vklabel">Reading the colors — the word under each tradition is its theological family</div>'+
       famLegend()+
-      '<p>These are the eight confessional families the site sorts by, the columns of the doctrine matrix. A tradition’s family is its nearest doctrinal kin, not its denominational label. The <b style="color:'+bap+'">Baptist</b> family includes every believer’s baptism congregation, such as nondenominational megachurches, seeker churches, and the Restorationist Churches of Christ. The progressive <b>UCC / Unitarian</b> sits at the edge of the <b style="color:'+ang+'">Anglican</b> family, because that’s its closest fit among the eight for a broad, non-confessional body, though its own roots are Congregationalist.</p></div>'+
+      '<p>These are the eight confessional families the site sorts by, the columns of the doctrine matrix. A tradition’s family is its nearest doctrinal kin, not its denominational label. The <b style="color:'+bap+'">Baptist</b> family includes every believer’s baptism congregation, such as nondenominational megachurches, seeker churches, and the Restorationist Churches of Christ. The <b>UCC / Unitarian</b> sits at the edge of the <b style="color:'+ang+'">Anglican</b> family, because that’s its closest fit among the eight for a broad, non-confessional body, though its own roots are Congregationalist.</p></div>'+
     '<div class="vgrid">'+DATA.traditions.map(voicesCard).join("")+otherVoicesCard()+woodsFavoritesCard()+'</div>'+
     '<p class="caption">Illustrative only — Woods can add, cut, or correct any name. &ldquo;Current Notable Figures&rdquo; lists living voices by reach, not endorsement. The final &ldquo;Other notable voices&rdquo; card holds popular authors who don’t self-identify with one of these traditions, each tagged with what they do identify as.</p>';
   vp.innerHTML=h;
@@ -744,8 +743,9 @@ function retrieve(q){
 }
 const SYS='You are the guide for a Comparative Theology site. The anchor voice is Wesleyan/Methodist (Woods Lisenby’s tradition), but you must represent every tradition fairly from its OWN authoritative self-understanding, never a rival’s caricature. Rules: answer ONLY from the SOURCES provided; never invent quotations; where a source states a position directly, state it directly and plainly; when traditions differ, lay the contrast out even-handedly; when a tradition spans a range (e.g. Reformed vs. mainline, general vs. Reformed Baptist), say so. Be clear and concise — a few short paragraphs. End major claims by naming the tradition, not a page citation.';
 function initChat(){
+  convo=[];
   $("#chat").innerHTML='<div class="askhead"><h3>Ask &amp; compare</h3>'+
-    '<p>Answers are drawn from the comparison data and each tradition’s own voice. This is the starting corpus; the sourced reading essays will deepen it.</p>'+
+    '<p>Answers are drawn from the comparison data and each tradition’s own voice. It follows the conversation, so you can ask a follow-up (&ldquo;and the Reformed view?&rdquo;) or chain questions.</p>'+
     '<div class="suggest">'+[
       "How does Methodist justification compare to Reformed?",
       "Who thinks salvation can be lost, and who doesn’t?",
@@ -755,20 +755,24 @@ function initChat(){
   $("#chat").querySelectorAll(".s").forEach(s=> s.onclick=()=>{ $("#q").value=s.textContent; send(); });
 }
 function addMsg(cls,html){ const d=document.createElement("div"); d.className="msg "+cls; d.innerHTML=html; $("#chat").appendChild(d); $("#chat").scrollTop=$("#chat").scrollHeight; return d; }
-let busy=false;
+let busy=false, convo=[];
 async function send(){
   const q=$("#q").value.trim(); if(!q||busy) return;
   busy=true; $("#send").disabled=true; $("#q").value="";
   addMsg("u",esc(q));
-  const sources=retrieve(q).map(c=>({type:c.type,name:c.name,text:c.text}));
+  // retrieve with the prior question in view, so follow-ups resolve their referents
+  const lastU=[...convo].reverse().find(m=>m.role==="user");
+  const sources=retrieve(q+(lastU?" "+lastU.content:"")).map(c=>({type:c.type,name:c.name,text:c.text}));
   const thinking=addMsg("sys","comparing…");
   try{
     const r=await fetch("/api/chat",{method:"POST",headers:{"content-type":"application/json"},
-      body:JSON.stringify({prompt:SYS+"\n\nQUESTION: "+q,question:q,sources})});
+      body:JSON.stringify({prompt:SYS+"\n\nQUESTION: "+q,question:q,sources,history:convo})});
     const j=await r.json(); thinking.remove();
     if(j.error){ addMsg("sys","The bot backend isn’t live yet ("+esc(j.error)+"). Add ANTHROPIC_API_KEY to enable it."); }
     else{ addMsg("a",esc(j.text).replace(/\n/g,"<br>")+
-      '<div class="src">Drawn from: '+sources.slice(0,6).map(s=>esc(s.name)).join(" · ")+'</div>'); }
+      '<div class="src">Drawn from: '+sources.slice(0,6).map(s=>esc(s.name)).join(" · ")+'</div>');
+      convo.push({role:"user",content:q},{role:"assistant",content:j.text});
+      if(convo.length>16) convo=convo.slice(-16); }
   }catch(e){ thinking.remove(); addMsg("sys","Couldn’t reach the bot backend. It works once deployed with an API key."); }
   busy=false; $("#send").disabled=false; $("#q").focus();
 }
