@@ -54,15 +54,14 @@
   .grid{stroke:var(--rule);stroke-width:1}
   .gridmid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
   /* matrix */
-  .mxwrap{overflow-x:auto;margin-top:6px;border:1px solid var(--rule);border-radius:10px;background:#fff}
-  table.mx{border-collapse:collapse;width:100%;font-size:12.5px}
-  table.mx th,table.mx td{border:1px solid var(--rule);padding:9px 11px;text-align:left;vertical-align:top;line-height:1.4}
+  .mxwrap{overflow:auto;max-height:calc(100vh - 210px);max-height:calc(100dvh - 210px);margin-top:6px;border:1px solid var(--rule);border-radius:10px;background:#fff}
+  table.mx{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px}
+  table.mx th,table.mx td{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:9px 11px;text-align:left;vertical-align:top;line-height:1.4}
   table.mx thead th{position:sticky;top:0;background:#f4efe6;font-family:var(--sans);font-size:11px;letter-spacing:.5px;color:var(--ink);z-index:2}
+  table.mx thead th:first-child{left:0;z-index:3}
   table.mx tbody th{background:#faf8f3;font-family:var(--serif);font-size:13.5px;font-weight:600;min-width:130px;position:sticky;left:0;z-index:1}
   table.mx td{cursor:pointer;min-width:150px;color:var(--muted)}
   table.mx td:hover{background:#fbf6ea;color:var(--ink)}
-  table.mx .anchorcol{background:#eef5f1}
-  table.mx thead th.anchorcol{background:#dcebe3;color:var(--branch-e)}
   /* mindmap chooser */
   .chooser{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
   .fchip{border:none;border-radius:16px;padding:5px 12px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;opacity:.55;transition:.12s}
@@ -361,12 +360,12 @@ function renderMap(){
 function renderMatrix(){
   const vp=$("#viewport"), fams=DATA.families;
   let h='<div class="vtitle">Doctrine matrix</div>'+
-    '<p class="vnote">Families across the top, doctrines down the side. The Methodist column is highlighted as the anchor. Tap any cell to read it, see its sourcing, and compare across the row.</p>'+
+    '<p class="vnote">Families across the top, doctrines down the side. Tap any cell to read it, see its sourcing, and compare across the row.</p>'+
     '<div class="mxwrap"><table class="mx"><thead><tr><th></th>';
-  fams.forEach(f=>{ const a=f===ANCHOR; h+='<th class="'+(a?"anchorcol":"")+'" style="border-top:3px solid '+FAM_COLOR[f]+'">'+esc(f)+'</th>'; });
+  fams.forEach(f=>{ h+='<th style="border-top:3px solid '+FAM_COLOR[f]+'">'+esc(f)+'</th>'; });
   h+='</tr></thead><tbody>';
   DATA.doctrines.forEach(d=>{ h+='<tr><th>'+esc(d.label)+'</th>';
-    fams.forEach(f=>{ const a=f===ANCHOR; h+='<td class="'+(a?"anchorcol":"")+'" data-doc="'+d.id+'" data-fam="'+esc(f)+'">'+esc(d.cells[f])+'</td>'; });
+    fams.forEach(f=>{ h+='<td data-doc="'+d.id+'" data-fam="'+esc(f)+'">'+esc(d.cells[f])+'</td>'; });
     h+='</tr>'; });
   h+='</tbody></table></div><p class="caption">Every cell is drawn from that tradition’s own confessional voice; fuller sourced essays are being added.</p>';
   vp.innerHTML=h;
@@ -403,6 +402,7 @@ function drawMindmap(t){
   const step=2*Math.PI/n, R=Math.min(430,Math.max(150,(maxW+gap)/step));
   const mgn=44, cx=Math.round(R+maxW/2+mgn), cy=Math.round(R+hh+mgn), W=cx*2, H=cy*2;
   const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  svg.style.margin="0 auto"; // center within the wider desktop svgbox
   // edges first
   const pts=docs.map((d,i)=>{ const ang=-Math.PI/2 + i*step; return {d,x:cx+Math.cos(ang)*R,y:cy+Math.sin(ang)*R}; });
   pts.forEach(p=> svg.appendChild(el("path",{d:"M"+cx+","+cy+" Q"+((cx+p.x)/2)+","+((cy+p.y)/2)+" "+p.x+","+p.y,class:"edge"})));
