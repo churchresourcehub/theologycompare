@@ -686,7 +686,7 @@ function openDetail(ref){
     $("#ptitle").textContent="Reading";
     let h='<div class="dtitle">'+esc(d.label)+'</div>'+
       '<span class="fam" style="background:'+FAM_COLOR[f]+'">'+esc(f)+'</span>'+
-      '<div class="dbody" style="margin-top:8px">'+esc(d.cells[f])+'</div>'+
+      '<div class="dbody" style="margin-top:8px">'+esc((d.detail&&d.detail[f])||d.cells[f])+'</div>'+
       '<div class="dsec">Across the families</div><ul class="celllist">'+
       DATA.families.map(ff=>'<li><b style="color:'+FAM_COLOR[ff]+'">'+esc(ff)+(ff===f?" • shown above":"")+'</b>'+esc(d.cells[ff])+'</li>').join("")+'</ul>'+
       sourceNote(f);
