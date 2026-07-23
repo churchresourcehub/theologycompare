@@ -802,7 +802,7 @@ async function send(){
   const thinking=addMsg("sys","comparing…");
   try{
     const r=await fetch("/api/chat",{method:"POST",headers:{"content-type":"application/json"},
-      body:JSON.stringify({prompt:SYS+"\n\nQUESTION: "+q,question:q,sources,history:convo})});
+      body:JSON.stringify({system:SYS,question:q,sources,history:convo})});
     const j=await r.json(); thinking.remove();
     if(j.error){ addMsg("sys","The bot backend isn’t live yet ("+esc(j.error)+"). Add ANTHROPIC_API_KEY to enable it."); }
     else{ addMsg("a",mdToHtml(j.text)+
