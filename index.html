@@ -307,7 +307,7 @@ function renderMap(){
   $("#mySel").onchange=e=>{ state.my=e.target.value; renderMap(); };
   const ax=AXES[state.mx], ay=AXES[state.my];
   const box=$("#svgbox"), W=Math.max(560,box.clientWidth||vp.clientWidth-4), H=Math.min(560,Math.max(420,W*0.62));
-  const mL=64,mR=120,mT=30,mB=54, x0=mL,x1=W-mR,y0=H-mB,y1=mT;
+  const mL=68,mR=120,mT=34,mB=64, x0=mL,x1=W-mR,y0=H-mB,y1=mT;
   const px=v=>x0+(v/100)*(x1-x0), py=v=>y0+(v/100)*(y1-y0);
   const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
   // frame + mid gridlines
@@ -319,8 +319,10 @@ function renderMap(){
   svg.appendChild(el("text",{x:x1,y:y0+22,"text-anchor":"end",class:"pole"},ax.right+" ▶"));
   svg.appendChild(el("text",{x:(x0+x1)/2,y:y0+40,"text-anchor":"middle",class:"axttl"},ax.label));
   const ymid=(y0+y1)/2;
-  svg.appendChild(el("text",{x:x0-10,y:y1+4,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+(y1+4)+")"},ay.right+" ▶"));
-  svg.appendChild(el("text",{x:x0-10,y:y0,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+y0+")"},"◀ "+ay.left));
+  // vertical pole labels: offset inward by half the label length so they don't straddle (and clip at) the top/bottom edge
+  const rt=estW(ay.right+" ▶",11)/2, lt=estW("◀ "+ay.left,11)/2;
+  svg.appendChild(el("text",{x:x0-10,y:y1+rt+3,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+(y1+rt+3)+")"},ay.right+" ▶"));
+  svg.appendChild(el("text",{x:x0-10,y:y0-lt-3,"text-anchor":"middle",class:"pole",transform:"rotate(-90 "+(x0-10)+" "+(y0-lt-3)+")"},"◀ "+ay.left));
   svg.appendChild(el("text",{x:x0-42,y:ymid,"text-anchor":"middle",class:"axttl",transform:"rotate(-90 "+(x0-42)+" "+ymid+")"},ay.label));
   // ---- points ----
   const items=DATA.traditions.map(t=>({t,cx:px(t.pos[ax.id]),cy:py(t.pos[ay.id]),anchor:t.family===ANCHOR,name:mapShort(t.name)}));
