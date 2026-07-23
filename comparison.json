@@ -6,7 +6,8 @@
       "id": "sacramental",
       "label": "liturgy and sacrament",
       "left": "sacramental",
-      "right": "biblicist"
+      "mid": "spiritual presence",
+      "right": "memorialist"
     },
     {
       "id": "gracewill",
@@ -18,7 +19,7 @@
       "id": "authority",
       "label": "locus of authority",
       "left": "church and tradition",
-      "right": "individual conscience"
+      "right": "the individual believer"
     },
     {
       "id": "security",
@@ -30,24 +31,28 @@
       "id": "atonement",
       "label": "extent of the atonement",
       "left": "limited / particular",
-      "right": "unlimited"
+      "right": "unlimited",
+      "note": "This axis asks for whom Christ died. The 'limited / particular' pole holds that his death was intended to secure the elect; the 'unlimited' pole holds that he died for everyone, though only those who believe receive its benefit. A middle position — 'sufficient for all, efficient for the elect' (Amyraldianism) — holds both at once: the death is sufficient for all, and savingly applied to those who come to faith."
     },
     {
       "id": "plan",
       "label": "God's plan across time",
       "left": "covenant / one people",
+      "mid": "one unfolding story",
       "right": "dispensational"
     },
     {
       "id": "baptism",
       "label": "baptism",
       "left": "infant",
-      "right": "believer’s"
+      "right": "believer’s",
+      "note": "The infant-baptizing traditions also baptize adults who come to faith, on their profession — so the left pole marks that infants are included, not that believers are excluded. The right pole is the position that baptizes professing believers only, and never infants."
     },
     {
       "id": "polity",
       "label": "church government",
       "left": "bishops / episcopal",
+      "mid": "elder-led / connectional",
       "right": "congregational"
     },
     {
@@ -60,13 +65,16 @@
       "id": "worship",
       "label": "worship style",
       "left": "formal / liturgical",
+      "mid": "blended",
       "right": "informal / free"
     },
     {
       "id": "gifts",
       "label": "the Spirit’s gifts",
       "left": "ceased (cessationist)",
-      "right": "for today (continuationist)"
+      "mid": "open but cautious",
+      "right": "for today (continuationist)",
+      "note": "These are the miraculous 'sign' gifts — speaking in tongues, prophecy, and healing (1 Corinthians 12–14) — not spiritual gifts in general like teaching or mercy, which every tradition affirms. The 'ceased' pole holds that the sign gifts belonged to the apostolic age and are no longer given now that the Church is founded and Scripture complete; the 'for today' pole holds that they continue in the church's life. The middle, 'open but cautious,' neither seeks them out nor rules them out."
     }
   ],
   "families": [

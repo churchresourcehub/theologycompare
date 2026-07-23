@@ -247,6 +247,7 @@ function renderSpectrum(){
   vp.innerHTML='<div class="vtitle">Spectrum</div>'+
     '<p class="vnote">One axis at a time. Each tradition sits where its own commitments place it — the same body can land in a very different spot on a different axis.</p>'+
     '<div class="controls"><div class="ctl"><label>Axis</label>'+axisSelect("axSel",state.axis)+'</div></div>'+
+    (a.note?'<p class="vnote" style="font-style:italic;margin:4px 0 8px">'+esc(a.note)+'</p>':'')+
     '<div id="svgbox"></div>'+famLegend()+
     '<p class="caption">Tap any tradition to read its position and open the compare bot.</p>';
   $("#axSel").onchange=e=>{ state.axis=e.target.value; renderSpectrum(); };
@@ -278,6 +279,8 @@ function renderSpectrum(){
   });
   svg.appendChild(el("text",{x:x0,y:axisY+26,"text-anchor":"start",class:"pole"},"◀ "+a.left));
   svg.appendChild(el("text",{x:x1,y:axisY+26,"text-anchor":"end",class:"pole"},a.right+" ▶"));
+  if(a.mid){ svg.appendChild(el("text",{x:(x0+x1)/2,y:axisY+26,"text-anchor":"middle",class:"pole",
+    style:"font-style:italic;font-weight:600;fill:var(--faint)"},a.mid)); }
   svg.appendChild(el("text",{x:(x0+x1)/2,y:axisY+50,"text-anchor":"middle",class:"axttl"},a.label));
   box.innerHTML=""; box.appendChild(svg);
 }
