@@ -360,7 +360,8 @@ function renderMap(){
 function renderMatrix(){
   const vp=$("#viewport"), fams=DATA.families;
   let h='<div class="vtitle">Doctrine matrix</div>'+
-    '<p class="vnote">Families across the top, doctrines down the side. Tap any cell to read it, see its sourcing, and compare across the row.</p>'+
+    '<p class="vnote">Families across the top, doctrines down the side. Each cell is a one-line summary of a position that carries more nuance than a sentence can — tap any cell to read it in context, see its sourcing, and compare across the row.</p>'+
+    '<p class="vnote" style="font-style:italic;margin:2px 0 10px">Nondenominational and community churches mostly sit in the Baptist column — believers’ church, symbolic ordinances — leaning Reformed or charismatic on particular points; see the map and spectrums for the finer breakout.</p>'+
     '<div class="mxwrap"><table class="mx"><thead><tr><th></th>';
   fams.forEach(f=>{ h+='<th style="border-top:3px solid '+FAM_COLOR[f]+'">'+esc(f)+'</th>'; });
   h+='</tr></thead><tbody>';
