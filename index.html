@@ -753,19 +753,19 @@ function buildChunks(){
       key:("woods favorites reading list "+wf).toLowerCase()}); }
 }
 function retrieve(q){
+  // the comparison is small, so hand the model the whole substance (every doctrine cell,
+  // every tradition, the axes) as base evidence, then add the best-matching author/denomination chunks
+  const base=CHUNKS.filter(c=>c.type==="doctrine"||c.type==="tradition"||c.type==="axis");
   const toks=q.toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
-  const scored=CHUNKS.map(c=>{ let s=0; toks.forEach(w=>{ if(c.key.includes(w)) s+=1; }); return {c,s}; });
-  const named=scored.filter(x=> x.c.type==="tradition" && q.toLowerCase().includes(x.c.name.toLowerCase().split(" (")[0].slice(0,8)));
-  named.forEach(x=>x.s+=4);
-  let top=scored.filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,14).map(x=>x.c);
-  if(!top.length) top=CHUNKS.filter(c=>c.key.includes("methodist")||c.key.includes("wesleyan")).slice(0,10);
-  return top;
+  const scored=CHUNKS.filter(c=>c.type==="figures"||c.type==="family").map(c=>{ let s=0; toks.forEach(w=>{ if(c.key.includes(w)) s+=1; }); return {c,s}; });
+  const extra=scored.filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,8).map(x=>x.c);
+  return base.concat(extra);
 }
-const SYS='You are the guide for a Comparative Theology site. The anchor voice is Wesleyan/Methodist (Woods Lisenby’s tradition), but you must represent every tradition fairly from its OWN authoritative self-understanding, never a rival’s caricature. Rules: answer ONLY from the SOURCES provided; never invent quotations; where a source states a position directly, state it directly and plainly; when traditions differ, lay the contrast out even-handedly; when a tradition spans a range (e.g. Reformed vs. mainline, general vs. Reformed Baptist), say so. Be clear and concise — a few short paragraphs. End major claims by naming the tradition, not a page citation.';
+const SYS='You are the guide for a Comparative Theology site, thinking a question through with the reader the way a fair-minded, well-read pastor would. The anchor voice is Wesleyan/Methodist (Woods Lisenby’s tradition), but represent every tradition from its OWN authoritative self-understanding, never a rival’s caricature. Use the comparison data below as your primary framing and evidence, and reason from it — do not merely quote the cells back. Where the data is thin, draw on your own solid knowledge of these traditions to give a substantive, meaningful answer, staying faithful to how each tradition understands itself and never inventing quotations. When traditions differ, lay the contrast out plainly and even-handedly; when a tradition spans a range, say so. Keep it clear and conversational, and you may reason a step beyond the sources when it genuinely helps the reader understand.';
 function initChat(){
   convo=[];
   $("#chat").innerHTML='<div class="askhead"><h3>Ask &amp; compare</h3>'+
-    '<p>Answers are drawn from the comparison data and each tradition’s own voice. It follows the conversation, so you can ask a follow-up (&ldquo;and the Reformed view?&rdquo;) or chain questions.</p>'+
+    '<p>It reasons from the comparison data and each tradition’s own voice, and follows the conversation, so you can ask a follow-up (&ldquo;and the Reformed view?&rdquo;) or chain questions.</p>'+
     '<div class="suggest">'+[
       "How does Methodist justification compare to Reformed?",
       "Who thinks salvation can be lost, and who doesn’t?",
