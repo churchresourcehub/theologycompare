@@ -37,6 +37,36 @@
       "label": "God's plan across time",
       "left": "covenant / one people",
       "right": "dispensational"
+    },
+    {
+      "id": "baptism",
+      "label": "baptism",
+      "left": "infant",
+      "right": "believer’s"
+    },
+    {
+      "id": "polity",
+      "label": "church government",
+      "left": "bishops / episcopal",
+      "right": "congregational"
+    },
+    {
+      "id": "women",
+      "label": "women in ministry",
+      "left": "all offices open",
+      "right": "male-only ordination"
+    },
+    {
+      "id": "worship",
+      "label": "worship style",
+      "left": "formal / liturgical",
+      "right": "informal / free"
+    },
+    {
+      "id": "gifts",
+      "label": "the Spirit’s gifts",
+      "left": "ceased (cessationist)",
+      "right": "for today (continuationist)"
     }
   ],
   "families": [
@@ -239,7 +269,12 @@
         "authority": 8,
         "security": 88,
         "atonement": 90,
-        "plan": 20
+        "plan": 20,
+        "baptism": 3,
+        "polity": 6,
+        "women": 98,
+        "worship": 2,
+        "gifts": 45
       }
     },
     {
@@ -253,7 +288,12 @@
         "authority": 5,
         "security": 88,
         "atonement": 90,
-        "plan": 20
+        "plan": 20,
+        "baptism": 3,
+        "polity": 3,
+        "women": 96,
+        "worship": 5,
+        "gifts": 55
       }
     },
     {
@@ -267,7 +307,12 @@
         "authority": 25,
         "security": 70,
         "atonement": 82,
-        "plan": 25
+        "plan": 25,
+        "baptism": 8,
+        "polity": 12,
+        "women": 60,
+        "worship": 10,
+        "gifts": 50
       }
     },
     {
@@ -281,7 +326,12 @@
         "authority": 35,
         "security": 75,
         "atonement": 85,
-        "plan": 30
+        "plan": 30,
+        "baptism": 8,
+        "polity": 42,
+        "women": 88,
+        "worship": 25,
+        "gifts": 12
       }
     },
     {
@@ -295,7 +345,12 @@
         "authority": 50,
         "security": 70,
         "atonement": 90,
-        "plan": 25
+        "plan": 25,
+        "baptism": 10,
+        "polity": 38,
+        "women": 8,
+        "worship": 30,
+        "gifts": 40
       }
     },
     {
@@ -309,7 +364,12 @@
         "authority": 45,
         "security": 70,
         "atonement": 85,
-        "plan": 25
+        "plan": 25,
+        "baptism": 10,
+        "polity": 15,
+        "women": 8,
+        "worship": 15,
+        "gifts": 52
       }
     },
     {
@@ -323,7 +383,12 @@
         "authority": 45,
         "security": 88,
         "atonement": 95,
-        "plan": 30
+        "plan": 30,
+        "baptism": 20,
+        "polity": 22,
+        "women": 12,
+        "worship": 45,
+        "gifts": 52
       }
     },
     {
@@ -337,7 +402,12 @@
         "authority": 40,
         "security": 5,
         "atonement": 15,
-        "plan": 15
+        "plan": 15,
+        "baptism": 10,
+        "polity": 50,
+        "women": 90,
+        "worship": 38,
+        "gifts": 20
       }
     },
     {
@@ -351,7 +421,12 @@
         "authority": 55,
         "security": 30,
         "atonement": 70,
-        "plan": 20
+        "plan": 20,
+        "baptism": 12,
+        "polity": 48,
+        "women": 8,
+        "worship": 38,
+        "gifts": 45
       }
     },
     {
@@ -365,7 +440,12 @@
         "authority": 70,
         "security": 80,
         "atonement": 90,
-        "plan": 40
+        "plan": 40,
+        "baptism": 92,
+        "polity": 82,
+        "women": 35,
+        "worship": 55,
+        "gifts": 42
       },
       "card_denoms": "the Amish, the Brethren, the Hutterites, and the Bruderhof"
     },
@@ -380,7 +460,12 @@
         "authority": 75,
         "security": 80,
         "atonement": 90,
-        "plan": 50
+        "plan": 50,
+        "baptism": 95,
+        "polity": 92,
+        "women": 82,
+        "worship": 50,
+        "gifts": 15
       },
       "card_denoms": "the Christian Churches / Churches of Christ and the Disciples of Christ"
     },
@@ -395,7 +480,12 @@
         "authority": 78,
         "security": 82,
         "atonement": 92,
-        "plan": 75
+        "plan": 75,
+        "baptism": 90,
+        "polity": 55,
+        "women": 30,
+        "worship": 88,
+        "gifts": 98
       }
     },
     {
@@ -409,7 +499,12 @@
         "authority": 55,
         "security": 5,
         "atonement": 15,
-        "plan": 25
+        "plan": 25,
+        "baptism": 82,
+        "polity": 68,
+        "women": 82,
+        "worship": 48,
+        "gifts": 28
       }
     },
     {
@@ -423,7 +518,12 @@
         "authority": 80,
         "security": 40,
         "atonement": 85,
-        "plan": 65
+        "plan": 65,
+        "baptism": 90,
+        "polity": 85,
+        "women": 55,
+        "worship": 88,
+        "gifts": 55
       },
       "card_denoms": "the Willow Creek and Saddleback networks and other seeker-model community churches"
     },
@@ -438,7 +538,12 @@
         "authority": 82,
         "security": 40,
         "atonement": 80,
-        "plan": 70
+        "plan": 70,
+        "baptism": 92,
+        "polity": 92,
+        "women": 60,
+        "worship": 90,
+        "gifts": 68
       },
       "card_denoms": "Acts 29, the ARC network, and independent nondenominational megachurches"
     },
@@ -453,7 +558,12 @@
         "authority": 80,
         "security": 90,
         "atonement": 92,
-        "plan": 70
+        "plan": 70,
+        "baptism": 95,
+        "polity": 80,
+        "women": 55,
+        "worship": 62,
+        "gifts": 48
       },
       "card_denoms": "General Baptists and other free-will (Arminian) Baptist bodies"
     },
@@ -468,7 +578,12 @@
         "authority": 72,
         "security": 15,
         "atonement": 70,
-        "plan": 75
+        "plan": 75,
+        "baptism": 96,
+        "polity": 88,
+        "women": 88,
+        "worship": 60,
+        "gifts": 30
       },
       "card_denoms": "the National and Progressive National Baptist Conventions, American Baptist Churches USA, and independent Baptist churches"
     },
@@ -483,7 +598,12 @@
         "authority": 68,
         "security": 15,
         "atonement": 70,
-        "plan": 90
+        "plan": 90,
+        "baptism": 96,
+        "polity": 90,
+        "women": 95,
+        "worship": 52,
+        "gifts": 8
       },
       "card_denoms": "independent fundamental Baptist (IFB) churches and separatist Bible churches"
     },
@@ -498,7 +618,12 @@
         "authority": 85,
         "security": 60,
         "atonement": 90,
-        "plan": 25
+        "plan": 25,
+        "baptism": 25,
+        "polity": 88,
+        "women": 5,
+        "worship": 42,
+        "gifts": 48
       }
     }
   ],
