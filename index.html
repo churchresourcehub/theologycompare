@@ -388,21 +388,31 @@ function renderMindmap(){
   vp.querySelectorAll(".fchip").forEach(b=> b.onclick=()=>{ state.trad=b.dataset.t; renderMindmap(); });
   drawMindmap(t);
 }
+// short labels for the radial nodes (the full label still shows on hover + in the reading panel)
+const MM_SHORT={ scripture:"Scripture", will:"the will", grace:"grace", election:"election",
+  atonement:"atonement", justification:"justification", sanctification:"sanctification",
+  perseverance:"security", supper:"the Supper", baptism:"baptism", polity:"polity",
+  women:"women", gifts:"the gifts", plan:"God's plan", worship:"worship" };
 function drawMindmap(t){
-  const box=$("#svgbox"), W=Math.max(560,box.clientWidth||900), H=Math.min(620,Math.max(460,W*0.66));
-  const cx=W/2, cy=H/2, R=Math.min(W,H)/2-96;
-  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
+  const box=$("#svgbox");
   const docs=DATA.doctrines, n=docs.length, col=FAM_COLOR[t.family];
+  const NF=11, hh=30, gap=16, lab=d=>MM_SHORT[d.id]||d.label;
+  const nodeW=d=>Math.max(92,estW(lab(d),NF+0.5)+18);
+  const maxW=Math.max(...docs.map(nodeW));
+  // radius grows with node count so neighbors never collide near the top/bottom of the ring
+  const step=2*Math.PI/n, R=Math.min(430,Math.max(150,(maxW+gap)/step));
+  const mgn=44, cx=Math.round(R+maxW/2+mgn), cy=Math.round(R+hh+mgn), W=cx*2, H=cy*2;
+  const svg=el("svg",{viewBox:"0 0 "+W+" "+H,width:W,height:H});
   // edges first
-  const pts=docs.map((d,i)=>{ const ang=-Math.PI/2 + i*2*Math.PI/n; return {d,x:cx+Math.cos(ang)*R,y:cy+Math.sin(ang)*R}; });
+  const pts=docs.map((d,i)=>{ const ang=-Math.PI/2 + i*step; return {d,x:cx+Math.cos(ang)*R,y:cy+Math.sin(ang)*R}; });
   pts.forEach(p=> svg.appendChild(el("path",{d:"M"+cx+","+cy+" Q"+((cx+p.x)/2)+","+((cy+p.y)/2)+" "+p.x+","+p.y,class:"edge"})));
   // doctrine nodes
   pts.forEach(p=>{
-    const w=Math.max(96,estW(p.d.label,11.5)+18), hh=30, x=p.x-w/2, y=p.y-hh/2;
+    const w=nodeW(p.d), x=p.x-w/2, y=p.y-hh/2;
     const g=el("g",{class:"node"});
     g.appendChild(el("rect",{x,y,width:w,height:hh,rx:9,fill:"#fff",stroke:col,"stroke-width":1.6}));
-    const tx=el("text",{x:p.x,y:p.y+4,"text-anchor":"middle"},p.d.label);
-    tx.setAttribute("font-size","11"); tx.style.fill=col; // inline style beats the .node text CSS rule
+    const tx=el("text",{x:p.x,y:p.y+4,"text-anchor":"middle"},lab(p.d));
+    tx.setAttribute("font-size",String(NF)); tx.style.fill=col; // inline style beats the .node text CSS rule
     g.appendChild(tx);
     g.style.cursor="pointer"; g.onclick=()=>openDetail({doc:p.d.id,fam:t.family});
     const show=ev=>tip(ev,"<b>"+esc(p.d.label)+"</b><br>"+esc(p.d.cells[t.family]));

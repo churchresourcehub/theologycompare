@@ -263,6 +263,76 @@
         "Baptist": "believer's baptism only; a symbol, by immersion",
         "Pentecostal": "believer's baptism, plus a distinct baptism in the Spirit"
       }
+    },
+    {
+      "id": "polity",
+      "label": "church government",
+      "cells": {
+        "Catholic": "episcopal and hierarchical: bishops in apostolic succession, in communion with the Pope",
+        "Orthodox": "bishops in apostolic succession; a communion of self-governing churches, led conciliarly",
+        "Anglican": "episcopal: bishops, priests, and deacons, with governance shared through synods",
+        "Lutheran": "varies: some churches keep bishops, others are led by synods and elected presidents",
+        "Wesleyan/Methodist": "connectional: bishops and annual conferences appoint clergy and order the church's life",
+        "Reformed": "presbyterian: rule by elders through graded courts — session, presbytery, assembly",
+        "Baptist": "congregational: each local church is self-governing and autonomous under Christ",
+        "Pentecostal": "varies: from congregational to overseer-led, often with district and general councils"
+      }
+    },
+    {
+      "id": "women",
+      "label": "women in ministry",
+      "cells": {
+        "Catholic": "ordination is reserved to men; women serve widely but are not ordained priests",
+        "Orthodox": "the priesthood is male; women serve in monastic, teaching, and historic diaconal roles",
+        "Anglican": "varies: the Episcopal Church ordains women as priests and bishops; some Anglican bodies do not",
+        "Lutheran": "varies: the ELCA ordains women; the LCMS reserves the pastoral office to men",
+        "Wesleyan/Methodist": "women are ordained to every office, including bishop, with full clergy rights",
+        "Reformed": "varies: the PCUSA ordains women; the PCA and confessional bodies ordain only men",
+        "Baptist": "varies: many Baptists ordain women; the SBC reserves the office of pastor for men",
+        "Pentecostal": "often open to women preaching and ordination, a mark since its earliest days"
+      }
+    },
+    {
+      "id": "gifts",
+      "label": "the Spirit's gifts",
+      "cells": {
+        "Catholic": "the charisms are real and continue, exercised under the Church's discernment",
+        "Orthodox": "the gifts continue, seen especially in the saints, elders, and the Church's life",
+        "Anglican": "a range, from cautious to the charismatic renewal welcomed in parts of the Communion",
+        "Lutheran": "the Spirit works through Word and sacrament; the sign gifts are held with caution",
+        "Wesleyan/Methodist": "open to the gifts, with love and holiness of life as their measure",
+        "Reformed": "commonly cessationist: the sign gifts authenticated the apostles and have ceased",
+        "Baptist": "commonly cessationist, though many are open but cautious about the sign gifts",
+        "Pentecostal": "the gifts are for today; tongues, prophecy, and healing mark the Spirit-filled life"
+      }
+    },
+    {
+      "id": "plan",
+      "label": "God's plan across time",
+      "cells": {
+        "Catholic": "one salvation history; the Church as the People of God, Israel's covenant never revoked",
+        "Orthodox": "one divine economy unfolding to Christ and fulfilled in the Church, read through the Fathers",
+        "Anglican": "one covenant of grace across both Testaments; the Church continuous with Israel",
+        "Lutheran": "law and gospel run through every age; one people saved by the promise in Christ",
+        "Wesleyan/Methodist": "one unfolding story of grace; the Church grafted into the covenant made with Israel",
+        "Reformed": "covenant theology: one covenant of grace administered differently through the ages",
+        "Baptist": "varies: from covenantal to dispensational, some sharply distinguishing Israel and the Church",
+        "Pentecostal": "often premillennial, expecting Christ's soon return; many hold a dispensational frame"
+      }
+    },
+    {
+      "id": "worship",
+      "label": "worship",
+      "cells": {
+        "Catholic": "the Mass at the center: liturgical, sacramental, ordered by the Church's calendar",
+        "Orthodox": "the Divine Liturgy: ancient, sung, iconographic, and unchanging in shape",
+        "Anglican": "ordered by the Book of Common Prayer, ranging from high ceremonial to low",
+        "Lutheran": "liturgical and hymn-rich, centered on the preached Word and the Sacrament",
+        "Wesleyan/Methodist": "a blend: ordered liturgy joined to revival warmth and Wesley's hymnody",
+        "Reformed": "Word-centered and orderly, historically plain, with the sermon at the center",
+        "Baptist": "free and informal, the sermon central; style ranges from traditional to contemporary",
+        "Pentecostal": "expressive and spontaneous: extended praise, testimony, and freedom for the Spirit"
+      }
     }
   ],
   "traditions": [
