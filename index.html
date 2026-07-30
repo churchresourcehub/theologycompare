@@ -214,6 +214,8 @@ const FAM_COLOR = {
   "Wesleyan/Methodist":"#2f7d68", "Reformed":"#2c4c7c", "Baptist":"#9c6b2f", "Pentecostal":"#b0447a"
 };
 const ANCHOR = "Wesleyan/Methodist";
+// which doctrine paragraph best explains a tradition's position on each spectrum axis
+const AXIS_DOCTRINE = { sacramental:"supper", gracewill:"grace", authority:"scripture", security:"perseverance", atonement:"atonement", plan:"plan", baptism:"baptism", polity:"polity", women:"women", worship:"worship", gifts:"gifts" };
 let DATA=null, AXES={}, CHUNKS=[];
 let state = { view:"map", axis:"sacramental", mx:"sacramental", my:"gracewill", trad:"methodist" };
 
@@ -277,10 +279,10 @@ function renderSpectrum(){
     const ly=topPad+it.lane*LH+11;
     svg.appendChild(el("line",{x1:it.x,y1:axisY,x2:it.x,y2:ly+3,class:"leader"}));
     const dot=el("circle",{cx:it.x,cy:axisY,r:anchor?7:5,fill:FAM_COLOR[it.t.family],stroke:"#fff","stroke-width":anchor?2:1.4,class:"dot"});
-    dot.onclick=()=>openDetail({trad:it.t.id}); svg.appendChild(dot);
+    dot.onclick=()=>openDetail({trad:it.t.id,axis:state.axis}); svg.appendChild(dot);
     const half=estW(it.t.name,11)/2, lx=Math.max(half+2,Math.min(W-half-2,it.x)); // keep inside the svg
     const tx=el("text",{x:lx,y:ly,"text-anchor":"middle",class:"lbl"+(anchor?" anchor":"")},it.t.name);
-    tx.style.cursor="pointer"; tx.onclick=()=>openDetail({trad:it.t.id}); svg.appendChild(tx);
+    tx.style.cursor="pointer"; tx.onclick=()=>openDetail({trad:it.t.id,axis:state.axis}); svg.appendChild(tx);
   });
   svg.appendChild(el("text",{x:x0,y:axisY+26,"text-anchor":"start",class:"pole"},"◀ "+a.left));
   svg.appendChild(el("text",{x:x1,y:axisY+26,"text-anchor":"end",class:"pole"},a.right+" ▶"));
@@ -670,6 +672,13 @@ function axisStrip(pos){
       '<div class="poles"><span>'+esc(a.left)+'</span><span>'+esc(a.right)+'</span></div></div></div>';
   }).join("")+'</div>';
 }
+function axisContext(t,axisId){
+  const a=AXES[axisId]; if(!a) return "";
+  const d=DATA.doctrines.find(x=>x.id===AXIS_DOCTRINE[axisId]); if(!d) return "";
+  const body=(d.detail&&d.detail[t.family])||d.cells[t.family]; if(!body) return "";
+  return '<div class="dsec">On this spectrum · '+esc(a.label)+'</div>'+
+    '<div class="dbody" style="margin-top:6px">'+esc(body)+'</div>';
+}
 function openDetail(ref){
   openPanel("detail");
   const body=$("#pbody");
@@ -679,6 +688,7 @@ function openDetail(ref){
     let h='<div class="dtitle">'+esc(t.name)+'</div>'+
       '<span class="fam" style="background:'+FAM_COLOR[t.family]+'">'+esc(t.family)+'</span>'+
       '<div class="dbody" style="margin-top:8px">'+esc(t.blurb)+'</div>'+
+      (ref.axis?axisContext(t,ref.axis):'')+
       '<div class="dsec">Where it sits</div>'+axisStrip(t.pos)+
       '<div class="dsec">Its positions, doctrine by doctrine</div>'+
       '<p class="dhint">Tap any doctrine to read the fuller explanation.</p><ul class="celllist">'+
